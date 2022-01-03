@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/stocking.js"></script>
 </head>
 <body>
 
@@ -22,13 +23,13 @@
 		          <a class="nav-link" href="#section_chicken">Request</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="#section_beef">Transfer</a>
+		          <a class="nav-link" href="#section_beef">Fulfill</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="#section_sushi">TopUp</a>
+		          <a class="nav-link" href="#section_sushi">Stock</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="#section_sushi">Inventory</a>
+		          <a class="nav-link" href="#section_sushi">Report</a>
 		        </li>
 		        <li class="nav-item">
 		          <a class="nav-link" href="#section_sushi">Admin</a>
@@ -41,6 +42,8 @@
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-2">Request</h1>
 
+		<div id="reminding" class="text-center mb-2 text-muted col-12 fst-italic fs-6">Select store and category</div>
+
 		<div class="row mb-2">
 			<div class="col-2 text-left align-text-bottom mt-2"><strong>Store:&nbsp</strong></div>
 			<div class="btn-group col-10" role="group">
@@ -51,7 +54,7 @@
         			if ($result->num_rows > 0) {
 		            while($row = $result->fetch_assoc()) {
 				?>
-              <input type="radio" class="btn-check" name="bt_store" id="<? echo $row["c_name"] ?>" autocomplete="off">
+              <input type="radio" class="btn-check" name="btn_store" id="<? echo $row["c_name"] ?>" autocomplete="off" onclick="f_who_is_requesting()">
 							<label class="btn btn-outline-primary" for="<? echo $row["c_name"] ?>"><? echo $row["c_name"] ?></label>
 				<?
 					    	}
@@ -70,7 +73,7 @@
         			if ($result->num_rows > 0) {
 		            while($row = $result->fetch_assoc()) {
 				?>
-              <input type="radio" class="btn-check" name="bt_cat" id="<? echo $row["c_cat"] ?>" autocomplete="off">
+              <input type="radio" class="btn-check" name="btn_cat" id="<? echo $row["c_cat"] ?>" autocomplete="off" onclick="f_who_is_requesting()">
 							<label class="btn btn-outline-primary" for="<? echo $row["c_cat"] ?>"><? echo $row["c_cat"] ?></label>
 				<?
 					    	}
@@ -81,9 +84,9 @@
 			</div> <!-- btn group -->
 		</div> <!-- row. selection area -->
 
-		<div class="row col">
+		<div class="row col mb-2">
 			<?
-				$sql = "SELECT `t_item`.`c_item`, `t_item`.`c_cat`, `t_request`.`c_store`,`t_request`.`c_qty` FROM `t_item` LEFT JOIN `t_request` ON `t_item`.`c_item` = `t_request`.`c_item`;";
+				$sql = "SELECT * FROM `t_request`;";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) {
 					$rownum = 0;
@@ -92,19 +95,19 @@
 						$cardID = "itemcard".$rownum;
 						$radioID = "reqQty".$rownum;
 			?>
-				<div class="card" id="<? echo $cardID ?>" data-stocking-item="<? echo $row["c_item"] ?>" data-stocking-cat="<? echo $row["c_cat"] ?>" data-stocking-store="<? echo $row["c_store"] ?>">
+				<div class="card d-none" id="<? echo $cardID ?>" data-stocking-item="<? echo $row["c_item"] ?>" data-stocking-cat="<? echo $row["c_cat"] ?>" data-stocking-store="<? echo $row["c_store"] ?>">
 				  <div class="card-body">
 				    <span class="card-title fs-5"><? echo $row["c_item"] ?></span>&nbsp<span class="card-subtitle fs-6 mb-2 text-muted"><? echo "open request: ".$row["c_qty"] ?></span>
 						<div class="btn-group col-12" role="group">
-						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>1" autocomplete="off">
+						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>1" value="1" autocomplete="off">
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>1">1</label>
-						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>2" autocomplete="off">
+						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>2" value="2" autocomplete="off">
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>2">2</label>
-						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>3" autocomplete="off">
+						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>3" value="3" autocomplete="off">
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>3">3</label>
-							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>4" autocomplete="off">
+							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>4" value="10" autocomplete="off">
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>4">10</label>
-							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>5" autocomplete="off">
+							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>5" value="50" autocomplete="off">
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>5">50</label>
 						</div> <!-- qty button -->
 				  </div> <!-- card body-->
@@ -117,7 +120,52 @@
 					$conn->close();
 			?>
 		</div> <!-- item list -->
+		<div class="row justify-content-end mt-3">
+	    <div class="col-4">
+      	<button type="button" class="btn btn-primary d-none" id="btn_submit" onclick="f_toConfirm()">Submit</button>
+	    </div>
+	    <div class="col-4">
+	      <button type="button" class="btn btn-outline-primary d-none" id="btn_clear" onclick="f_refresh()">Clear</button>
+	    </div>
+		</div> <!-- buttons -->
+		<!-- Modal Submit-->
+		<div class="modal fade" id="model_r" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="RequestModalLabel">Confirm to submit below request?</h5>
+					</div>
+					<div class="modal-body fs-6" id="modal_r_body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="btn_close" onclick="f_submit()">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal 2-->
+		<div class="modal fade" id="MsgModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="MsgModalLabel">Request submitted!</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+					</div>
+					<div class="modal-body">
+						Next to return home page...
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Next</button>
+					</div>
+				</div>
+			</div>
+		</div>
+ 	</div> <!-- container -->
 
-	 </div> <!-- container -->
+	<script>
+		var model_r = new bootstrap.Modal(document.getElementById('model_r'));
+	</script>
+
 </body>
 </html>

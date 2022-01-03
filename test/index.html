@@ -2,27 +2,89 @@
 <html lang="en">
   <head>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="dropdowns.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/bootstrap.min.js"></script>
 
+
+    <script>
+      function f_test () {
+        var $sql = "SELECT `t_item`.`c_item`, `t_item`.`c_cat`, `t_request`.`c_store`,`t_request`.`c_qty` FROM `t_item` LEFT JOIN `t_request` ON `t_item`.`c_item` = `t_request`.`c_item`;";
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("srv_msg").innerHTML = this.responseText;
+            myModal.hide();
+            console.log(myModal);
+            // myModal = new bootstrap.Modal(document.getElementById('MsgModal'));
+            // myModal.show();
+        }
+        xhttp.open("POST", "test.php");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("strSQL="+$sql);
+        document.getElementById("msg").innerHTML = "POST sent!";
+      }
+
+    </script>
   </head>
-  <body>
 
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        WHERE AM I button
+  <body>
+    <h1 class="text-center">TEST</h1>
+    <div class="container">
+
+      <div class="col">my message:<span id="msg"></span></div>
+      <div class="col">server message:<span id="srv_msg"></span></div>
+      <p></p>
+      <p></p>
+      <button type="button" class="btn btn-primary" onclick="f_rdo()">TEST</button>
+      <p></p>
+      <p></p>
+      <!-- Button trigger modal -->
+      <button type="button" id="btn_launch" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RequestModal">
+        Launch demo modal
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
+
+      <!-- Modal 1-->
+      <div class="modal fade" id="RequestModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="RequestModalLabel">Confirm to submit below request?</h5>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="btn_close" onclick="f_test()">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Modal 2-->
+      <div class="modal fade" id="MsgModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="MsgModalLabel">Request submitted!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+            </div>
+            <div class="modal-body">
+              Next to return home page...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <script src="../js/bootstrap.bundle.min.js"></script>
-
+    <script>
+      var myModal = new bootstrap.Modal(document.getElementById('RequestModal'));
+    </script>
 
   </body>
 </html>
