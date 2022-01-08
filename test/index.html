@@ -5,52 +5,33 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/bootstrap.min.js"></script>
-
-
-    <script>
-      function f_test () {
-        var $sql = "SELECT `t_item`.`c_item`, `t_item`.`c_cat`, `t_request`.`c_store`,`t_request`.`c_qty` FROM `t_item` LEFT JOIN `t_request` ON `t_item`.`c_item` = `t_request`.`c_item`;";
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            document.getElementById("srv_msg").innerHTML = this.responseText;
-            myModal.hide();
-            console.log(myModal);
-            // myModal = new bootstrap.Modal(document.getElementById('MsgModal'));
-            // myModal.show();
-        }
-        xhttp.open("POST", "test.php");
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("strSQL="+$sql);
-        document.getElementById("msg").innerHTML = "POST sent!";
-      }
-
-    </script>
+    <script src="test.js"></script>
   </head>
 
   <body>
     <h1 class="text-center">TEST</h1>
     <div class="container">
 
-      <div class="col">my message:<span id="msg"></span></div>
-      <div class="col">server message:<span id="srv_msg"></span></div>
+      <div class="col">my message:&nbsp<span id="msg"></span></div>
+      <div class="col">server message:&nbsp<span id="srv_msg"></span></div>
       <p></p>
       <p></p>
-      <button type="button" class="btn btn-primary" onclick="f_rdo()">TEST</button>
+      <button type="button" class="btn btn-primary" onclick="f_test2()">TEST</button>
       <p></p>
       <p></p>
-      <!-- Button trigger modal -->
+      <!-- Button trigger modal
       <button type="button" id="btn_launch" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RequestModal">
         Launch demo modal
-      </button>
+      </button>-->
 
       <!-- Modal 1-->
       <div class="modal fade" id="RequestModal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="RequestModalLabel">Confirm to submit below request?</h5>
+              <h5 class="modal-title" id="RequestModalLabel">test</h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="modal_text">
               ...
             </div>
             <div class="modal-footer">
@@ -81,10 +62,6 @@
       </div>
 
     </div>
-
-    <script>
-      var myModal = new bootstrap.Modal(document.getElementById('RequestModal'));
-    </script>
 
   </body>
 </html>

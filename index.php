@@ -10,7 +10,6 @@
 	<script src="js/stocking.js"></script>
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-sm navbar-light bg-white">
 	  <div class="container-fluid">
 	    <a class="navbar-brand" href="#"><img class="img-fluid align-top" src="/img/CoffeePlus_wordlogo.jpeg"><span class="align-text-bottom">&nbspStocking</span></a>
@@ -97,7 +96,7 @@
 			?>
 				<div class="card d-none" id="<? echo $cardID ?>" data-stocking-item="<? echo $row["c_item"] ?>" data-stocking-cat="<? echo $row["c_cat"] ?>" data-stocking-store="<? echo $row["c_store"] ?>">
 				  <div class="card-body">
-				    <span class="card-title fs-5"><? echo $row["c_item"] ?></span>&nbsp<span class="card-subtitle fs-6 mb-2 text-muted"><? echo "open request: ".$row["c_qty"] ?></span>
+				    <span class="card-title fs-5"><? echo $row["c_item"] ?></span>&nbsp<span class="card-subtitle fs-6 mb-2 text-muted"><? if ($row["c_qty"]>0) {echo "open request: ".$row["c_qty"];} ?></span>
 						<div class="btn-group col-12" role="group">
 						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>1" value="1" autocomplete="off">
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>1">1</label>
@@ -120,16 +119,16 @@
 					$conn->close();
 			?>
 		</div> <!-- item list -->
-		<div class="row justify-content-end mt-3">
-	    <div class="col-4">
+		<div class="row mt-3">
+	    <div class="col-6">
       	<button type="button" class="btn btn-primary d-none" id="btn_submit" onclick="f_toConfirm()">Submit</button>
 	    </div>
-	    <div class="col-4">
+	    <div class="col-6">
 	      <button type="button" class="btn btn-outline-primary d-none" id="btn_clear" onclick="f_refresh()">Clear</button>
 	    </div>
 		</div> <!-- buttons -->
 		<!-- Modal Submit-->
-		<div class="modal fade" id="model_r" tabindex="-1">
+		<div class="modal fade" id="modal_r" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -138,34 +137,22 @@
 					<div class="modal-body fs-6" id="modal_r_body">
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary" id="btn_close" onclick="f_submit()">OK</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Modal 2-->
-		<div class="modal fade" id="MsgModal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="MsgModalLabel">Request submitted!</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
-					</div>
-					<div class="modal-body">
-						Next to return home page...
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Next</button>
+						<button type="button" class="btn btn-secondary" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="btn_ok" onclick="f_submit()">OK</button>
 					</div>
 				</div>
 			</div>
 		</div>
  	</div> <!-- container -->
 
-	<script>
-		var model_r = new bootstrap.Modal(document.getElementById('model_r'));
-	</script>
+	<div class="container">
+	  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+	    <p class="col-md-4 mb-0 text-muted">&copy; 2021 COMPASS F&B Trading Pte, Inc</p>
+	    <ul class="nav col-md-4 justify-content-end">
+	      <li class="nav-item"><a href="http://coffeeplus.sg" class="nav-link px-2 text-muted">About</a></li>
+	    </ul>
+	  </footer>
+	</div>
 
 </body>
 </html>

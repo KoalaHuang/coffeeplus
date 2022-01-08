@@ -1,19 +1,13 @@
 <?php
-/**
- * 写日志，方便测试（看网站需求，也可以改成把记录存入数据库）
- * 注意：服务器需要开通fopen配置
+/*
+	myLOG(__FILE__.print_r($var),TRUE));
+	mylog.txt is stored at web root folder.
+*/
 
- How to use:
- if (JDEBUG) 
-	{
-		include_once("mylog.php"); //#HHJ#
-		myLOG("Match\n" . print_r($matches[0][$i],TRUE));
-	}		
- */
 function myLOG($word='') {
-	$fp = fopen("mylog.txt","a");
+	$fp = fopen($_SERVER['DOCUMENT_ROOT']."/mylog.txt","a") or die("Unable to open file!");
 	flock($fp, LOCK_EX) ;
-	fwrite($fp,"<".strftime("%Y%m%d%H%M%S",time()).">\n".$word."\n");
+	fwrite($fp,"<".strftime("%Y%m%d%H%M%S",time()).">\n".$word."\n") or die("unable to write");
 	flock($fp, LOCK_UN);
 	fclose($fp);
 }
