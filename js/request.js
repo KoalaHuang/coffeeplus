@@ -47,6 +47,7 @@ function f_who_is_requesting() {
     //display submit and clear buttons
     document.getElementById("btn_submit").setAttribute("class","btn btn-primary");
     document.getElementById("btn_clear").setAttribute("class","btn btn-outline-primary");
+    document.getElementById("link_btp").setAttribute("class","col-4 mt-3");
   } //store and cat seleted
 } //function who_is_requesting
 

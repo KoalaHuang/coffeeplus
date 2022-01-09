@@ -8,7 +8,7 @@
 
   $str = file_get_contents('php://input');
   $obj = json_decode($str, false);
-  myLOG(__FILE__."\n"."str: ".print_r($str,true)." obj: ".print_r($obj,true)."  input: ".file_get_contents('php://input')." $_POST:".print_r($_POST,true));
+  // myLOG(__FILE__."\n"."str: ".print_r($str,true)." obj: ".print_r($obj,true)."  input: ".file_get_contents('php://input')." $_POST:".print_r($_POST,true));
 
   if ($obj == null){
     echo "NULL JSON result from:".$str;
@@ -21,7 +21,7 @@
   $stmt = $conn->prepare("UPDATE `t_request` SET `c_qty`=`c_qty`+? WHERE `c_store`=? AND `c_item`=?");
   $stmt->bind_param("iss", $c_qty,$c_store,$c_item);
   $numRow = (int)($obj->r);
-  myLOG("obj: ".print_r($obj,TRUE)." numRow: ".$numRow);
+  // myLOG("obj: ".print_r($obj,TRUE)." numRow: ".$numRow);
   if (!$numRow) {
     $errDB = "JSON Para error".$obj->r;
     die;
@@ -32,11 +32,11 @@
       $nameQty = "q".$i;
       $c_item = $obj->$nameItem;
       $c_qty = $obj->$nameQty;
-      myLOG("store: ".$c_store." item: ".$c_item." qty: ".$c_qty);
+      // myLOG("store: ".$c_store." item: ".$c_item." qty: ".$c_qty);
       $result = ($result && $stmt->execute());
-      myLOG("stmt after ".print_r($stmt,TRUE));
+      // myLOG("stmt after ".print_r($stmt,TRUE));
     } // for
-    myLOG("result: ".print_r($result,TRUE));
+    // myLOG("result: ".print_r($result,TRUE));
     echo json_encode($result);
   } //if $numRow correct
   $stmt->close();

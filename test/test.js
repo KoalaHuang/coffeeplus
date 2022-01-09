@@ -31,7 +31,9 @@ function f_test () {
   // window.location.href = "http://irc.pythonabc.org/mylog.php";
 // }
 
-function f_test2() {
-  document.getElementById("modal_text").innerHTML = JSON.stringify(jsonObj);
-  myModal.show();
+function f_test2(strElemenID) {
+  console.log("elm: " + strElemenID);
+  var int_range = document.getElementById(strElemenID).value;
+  console.log("value:" + int_range);
+  document.getElementById("msg").innerHTML = strElemenID + " value changed:" + int_range;
 }

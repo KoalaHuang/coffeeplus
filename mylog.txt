@@ -1,0 +1,258 @@
+<20220109231545>
+/volume1/Stocking/fulfil_update.php
+str: {"s":"Queens","c":"Ice Cream","r":5,"i1":"D.Chocolate","q1":2,"l1":"HP","i2":"Mango","q2":1,"l2":"Koala","i3":"Strawberry","q3":2,"l3":"Koala","i4":"Vanilla","q4":2,"l4":"HP","i5":"Vanilla","q5":1,"l5":"Koala"} obj: stdClass Object
+(
+    [s] => Queens
+    [c] => Ice Cream
+    [r] => 5
+    [i1] => D.Chocolate
+    [q1] => 2
+    [l1] => HP
+    [i2] => Mango
+    [q2] => 1
+    [l2] => Koala
+    [i3] => Strawberry
+    [q3] => 2
+    [l3] => Koala
+    [i4] => Vanilla
+    [q4] => 2
+    [l4] => HP
+    [i5] => Vanilla
+    [q5] => 1
+    [l5] => Koala
+)
+  input: {"s":"Queens","c":"Ice Cream","r":5,"i1":"D.Chocolate","q1":2,"l1":"HP","i2":"Mango","q2":1,"l2":"Koala","i3":"Strawberry","q3":2,"l3":"Koala","i4":"Vanilla","q4":2,"l4":"HP","i5":"Vanilla","q5":1,"l5":"Koala"} _POST:Array
+(
+)
+
+<20220109231545>
+store: Queens item: D.Chocolate storage: HP qty: 2
+<20220109231545>
+stmt_req after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 1
+)
+stmt_stk after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 2
+)
+
+<20220109231545>
+store: Queens item: Mango storage: Koala qty: 1
+<20220109231545>
+stmt_req after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 1
+)
+stmt_stk after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 2
+)
+
+<20220109231545>
+store: Queens item: Strawberry storage: Koala qty: 2
+<20220109231545>
+stmt_req after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 1
+)
+stmt_stk after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 2
+)
+
+<20220109231545>
+store: Queens item: Vanilla storage: HP qty: 2
+<20220109231545>
+stmt_req after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 1
+)
+stmt_stk after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 2
+)
+
+<20220109231545>
+store: Queens item: Vanilla storage: Koala qty: 1
+<20220109231545>
+stmt_req after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 1
+)
+stmt_stk after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 2
+)
+
+<20220109231648>
+/volume1/Stocking/fulfil_update.php
+str: {"s":"Queens","c":"Ice Cream","r":1,"i1":"B.Sesame","q1":1,"l1":"HP"} obj: stdClass Object
+(
+    [s] => Queens
+    [c] => Ice Cream
+    [r] => 1
+    [i1] => B.Sesame
+    [q1] => 1
+    [l1] => HP
+)
+  input: {"s":"Queens","c":"Ice Cream","r":1,"i1":"B.Sesame","q1":1,"l1":"HP"} _POST:Array
+(
+)
+
+<20220109231648>
+store: Queens item: B.Sesame storage: HP qty: 1
+<20220109231648>
+stmt_req after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 4
+)
+stmt_stk after mysqli_stmt Object
+(
+    [affected_rows] => 1
+    [insert_id] => 0
+    [num_rows] => 0
+    [param_count] => 3
+    [field_count] => 0
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [sqlstate] => 00000
+    [id] => 5
+)
+

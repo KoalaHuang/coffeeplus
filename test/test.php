@@ -1,42 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="test.js"></script>
+  </head>
+
+  <body>
+
 <?
-  header("Content-Type: application/json; charset=UTF-8");
-  include "../mylog.php";
-
-  $str = file_get_contents('php://input');
-  $obj = json_decode($str, false);
-  myLOG(__FILE__."\n"."str: ".print_r($str,true)." obj: ".print_r($obj,true)."  input: ".file_get_contents('php://input')." $_POST:".print_r($_POST,true));
-
-  if ($obj == null){
-    echo "NULL JSON result";
-  }else {
-    echo json_encode($obj);
-  }
-/*
   include "../connect_db.php";
-  $errDB = "";
-  $result = true;
-  $stmt = $conn->prepare("UPDATE `t_request` SET `c_qty`=`c_qty`+? WHERE `c_store`=? AND `c_item`=?");
-  $stmt->bind_param("iss", $c_qty,$c_store,$c_item);
-  $numRow = (int)($obj->r);
-  myLOG("obj: ".print_r($obj,TRUE)." numRow: ".$numRow);
-  if (!$numRow) {
-    $errDB = "JSON Para error".$obj->r;
-    die;
-  }else{
-    $c_store = $obj->s;
-    for ($i = 1; $i <= $numRow; $i++) {
-      $nameItem = "i".$i;
-      $nameQty = "q".$i;
-      $c_item = $obj->$nameItem;
-      $c_qty = $obj->$nameQty;
-      myLOG("store: ".$c_store." item: ".$c_item." qty: ".$c_qty);
-      $result = ($result && $stmt->execute());
-      // myLOG("stmt after ".print_r($stmt,TRUE));
-    } // for
-    myLOG("result: ".print_r($result,TRUE));
-    echo json_encode($result);
-  } //if $numRow correct
-  $stmt->close();
-  $conn->close();
-  */
+
+  $sql = "SELECT * FROM `t_request` WHERE `c_qty` > 0;";
+  $stmt = $conn->prepare("SELECT `c_storage`, `c_qty` FROM `t_stock` WHERE `c_item`=?");
+  $stmt->bind_param("s", $c_item );
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    $rownum = 0;
+    while($row = $result->fetch_assoc()) {
+      $rownum = $rownum + 1;
+      $cardID = "itemcard".$rownum;
+      $radioID = "reqQty".$rownum;
+      $c_item = $row["c_item"];
+      $c_qty_req = $row["c_qty"];
 ?>
+  <div class="card" id="<? echo $cardID ?>" data-stocking-item="<? echo $c_item ?>" data-stocking-cat="<? echo $row["c_cat"] ?>" data-stocking-store="<? echo $row["c_store"] ?>">
+    <div class="card-body">
+      <span class="card-title fs-5"><? echo $c_item ?></span>&nbsp<span class="card-subtitle fs-6 mb-2 text-muted"><? echo "open request: ".$c_qty_req; ?></span>
+      <div>
+        <?
+          $stockRowNum = 0;
+          if ($stmt->execute()) {
+            $stmt_result = $stmt->get_result();
+            $stock=array(array());
+            while($stk=$stmt_result->fetch_assoc())
+            {
+             $stock[$stockRowNum][0] = $stk['c_storage'];
+             $stock[$stockRowNum][1] = $stk['c_qty'];
+             $stockRowNum++;
+            } //loop stock data
+            echo print_r($stock, true);
+        ?>
+            </div>
+        <?
+          }else{
+            echo "Error in getting stock data!";
+            die;
+          } //if_stock data
+        ?>
+        </div> <!--card body-->
+        <?
+        } // loop request data
+        ?>
+        </div> <!--card-->
+        <?
+      } //if_request data
+      $stmt->close();
+      $conn->close();
+    ?>
+</body>
+</html>

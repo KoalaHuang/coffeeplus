@@ -7,13 +7,14 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/request.js"></script>
+	<script src="js/fulfil.js"></script>
+	<? include "mylog.php"?>
 </head>
 <body>
 	<? include "navbar.php" ?>
 
 	<div class="container">
-		<h1 id="section_home" class="text-center mb-2">Request</h1>
+		<h1 id="section_home" class="text-center mb-2">Fulfill</h1>
 
 		<div id="reminding" class="text-center mb-2 text-muted col-12 fst-italic fs-6">Select store and category</div>
 
@@ -59,40 +60,70 @@
 
 		<div class="row col mb-2">
 			<?
-				$sql = "SELECT * FROM `t_request`;";
+				$sql = "SELECT * FROM `t_request` WHERE `c_qty` > 0;";
+				$stmt = $conn->prepare("SELECT `c_storage`, `c_qty` FROM `t_stock` WHERE `c_qty`>0 AND `c_item`=?");
+				$stmt->bind_param("s", $c_item );
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) {
 					$rownum = 0;
 					while($row = $result->fetch_assoc()) {
 						$rownum = $rownum + 1;
 						$cardID = "itemcard".$rownum;
-						$radioID = "reqQty".$rownum;
+						$c_item = $row["c_item"];
+						$c_qty_req = (int)$row["c_qty"];
 			?>
-				<div class="card d-none" id="<? echo $cardID ?>" data-stocking-item="<? echo $row["c_item"] ?>" data-stocking-cat="<? echo $row["c_cat"] ?>" data-stocking-store="<? echo $row["c_store"] ?>">
+				<div class="card d-none" id="<? echo $cardID ?>" data-stocking-item="<? echo $c_item ?>" data-stocking-cat="<? echo $row["c_cat"] ?>" data-stocking-store="<? echo $row["c_store"] ?>">
 				  <div class="card-body">
-				    <span class="card-title fs-5"><? echo $row["c_item"] ?></span>&nbsp<span class="card-subtitle fs-6 mb-2 text-muted"><? if ($row["c_qty"]>0) {echo "open request: ".$row["c_qty"];} ?></span>
-						<div class="btn-group col-12" role="group">
-						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>1" value="1" autocomplete="off">
-						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>1">1</label>
-						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>2" value="2" autocomplete="off">
-						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>2">2</label>
-						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>3" value="3" autocomplete="off">
-						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>3">3</label>
-							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>4" value="10" autocomplete="off">
-						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>4">10</label>
-							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>5" value="50" autocomplete="off">
-						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>5">50</label>
-						</div> <!-- qty button -->
+				    <span class="card-title fs-5"><? echo $c_item."&nbsp"; ?></span><span class="card-subtitle fs-6 mb-2 text-muted">open request:&nbsp</span><span class="text-primary"><?echo $c_qty_req; ?></span>
+						<div>
+							<?
+								$stockRowNum = 0;
+								if ($stmt->execute()) {
+			            $stmt_result = $stmt->get_result();
+			            while($stk=$stmt_result->fetch_assoc())
+			            {
+										$stockRowNum++;
+										$c_qty_stock = (int)$stk['c_qty'];
+										if ($c_qty_stock >= $c_qty_req) {
+											$rangeVal = $c_qty_req;
+											$c_qty_req = 0;
+										}else{
+											$rangeVal = $c_qty_stock;
+											$c_qty_req = $c_qty_req - $c_qty_stock;
+										}//if allocate range value
+										// myLOG("req: ".$c_qty_req." stock:".$c_qty_stock." rangeval:".$rangeVal);
+										$rangeID = "r_".$rownum."_".$stockRowNum;
+										echo '<div class="row">';
+														echo '<label for="'.$rangeID.'" class="form-label col-3">'.$stk["c_storage"].'</label><span class="col-9"><span class="ms-2 text-muted">stock:'.'</span><span>'.$c_qty_stock.'</span><span class="ms-2 text-muted">&nbspallocate:</span><span class="ms-2 text-primary" id="'.$rangeID.'_val">'.$rangeVal.'</span></span>';
+										echo '</div>';
+			      				echo '<input type="range" class="form-range" data-stocking-storage="'.$stk['c_storage'].'" min="0" max="'.$c_qty_stock.'" step="1" value="'.$rangeVal.'" id="'.$rangeID."\" onchange=\"f_rangeVal('".$rangeID."')\">";
+			            } //loop stock data
+									if ($stockRowNum == 0) {
+										echo '<p class="fs-5 text-danger">Out of stock!</p>';
+									} //if out of stock
+								}else{
+									echo "Error getting stock data. item:".$c_item." store:".$row["c_store"];
+									die;
+								} //if_stock data found
+						?>
+						</div><!-- stock ranges-->
 				  </div> <!-- card body-->
 				</div> <!-- card -->
 			<?
-						}
-					} else {
-								echo "ERROR! No category found.";
-					}
-					$conn->close();
+					}//loop request data
+				} else {
 			?>
-		</div> <!-- item list -->
+					<div class="card d-none" id="itemcard1">
+						<div class="card-body">
+							<span class="card-title fs-5">Wah hoo, NO pending request from any store...</span>
+						</div> <!--empty request table card body-->
+					</div> <!--empty request table card-->
+			<?
+				}//if_request data found
+				$stmt->close();
+				$conn->close();
+			?>
+		</div> <!-- card list -->
 		<div class="row mt-3">
 	    <div class="col-4">
       	<button type="button" class="btn btn-primary d-none" id="btn_submit" onclick="f_toConfirm()">Submit</button>
@@ -105,13 +136,13 @@
 	    </div>
 		</div> <!-- buttons -->
 		<!-- Modal Submit-->
-		<div class="modal fade" id="modal_r" tabindex="-1">
+		<div class="modal fade" id="modal_box" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="RequestModalLabel">Confirm to submit below request?</h5>
+						<h5 class="modal-title" id="lbl_modal">Confirm to fulfill?</h5>
 					</div>
-					<div class="modal-body fs-6" id="modal_r_body">
+					<div class="modal-body fs-6" id="body_modal">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>
