@@ -6,7 +6,22 @@ const obj_request = {
 
 var modal_Popup;
 window.addEventListener("DOMContentLoaded", function() {
-  modal_Popup = new bootstrap.Modal(document.getElementById("modal_r"));
+   modal_Popup = new bootstrap.Modal(document.getElementById("modal_box"));
+
+   const $navbarNav = document.querySelector("#navbarToggler");
+   if ($navbarNav) {
+     const navbarNavCollapse = (event) => {
+       if ($navbarNav != event.target) {
+         $navbarNav.setAttribute("class","collapse navbar-collapse");
+         document.removeEventListener("mouseup", navbarNavCollapse);
+       }
+     }
+
+     $navbarNav.addEventListener("shown.bs.collapse", () => {
+       document.addEventListener("mouseup", navbarNavCollapse);
+     });
+   }
+
 }, false);
 
 function f_who_is_requesting() {
@@ -91,23 +106,22 @@ function f_submit() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     if (this.responseText == "true") {
-      document.getElementById("modal_r_body").innerHTML = "Update successfully!<br>Press OK to return";
+      document.getElementById("body_modal").innerHTML = "Update successfully!<br>Press OK to return";
       document.getElementById("btn_ok").style.visibility = "visible";
       document.getElementById("btn_ok").onclick = f_refresh;
     }else{
-      document.getElementById("modal_r_body").innerHTML = "Update failed!<br>"+ this.responseText + "<br>Press Cancel to return";
+      document.getElementById("body_modal").innerHTML = "Update failed!<br>"+ this.responseText + "<br>Press Cancel to return";
       document.getElementById("btn_cancel").style.visibility = "visible";
       // modal_Popup.hide();
     }
   }
   const strJson = JSON.stringify(obj_request);
-  console.log(strJson);
   xhttp.open("POST", "req_update.php");
   xhttp.setRequestHeader("Accept", "application/json");
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(strJson);
-  document.getElementById("RequestModalLabel").innerHTML = "Request submitted";
-  document.getElementById("modal_r_body").innerHTML = "Waiting server response...";
+  document.getElementById("lbl_modal").innerHTML = "Request submitted";
+  document.getElementById("body_modal").innerHTML = "Waiting server response...";
   document.getElementById("btn_cancel").style.visibility = "hidden";
   document.getElementById("btn_ok").style.visibility = "hidden";
 }//f_submit

@@ -2,6 +2,22 @@ var myModal;
 
 window.addEventListener("DOMContentLoaded", function() {
    myModal = new bootstrap.Modal(document.getElementById("RequestModal"));
+
+   const $navbarNav = document.querySelector("#navbarToggler");
+   if ($navbarNav) {
+     console.log($navbarNav);
+     const navbarNavCollapse = (event) => {
+       if ($navbarNav != event.target) {
+         $navbarNav.setAttribute("class","collapse navbar-collapse");
+         document.removeEventListener("mouseup", navbarNavCollapse);
+       }
+     }
+
+     $navbarNav.addEventListener("shown.bs.collapse", () => {
+       document.addEventListener("mouseup", navbarNavCollapse);
+     });
+   }
+
 }, false);
 
 var jsonObj = {

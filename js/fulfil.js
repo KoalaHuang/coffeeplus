@@ -6,7 +6,22 @@ const obj_fulfil = {
 
 var modal_Popup;
 window.addEventListener("DOMContentLoaded", function() {
-  modal_Popup = new bootstrap.Modal(document.getElementById("modal_box"));
+   modal_Popup = new bootstrap.Modal(document.getElementById("modal_box"));
+
+   const $navbarNav = document.querySelector("#navbarToggler");
+   if ($navbarNav) {
+     const navbarNavCollapse = (event) => {
+       if ($navbarNav != event.target) {
+         $navbarNav.setAttribute("class","collapse navbar-collapse");
+         document.removeEventListener("mouseup", navbarNavCollapse);
+       }
+     }
+
+     $navbarNav.addEventListener("shown.bs.collapse", () => {
+       document.addEventListener("mouseup", navbarNavCollapse);
+     });
+   }
+
 }, false);
 
 function f_who_is_requesting() {
@@ -124,7 +139,6 @@ function f_submit() {
     }
   }
   const strJson = JSON.stringify(obj_fulfil);
-  console.log(strJson);
   xhttp.open("POST", "fulfil_update.php");
   xhttp.setRequestHeader("Accept", "application/json");
   xhttp.setRequestHeader("Content-Type", "application/json");

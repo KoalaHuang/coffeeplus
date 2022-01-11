@@ -9,6 +9,7 @@
   </head>
 
   <body>
+  	<? include "../navbar.php" ?>
     <h1 class="text-center">TEST</h1>
     <div class="container-fluid">
 

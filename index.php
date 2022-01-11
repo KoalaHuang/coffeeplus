@@ -105,13 +105,13 @@
 	    </div>
 		</div> <!-- buttons -->
 		<!-- Modal Submit-->
-		<div class="modal fade" id="modal_r" tabindex="-1">
+		<div class="modal fade" id="modal_box" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="RequestModalLabel">Confirm to submit below request?</h5>
+						<h5 class="modal-title" id="lbl_modal">Confirm to submit below request?</h5>
 					</div>
-					<div class="modal-body fs-6" id="modal_r_body">
+					<div class="modal-body fs-6" id="body_modal">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>
