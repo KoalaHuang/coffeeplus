@@ -13,13 +13,13 @@
             <a class="nav-link" href="fulfil.php">Fulfill</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#section_sushi">Stock</a>
+            <a class="nav-link" href="stock.php">Stock</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#section_sushi">Report</a>
+            <a class="nav-link" href="report.php">Report</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#section_sushi">Admin</a>
+            <a class="nav-link" href="admin.php">Admin</a>
           </li>
       </ul>
     </div> <!-- navbar-collapse -->
