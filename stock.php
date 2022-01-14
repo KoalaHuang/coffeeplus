@@ -17,8 +17,7 @@
 		<h1 id="section_home" class="text-center mb-2">Stock</h1>
 		<div id="reminding" class="text-center mb-2 text-muted col-12 fst-italic fs-6">Select item category</div>
 		<div class="row mb-4">
-			<div class="col-2 text-left align-text-bottom mt-2"><strong>CAT:&nbsp</strong></div>
-			<div class="btn-group col-10" role="group">
+			<div class="btn-group col-12" role="group">
 				<?
 					include 'connect_db.php';
 	        $sql = "SELECT * FROM `t_cat`";
@@ -77,8 +76,8 @@
 						<div class="input-group mb-3">
   						<span class="input-group-text col-3" id="<? echo "lblStorage".$strIndex ?>"><? echo $row["c_storage"] ?></span>
 							<span class="input-group-text col-3">
-								<span><? echo $c_qty ?>&rarr;</span>
-								<span class="fw-bold" id="<? echo "lblResult".$strIndex ?>"><?echo $c_qty ?></span>
+								<span><? echo $c_qty ?></span>
+								<span class="fw-bold" id="<? echo "lblResult".$strIndex ?>"></span>
 							</span>
 						  <input type="text" class="form-control text-center col-2" data-stocking-stock="<? echo $c_qty ?>" value="0" onchange="<? echo "f_boxChanged('".$strIndex."')"; ?>" id="<? echo "box".$strIndex ?>">
 						  <button class="btn btn-outline-secondary col-2" type="button" onclick="<? echo "f_adjust('".$strIndex."',true)"; ?>">+</button>

@@ -98,7 +98,7 @@ function f_toConfirm() {
     elm = document.getElementById("itemcard"+i);
   } // loop rows
   obj_request.r = numRow;
-  document.getElementById("modal_r_body").innerHTML = strToSubmit + "<br>";
+  document.getElementById("body_modal").innerHTML = strToSubmit + "<br>";
   modal_Popup.show();
 }// function f_toConfirm
 

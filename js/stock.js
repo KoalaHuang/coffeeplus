@@ -60,7 +60,7 @@ function f_refresh() {
   location.reload()
 }
 
-//update info with edit box value change
+//update info with changed edit box value
 function f_boxChanged(strIndex) {
   const inputBox = document.getElementById("box" + strIndex);
   var intChange = Number(inputBox.value);
@@ -74,7 +74,7 @@ function f_boxChanged(strIndex) {
     intChange = -intStock;
     inputBox.value = intChange;
   }
-  document.getElementById("lblResult" + strIndex).innerHTML = "&nbsp" + intResult;
+  document.getElementById("lblResult" + strIndex).innerHTML = "&nbsp&rarr;&nbsp" + intResult;
 }
 
 //response to +/- buttons
@@ -92,33 +92,36 @@ function f_toConfirm() {
   var i = 1;//row index
   var numRow=0; //row count of update
   var strName = "";
-  var strToSubmit = "<p>" + obj_stock.s + ":</p>";
-  var rowStore, rowItem, rowCat; //item and store of current row
+  var strToSubmit = "<p> Update " + obj_stock.c + " stock:</p>";
+  var rowItem, rowCat; //item and store of current row
+  var elmInput;
   var elm = document.getElementById("itemcard"+i);
-  var rangeStk; //stock range element
   while (elm != null) {
-    rowStore = elm.getAttribute("data-stocking-store");
     rowCat = elm.getAttribute("data-stocking-cat");
     rowItem = elm.getAttribute("data-stocking-item");
-    if ((rowCat == obj_stock.c) && (rowStore == obj_stock.s)) {
+    if (rowCat == obj_stock.c) {
       var j = 1;
-      rangeStk = document.getElementById("r_" + i + "_" + j);
-      while (rangeStk != null) {
-        var rangeVal = rangeStk.value;
-        var storageLoc = rangeStk.getAttribute("data-stocking-storage");
-        if (rangeVal > 0) {
-          strToSubmit = strToSubmit + "<p>" + rowItem + "&nbsp&nbsp[" + rangeVal + "] from " + storageLoc + "</p>";
+      elmInput = document.getElementById("box_" + i + "_" + j);
+      while (elmInput != null) {
+        var inputVal = Number(elmInput.value);
+        var rowStock = Number(elmInput.getAttribute("data-stocking-stock"));
+        var rowChangedStock = rowStock + inputVal;
+        var storageLoc = document.getElementById("lblStorage_" + i + "_" + j).innerHTML;
+        // console.log("item: "+ rowItem + "inputVal: "+inputVal+" storage: "+storageLoc+" stock:"+rowStock);
+        if (inputVal != 0) {
+          if (j == 1) {strToSubmit = strToSubmit + "<p>&diams;" + rowItem + "&diams;</p>";}
+          strToSubmit = strToSubmit + "<p>" + storageLoc + ": " + rowStock + "&rarr;" + rowChangedStock + " by " + inputVal + "</p>";
           numRow++;
           var strNum = numRow.toString();
           strName = "i" + strNum;
           obj_stock[strName] = rowItem; //add item object property
           strName = "q" + strNum;
-          obj_stock[strName] = Number(rangeVal); //add qty object property
+          obj_stock[strName] = inputVal; //add qty object property - changing value
           strName = "l" + strNum;
           obj_stock[strName] = storageLoc; //add  storage location property
-        }// if allocate stock
+        }// if stock is changed
         j++;
-        rangeStk = document.getElementById("r_" + i + "_" + j);
+        elmInput = document.getElementById("box_" + i + "_" + j);
       } //loop stock ranges
     } // if card's cat and store  are selected
     i++;
@@ -133,6 +136,7 @@ function f_toConfirm() {
     document.getElementById("btn_cancel").style.visibility = "visible";
   }
   document.getElementById("body_modal").innerHTML = strToSubmit;
+  // console.log(obj_stock);
   modal_Popup.show();
 }// function f_toConfirm
 
@@ -146,7 +150,6 @@ function f_submit() {
     }else{
       document.getElementById("body_modal").innerHTML = "Update failed!<br>"+ this.responseText + "<br>Press Cancel to return";
       document.getElementById("btn_cancel").style.visibility = "visible";
-      // modal_Popup.hide();
     }
   }
   const strJson = JSON.stringify(obj_stock);
@@ -154,7 +157,7 @@ function f_submit() {
   xhttp.setRequestHeader("Accept", "application/json");
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(strJson);
-  document.getElementById("lbl_modal").innerHTML = "Request submitted";
+  document.getElementById("lbl_modal").innerHTML = "Stock update submitted";
   document.getElementById("body_modal").innerHTML = "Waiting server response...";
   document.getElementById("btn_cancel").style.visibility = "hidden";
   document.getElementById("btn_ok").style.visibility = "hidden";

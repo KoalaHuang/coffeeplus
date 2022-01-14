@@ -13,6 +13,28 @@
     <h1 class="text-center">TEST</h1>
     <div class="container-fluid">
 
+      <div class="row mb-4">
+  			<div class="btn-group" role="group">
+          <input type="radio" class="btn-check" name="btn_type" id="Request" autocomplete="off" onclick="">
+  				<label class="btn btn-outline-primary" for="Request">Request</label>
+  				<input type="radio" class="btn-check" name="btn_type" id="Fulfill" autocomplete="off" onclick="">
+  				<label class="btn btn-outline-primary" for="Fulfill">Fulfill</label>
+  				<input type="radio" class="btn-check" name="btn_type" id="Stock" autocomplete="off" onclick="">
+  				<label class="btn btn-outline-primary" for="Stock">Stock</label>
+  			</div> <!-- btn group -->
+  		</div> <!-- row. selection area -->
+
+      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+      </div>
+
       <div class="col">my message:&nbsp<span id="msg"></span></div>
       <div class="col">server message:&nbsp<span id="srv_msg"></span></div>
       <p></p>
