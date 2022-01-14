@@ -78,10 +78,10 @@
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>2">2</label>
 						  <input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>3" value="3" autocomplete="off">
 						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>3">3</label>
-							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>4" value="10" autocomplete="off">
-						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>4">10</label>
-							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>5" value="50" autocomplete="off">
-						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>5">50</label>
+							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>4" value="4" autocomplete="off">
+						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>4">4</label>
+							<input type="radio" class="btn-check" name="<? echo $radioID ?>" id="<? echo $radioID ?>5" value="5" autocomplete="off">
+						  <label class="btn btn-outline-primary" for="<? echo $radioID ?>5">5</label>
 						</div> <!-- qty button -->
 				  </div> <!-- card body-->
 				</div> <!-- card -->
