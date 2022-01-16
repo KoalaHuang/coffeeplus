@@ -106,11 +106,11 @@ function f_submit() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     if (this.responseText == "true") {
-      document.getElementById("body_modal").innerHTML = "Update successfully!<br>Press OK to return";
+      document.getElementById("body_modal").innerHTML = "Submit successfully!<br>Press OK to return";
       document.getElementById("btn_ok").style.visibility = "visible";
       document.getElementById("btn_ok").onclick = f_refresh;
     }else{
-      document.getElementById("body_modal").innerHTML = "Update failed!<br>"+ this.responseText + "<br>Press Cancel to return";
+      document.getElementById("body_modal").innerHTML = "Update failed!<br>Return code: "+ this.responseText + "<br>Press Cancel to return";
       document.getElementById("btn_cancel").style.visibility = "visible";
       // modal_Popup.hide();
     }

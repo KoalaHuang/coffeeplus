@@ -46,7 +46,7 @@
 					$c_item_current = ""; //one item can have mutiple storage. which will be put under card of same item
 					while($row = $result->fetch_assoc()) {
 						$c_item = $row["c_item"];
-						myLOG("storage: ".$row["c_storage"]." c_item: ".$c_item." current: ".$c_item_current);
+						// myLOG("storage: ".$row["c_storage"]." c_item: ".$c_item." current: ".$c_item_current);
 						if ($c_item != $c_item_current) { //creating item card
 							if ($c_item_current != "") { //close last card
 			?>

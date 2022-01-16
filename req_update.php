@@ -5,6 +5,7 @@
 
   header("Content-Type: application/json; charset=UTF-8");
   include "mylog.php";
+  include "whatsapp.php";
 
   $str = file_get_contents('php://input');
   $obj = json_decode($str, false);
@@ -44,6 +45,8 @@
       // myLOG("stmt after ".print_r($stmt,TRUE));
     } // for
     // myLOG("result: ".print_r($result,TRUE));
+    // $whatsapp_rtn = send_whatsapp($c_cat." request received from store ".$c_store."!");
+    // myLOG(__FILE__."WhatsApp return: ".print_r($whatsapp_rtn));
     echo json_encode($result);
   } //if $numRow correct
   $stmt->close();

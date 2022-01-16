@@ -1,114 +1,12 @@
-<20220114234135>
-storage: HP c_item: 400g C&C current: 
-<20220114234135>
-storage: Koala c_item: 400g Mango current: 400g C&C
-<20220114234135>
-storage: Koala c_item: 400g Strawberry current: 400g Mango
-<20220114234135>
-storage: HP c_item: 400g Vanilla current: 400g Strawberry
-<20220114234135>
-storage: Koala c_item: 400g Vanilla current: 400g Vanilla
-<20220114234135>
-storage: HP c_item: B.Orange current: 400g Vanilla
-<20220114234135>
-storage: HP c_item: B.Sesame current: B.Orange
-<20220114234135>
-storage: HP c_item: Biscoff current: B.Sesame
-<20220114234135>
-storage: HP c_item: C&C current: Biscoff
-<20220114234135>
-storage: Queens c_item: Cover current: C&C
-<20220114234135>
-storage: Queens c_item: Cup current: Cover
-<20220114234135>
-storage: HP c_item: D.Chocolate current: Cup
-<20220114234135>
-storage: HP c_item: Hazlnut current: D.Chocolate
-<20220114234135>
-storage: Koala c_item: Mango current: Hazlnut
-<20220114234135>
-storage: HP c_item: Matcha current: Mango
-<20220114234135>
-storage: HP c_item: Pistachio current: Matcha
-<20220114234135>
-storage: Koala c_item: Strawberry current: Pistachio
-<20220114234135>
-storage: HP c_item: Vanilla current: Strawberry
-<20220114234135>
-storage: Koala c_item: Vanilla current: Vanilla
-<20220114234223>
-storage: HP c_item: 400g C&C current: 
-<20220114234223>
-storage: Koala c_item: 400g Mango current: 400g C&C
-<20220114234223>
-storage: Koala c_item: 400g Strawberry current: 400g Mango
-<20220114234223>
-storage: HP c_item: 400g Vanilla current: 400g Strawberry
-<20220114234223>
-storage: Koala c_item: 400g Vanilla current: 400g Vanilla
-<20220114234223>
-storage: HP c_item: B.Orange current: 400g Vanilla
-<20220114234223>
-storage: HP c_item: B.Sesame current: B.Orange
-<20220114234223>
-storage: HP c_item: Biscoff current: B.Sesame
-<20220114234223>
-storage: HP c_item: C&C current: Biscoff
-<20220114234223>
-storage: Queens c_item: Cover current: C&C
-<20220114234223>
-storage: Queens c_item: Cup current: Cover
-<20220114234223>
-storage: HP c_item: D.Chocolate current: Cup
-<20220114234223>
-storage: HP c_item: Hazlnut current: D.Chocolate
-<20220114234223>
-storage: Koala c_item: Mango current: Hazlnut
-<20220114234223>
-storage: HP c_item: Matcha current: Mango
-<20220114234223>
-storage: HP c_item: Pistachio current: Matcha
-<20220114234223>
-storage: Koala c_item: Strawberry current: Pistachio
-<20220114234223>
-storage: HP c_item: Vanilla current: Strawberry
-<20220114234223>
-storage: Koala c_item: Vanilla current: Vanilla
-<20220114234246>
-storage: HP c_item: 400g C&C current: 
-<20220114234246>
-storage: Koala c_item: 400g Mango current: 400g C&C
-<20220114234246>
-storage: Koala c_item: 400g Strawberry current: 400g Mango
-<20220114234246>
-storage: HP c_item: 400g Vanilla current: 400g Strawberry
-<20220114234246>
-storage: Koala c_item: 400g Vanilla current: 400g Vanilla
-<20220114234246>
-storage: HP c_item: B.Orange current: 400g Vanilla
-<20220114234246>
-storage: HP c_item: B.Sesame current: B.Orange
-<20220114234246>
-storage: HP c_item: Biscoff current: B.Sesame
-<20220114234246>
-storage: HP c_item: C&C current: Biscoff
-<20220114234246>
-storage: Queens c_item: Cover current: C&C
-<20220114234246>
-storage: Queens c_item: Cup current: Cover
-<20220114234246>
-storage: HP c_item: D.Chocolate current: Cup
-<20220114234246>
-storage: HP c_item: Hazlnut current: D.Chocolate
-<20220114234246>
-storage: Koala c_item: Mango current: Hazlnut
-<20220114234246>
-storage: HP c_item: Matcha current: Mango
-<20220114234246>
-storage: HP c_item: Pistachio current: Matcha
-<20220114234246>
-storage: Koala c_item: Strawberry current: Pistachio
-<20220114234246>
-storage: HP c_item: Vanilla current: Strawberry
-<20220114234246>
-storage: Koala c_item: Vanilla current: Vanilla
+<20220116203700>
+result: 1
+<20220116203851>
+result: 1
+<20220116210459>
+/volume1/Stocking/req_update.phpWhatsApp error1
+<20220116211450>
+/volume1/Stocking/req_update.phpWhatsApp return: 1
+<20220116213533>
+/volume1/Stocking/req_update.phpWhatsApp return: 1
+<20220116222853>
+/volume1/Stocking/req_update.phpWhatsApp return: 1

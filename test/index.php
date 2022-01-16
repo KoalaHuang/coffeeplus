@@ -9,7 +9,10 @@
   </head>
 
   <body>
-  	<? include "../navbar.php" ?>
+  	<?= include "../navbar.php";
+        include "../whatsapp.php";
+        echo send_whatsapp("hello from coffeeplus!");
+    ?>
     <h1 class="text-center">TEST</h1>
     <div class="container-fluid">
 

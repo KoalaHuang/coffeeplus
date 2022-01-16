@@ -58,12 +58,12 @@
 				<div class="card d-none" id="<? echo $cardID ?>" data-stocking-type="<? echo $orderType ?>">
 				  <div class="card-body">
 						<p>
-						  <a class="btn btn-light col-12" data-bs-toggle="collapse" href="#<?echo "order".$rownum?>" role="button">
+						  <a class="btn btn-outline-dark col-12" data-bs-toggle="collapse" href="#<?echo "order".$rownum?>" role="button">
 						    <?
 								$date = date_create($row["c_date"]);
-								$strBtnText = date_format($date,"M.d")."&nbsp&nbsp&#9749&nbsp&nbsp";
+								$strBtnText = date_format($date,"M.d")."&nbsp&nbsp&#9839&nbsp&nbsp";
 								if ($orderType != 's') {
-									$strBtnText = $strBtnText.$row["c_store"]."&nbsp&nbsp&#9749&nbsp&nbsp"; //store name for fulfill and reqeust orders
+									$strBtnText = $strBtnText.$row["c_store"]."&nbsp&nbsp&#9839&nbsp&nbsp"; //store name for fulfill and reqeust orders
 								}
 								$strBtnText = $strBtnText.$row["c_cat"];
 								echo $strBtnText;
