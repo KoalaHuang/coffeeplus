@@ -30,7 +30,7 @@
 		<div class="row col mb-2">
 			<?
 				include 'connect_db.php';
-				$sql = "SELECT * FROM `t_report` LIMIT 50;"; //limit to 10 result to avoid performance issue
+				$sql = "SELECT * FROM `t_report` WHERE DATEDIFF(CURDATE(),`c_date`)<60;"; //limit to 1 mth data
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) {
 					$rownum = 0;

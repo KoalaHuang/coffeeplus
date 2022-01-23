@@ -29,7 +29,7 @@ function f_whichType() {
     }
   }
   //update reminding message
-  document.getElementById("reminding").innerHTML="Display recent 10 " + obj_report.t + " orders";
+  document.getElementById("reminding").innerHTML="Display " + obj_report.t + " orders in past 60 days";
   //display item cards
   i = 1;
   elm = document.getElementById("cardType"+i);
