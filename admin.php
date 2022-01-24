@@ -16,7 +16,7 @@
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-2">Admin</h1>
 
-		<div id="reminding" class="text-center mb-3 text-danger col-12 fst-italic fs-6">Danger zone. Use only you know what you are doing...</div>
+		<div id="reminding" class="text-center mb-3 text-danger col-12 fst-italic fs-6">Danger zone. Know what you are doing...</div>
 
 		<nav>
 		  <div class="nav nav-tabs" id="tabAdmin" role="tablist">
@@ -64,13 +64,13 @@
 						</select>
 					</span>
 				</div> <!-- cat and item selection rows-->
+				<div class="col-12 text-center mb-1"><strong>Item Name</strong></div>
 				<div class="input-group mb-3">
-				  <span class="input-group-text"><strong>&nbsp;&nbsp;Item:&nbsp;&nbsp;</strong></span>
 				  <input type="text" class="form-control" id="iptItem" disabled>
 				</div> <!--input box-->
+				<div class="col-12 text-center mb-1"><strong>Storage</strong></div>
 				<div class="row mb-5">
-					<div class="col-2 text-left mt-2"><strong>Storage:&nbsp</strong></div>
-					<div class="btn-group col-10" role="group">
+					<div class="btn-group" role="group">
 						<?
 		        $sql = "SELECT * FROM `t_storage`";
       			$result = $conn->query($sql);
