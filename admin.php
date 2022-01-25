@@ -88,7 +88,7 @@
 				</div> <!-- storage row -->
 				<div class="row">
 					<span><button type="button" class="btn btn-primary col-3 me-5" onclick="f_toConfirm()">OK</button>
-					<button type="button" class="btn btn-secondary col-3" onclick="f_refresh">Cancel</button></span>
+					<button type="button" class="btn btn-secondary col-3" onclick="f_refresh()">Cancel</button></span>
 				</div>
 			</div> <!--tab item-->
 		  <div class="tab-pane fade" id="tcCat" role="tabpanel"><span class="mt-5">&#9935;&nbsp;&nbsp;&nbsp;&nbsp;will figure out later...</span></div>
@@ -105,7 +105,7 @@
 					<div class="modal-body fs-6" id="body_modal">
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-secondary" id="btn_cancel" onclick="f_refresh()">Cancel</button>
 						<button type="button" class="btn btn-primary" id="btn_ok" onclick="f_submit()">OK</button>
 					</div>
 				</div>

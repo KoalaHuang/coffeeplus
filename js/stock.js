@@ -67,14 +67,18 @@ function f_boxChanged(strIndex) {
   var intStock = Number(inputBox.getAttribute("data-stocking-stock"));
   var intResult;
 
-  intResult = intStock + intChange;
+  if (intChange == 0) {
+    document.getElementById("lblResult" + strIndex).innerHTML = "";
+  }else{
+    intResult = intStock + intChange;
 
-  if (intResult <  0) { //can't be less than zero
-    intResult = 0;
-    intChange = -intStock;
-    inputBox.value = intChange;
+    if (intResult <  0) { //can't be less than zero
+      intResult = 0;
+      intChange = -intStock;
+      inputBox.value = intChange;
+    }
+    document.getElementById("lblResult" + strIndex).innerHTML = "&nbsp&rarr;&nbsp" + intResult;
   }
-  document.getElementById("lblResult" + strIndex).innerHTML = "&nbsp&rarr;&nbsp" + intResult;
 }
 
 //response to +/- buttons
