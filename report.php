@@ -1,3 +1,4 @@
+<? include_once "sessioncheck.php"?>
 <!DOCTYPE html>
 <html>
 <head>

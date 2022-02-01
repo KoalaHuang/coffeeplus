@@ -1,24 +1,2 @@
-<20220123211052>
-/volume1/Stocking/admin_update.php
-sql: INSERT INTO `t_stock`(`c_storage`, `c_item`, `c_cat`, `c_qty`) VALUES ("FR Storage","Paper","Consumables",0);
-<20220123211222>
-/volume1/Stocking/admin_update.php
-sql: UPDATE `t_stock` SET `c_item`="Paper2",`c_storage`="VP Storage" WHERE `c_storage`="FR Storage" AND `c_item`="Paper";
-<20220123211334>
-/volume1/Stocking/admin_update.php
-sql: UPDATE `t_stock` SET `c_item`="400g C&C",`c_storage`="FR Storage" WHERE `c_storage`="VP Storage" AND `c_item`="400g C&C";
-<20220123211349>
-/volume1/Stocking/admin_update.php
-sql: UPDATE `t_stock` SET `c_item`="400g C&C",`c_storage`="VP Storage" WHERE `c_storage`="FR Storage" AND `c_item`="400g C&C";
-<20220124003719>
-/volume1/Stocking/admin_update.php
-sql: UPDATE `t_stock` SET `c_item`="Cover4",`c_storage`="FR Storage" WHERE `c_storage`="FR Storage" AND `c_item`="Cover";
-<20220124003745>
-/volume1/Stocking/admin_update.php
-sql: INSERT INTO `t_stock`(`c_storage`, `c_item`, `c_cat`, `c_qty`) VALUES ("FR Storage","Logo label","Consumables",0);
-<20220124003836>
-/volume1/Stocking/admin_update.php
-sql: INSERT INTO `t_stock`(`c_storage`, `c_item`, `c_cat`, `c_qty`) VALUES ("","Carton box","Consumables",0);
-<20220124004804>
-/volume1/Stocking/admin_update.php
-sql: INSERT INTO `t_stock`(`c_storage`, `c_item`, `c_cat`, `c_qty`) VALUES ("FR Storage","Carton Box","Consumables",0);
+<20220131213331>
+HP
