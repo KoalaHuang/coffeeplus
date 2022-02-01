@@ -1,2 +1,5 @@
 <20220131213331>
 HP
+<20220201212743>
+/volume1/Stocking/admin_update.php
+sql: UPDATE `t_stock` SET `c_item`="Paper2",`c_storage`="FR Storage" WHERE `c_storage`="VP Storage" AND `c_item`="Paper2";

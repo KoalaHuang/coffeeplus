@@ -16,7 +16,7 @@ $access = $_SESSION["access"];
 	<title>BackOffice</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/nav.js"></script>
 </head>
 <body>
@@ -25,31 +25,35 @@ $access = $_SESSION["access"];
 	<div class="container">
 		<h1 class="text-center text-secondary mb-2">Welcome</h1>
     <h1 class="text-center mb-3 fs-10"><?echo $user;?></h1>
-
-    <?
-    echo "<div class=\"d-grid gap-2 col-6 mx-auto\">";
-    echo "<a href=\"request.php\" class=\"btn btn-primary mb-3 ";
-    if (!strstr($access,"R")) {echo "disabled\"";}
-    echo " role=\"button\">Stock - Request</a>";
-    echo "<a href=\"fufil.php\" class=\"btn btn-primary mb-3 ";
-    if (!strstr($access,"F")) {echo "disabled\"";}
-    echo " role=\"button\">Stock - Fufill</a>";
-    echo "<a href=\"stock.php\" class=\"btn btn-primary mb-3 ";
-    if (!strstr($access,"S")) {echo "disabled\"";}
-    echo " role=\"button\">Stock - Stock</a>";
-    echo "<a href=\"report.php\" class=\"btn btn-primary mb-3 ";
-    if (!strstr($access,"T")) {echo "disabled\"";}
-    echo " role=\"button\">Stock - Report</a>";
-    echo "<a href=\"admin.php\" class=\"btn btn-primary mb-3 ";
-    if (!strstr($access,"A")) {echo "disabled\"";}
-    echo " role=\"button\">Stock - Admin</a>";
-    echo "<a href=\"calendar.php\" class=\"btn btn-primary mb-3 ";
-    if (!strstr($access,"C")) {echo "disabled\"";}
-    echo " role=\"button\">Schedule - Calendar</a>";
-    echo "</div>";
-  ?>
-
- 	</div> <!-- container -->
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <?
+      if (strstr($access,"R")) {
+        echo "<a href=\"request.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Request</a>";
+      }
+      if (strstr($access,"F")) {
+        echo "<a href=\"fulfil.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Fulfill</a>";
+      }
+      if (strstr($access,"S")) {
+        echo "<a href=\"stock.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Stock</a>";
+      }
+      if (strstr($access,"T")) {
+        echo "<a href=\"report.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Report</a>";
+      }
+      if (strstr($access,"C")) {
+        echo "<a href=\"shift.php\" class=\"btn btn-primary mb-3\" role=\"button\">Shift</a>";
+      }
+      if (strstr($access,"A")) {
+        echo "<div class=\"btn-group\" role=\"group\">";
+        echo "<button type=\"button\" id=\"btnGroupDrop1\" class=\"btn btn-primary dropdown-toggle\" data-bs-toggle=\"dropdown\">Admin</button>";
+        echo "<ul class=\"dropdown-menu\"  aria-labelledby=\"btnGroupDrop1\">";
+        echo "<li><a class=\"dropdown-item\" href=\"admin_item.php\">Item</a></li>";
+        echo "<li><a class=\"dropdown-item\" href=\"admin_cat.php\">Category</a></li>";
+        echo "<li><a class=\"dropdown-item\" href=\"admin_user.php\">User</a></li>";
+        echo "</ul></div>";
+      }
+    ?>
+    </div>
+  </div> <!-- container -->
 
 	<? include "footer.php" ?>
 </body>

@@ -3,22 +3,6 @@ const obj_report = {
   "t": "", //name of type
 };
 
-window.addEventListener("DOMContentLoaded", function() {
-   const $navbarNav = document.querySelector("#navbarToggler");
-   if ($navbarNav) {
-     const navbarNavCollapse = (event) => {
-       if ($navbarNav != event.target) {
-         $navbarNav.setAttribute("class","collapse navbar-collapse");
-         document.removeEventListener("mouseup", navbarNavCollapse);
-       }
-     }
-
-     $navbarNav.addEventListener("shown.bs.collapse", () => {
-       document.addEventListener("mouseup", navbarNavCollapse);
-     });
-   }
-}, false);
-
 function f_whichType() {
   elm = document.getElementsByName("btn_ordertype");
   for (i = 0, length = elm.length; i < length; i++) {

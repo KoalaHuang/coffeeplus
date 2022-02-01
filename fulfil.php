@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/nav.js"></script>
 	<script src="js/fulfil.js"></script>
-	<? include "mylog.php"?>
 </head>
 <body>
 	<? include "navbar.php" ?>
@@ -92,7 +92,6 @@
 											$rangeVal = $c_qty_stock;
 											$c_qty_req = $c_qty_req - $c_qty_stock;
 										}//if allocate range value
-										// myLOG("req: ".$c_qty_req." stock:".$c_qty_stock." rangeval:".$rangeVal);
 										$rangeID = "r_".$rownum."_".$stockRowNum;
 										echo '<div class="row">';
 														echo '<label for="'.$rangeID.'" class="form-label col-3">'.$stk["c_storage"].'</label><span class="col-9"><span class="ms-2 text-muted">stock:'.'</span><span>'.$c_qty_stock.'</span><span class="ms-2 text-muted">&nbspallocate:</span><span class="ms-2 text-primary" id="'.$rangeID.'_val">'.$rangeVal.'</span></span>';

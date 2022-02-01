@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/nav.js"></script>
 	<script src="js/report.js"></script>
-	<? include "mylog.php"?>
 </head>
 <body>
 	<? include "navbar.php" ?>
@@ -39,7 +39,6 @@
 					while($row = $result->fetch_assoc()) {
 						$c_ordernum = $row["c_ordernum"];
 						$orderType = $c_ordernum[0];
-						// myLOG("c_ordernum: ".$c_ordernum."storage: ".$row["c_storage"]." c_item: ".$row["c_item"]." current order: ".$c_ordernum_current);
 						if ($c_ordernum != $c_ordernum_current) { //creating item card
 							if ($c_ordernum_current != "") {
 			?>

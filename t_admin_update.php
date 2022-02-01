@@ -19,11 +19,11 @@
   $c_user = 'default';
   $stmt = $conn->prepare("INSERT INTO `t_user`(`c_name`, `c_pwd`, `c_color`, `c_workday`, `c_access`) VALUES (?,?,?,?,?)");
   $stmt->bind_param("sssss", $c_name,$c_pwd,$c_color,$c_workday,$c_access);
-  $c_name = 'XinMiao';
-  $c_pwd = password_hash('1234',PASSWORD_DEFAULT);
-  $c_color = 'Teal';
-  $c_workday = '34567';
-  $c_access = 'RTC';
+  $c_name = 'Jerry';
+  $c_pwd = password_hash('1',PASSWORD_DEFAULT);
+  $c_color = 'green';
+  $c_workday = '';
+  $c_access = 'RFSTAC';
   $result = ($result && $stmt->execute());
   if ((!$result) || ($stmt->affected_rows == 0)) {
     echo ($stmt->error);

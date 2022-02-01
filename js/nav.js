@@ -1,8 +1,10 @@
 window.addEventListener("DOMContentLoaded", function() {
+  //when clicking on nav bar or ADMIN drop down, don't collapse
    const $navbarNav = document.querySelector("#navbarToggler");
+   const $admindropdown = document.querySelector("#admindropdown");
    if ($navbarNav) {
      const navbarNavCollapse = (event) => {
-       if ($navbarNav != event.target) {
+       if (!(($navbarNav == event.target) || ($admindropdown == event.target))) {
          $navbarNav.setAttribute("class","collapse navbar-collapse");
          document.removeEventListener("mouseup", navbarNavCollapse);
        }
@@ -12,5 +14,4 @@ window.addEventListener("DOMContentLoaded", function() {
        document.addEventListener("mouseup", navbarNavCollapse);
      });
    }
-
 }, false);
