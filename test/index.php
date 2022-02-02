@@ -20,19 +20,11 @@
     <input type="text" class="form-control" id="iptItem">
 
     <button type="button" class="btn btn-primary" onclick="f_hide()">Primary</button>
+    <button id="btn_sec" type="button" class="btn btn-primary">Secondary</button>
   </body>
 <script>
 function f_hide(){
-  const objItems = [];
-
-  var obj ={
-    "c": "Ice Cream", //category of item
-    "i": "Mango", //item name
-    "s": "FR Storage" //storage
-  }
-  objItems.push(obj);
-  console.log(objItems);
-  document.getElementById("iptItem").value = objItems[0].c;
+  document.getElementById("btn_sec").innerHTML = "changed";
 }
 </script>
 </html>

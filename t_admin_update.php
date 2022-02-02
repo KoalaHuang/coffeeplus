@@ -17,8 +17,8 @@
   $result = true;
   $c_date = date('Y-m-d');
   $c_user = 'default';
-  $stmt = $conn->prepare("INSERT INTO `t_user`(`c_name`, `c_pwd`, `c_color`, `c_workday`, `c_access`) VALUES (?,?,?,?,?)");
-  $stmt->bind_param("sssss", $c_name,$c_pwd,$c_color,$c_workday,$c_access);
+  $stmt = $conn->prepare("INSERT INTO `t_user`(`c_name`, `c_pwd`, `c_id`, `c_workday`, `c_access`) VALUES (?,?,?,?,?)");
+  $stmt->bind_param("sssss", $c_name,$c_pwd,$c_id,$c_workday,$c_access);
   $c_name = 'Jerry';
   $c_pwd = password_hash('1',PASSWORD_DEFAULT);
   $c_color = 'green';

@@ -34,10 +34,11 @@
 							$c_id = $row["c_id"];
 							$c_workday = $row["c_workday"];
 					?>
-				  <option value="<?echo $c_name?>" data-stocking-access="<?echo $c_access?>" data-stocking-id="<?echo $c_id?>" data-stocking-workday="<?echo $c_workday?>"><?echo $c_name?></option>
+				  <option value="<?echo $c_name?>" data-stocking-access="<?echo $c_access?>" data-stocking-id="<?echo $c_id?>" data-stocking-workday="<?echo $c_workday?>" data-stocking-name="<?echo $c_name?>"><?echo $c_name?></option>
 					<?
 						}
 					}
+					$conn->close();
 					?>
 				</select>
 			</span>
@@ -52,7 +53,7 @@
 		</div> <!--initial-->
 		<div class="input-group mb-3">
 			<span class="input-group-text">password</span>
-		  <input type="password" class="form-control" id="iptPwd" disabled>
+		  <input type="password" placeholder="leave blank if no change" class="form-control" id="iptPwd" disabled>
 		</div> <!--pwd-->
 		<div class="col-12 text-center mb-1"><strong>Working Day</strong></div>
 		<div class="row mb-5">
@@ -88,10 +89,10 @@
 				<label class="btn btn-outline-primary" for="as5">Shift</label>
 				<input type="checkbox" class="btn-check" name="btn_access" id="as6" value="A" autocomplete="off" disabled>
 				<label class="btn btn-outline-primary" for="as6">Admin</label>
-			</div> <!-- workday btn group -->
-		</div> <!-- workday row -->
+			</div> <!-- access btn group -->
+		</div> <!-- access row -->
 		<div class="row">
-			<span><button type="button" class="btn btn-primary col-3 me-5" onclick="f_toConfirm()">OK</button>
+			<span><button type="button" id="btn_toConfirm" class="btn btn-primary col-3 me-5" onclick="f_toConfirm()" disabled>OK</button>
 			<button type="button" class="btn btn-secondary col-3" onclick="f_refresh()">Cancel</button></span>
 		</div>
  	</div> <!-- container -->
@@ -101,12 +102,12 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="lbl_modal">Confirm to submit below request?</h5>
+					<h5 class="modal-title" id="lbl_modal"></h5>
 				</div>
 				<div class="modal-body fs-6" id="body_modal">
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" id="btn_cancel" onclick="f_refresh()">Cancel</button>
+					<button type="button" class="btn btn-secondary" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" id="btn_ok" onclick="f_submit()">OK</button>
 				</div>
 			</div>

@@ -42,6 +42,11 @@
           echo "</ul>";
           echo "</li>";
           }
+          if (strstr($_SESSION["access"],"O")) {
+          echo "<li class=\"nav-item\">";
+          echo "<a class=\"nav-link\" href=\"myaccount.php\">My Account</a>";
+          echo "</li>";
+          }
           ?>
           <li class="nav-item">
             <a class="nav-link" href="logout.php">Logout</a>

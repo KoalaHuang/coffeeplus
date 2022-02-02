@@ -1,5 +1,5 @@
 <?
-  //receive request data and update t_stock table
+  //receive request data and update t_user table
   //receive data in JSON format
   //return true if sucess otherwise return false
 
@@ -18,13 +18,12 @@
   include "connect_db.php";
   $result = true;
 
-  if ($obj->i == 'addNewItem'){
-    $sql_stock = "INSERT INTO `t_stock`(`c_storage`, `c_item`, `c_cat`, `c_qty`) VALUES (\"".$obj->ns."\",\"".$obj->ni."\",\"".$obj->c."\",0);";
-  }else{
-    $sql_stock = "UPDATE `t_stock` SET `c_item`=\"".$obj->ni."\",`c_storage`=\"".$obj->ns."\" WHERE `c_storage`=\"".$obj->s."\" AND `c_item`=\"".$obj->i."\";";
-  }
-  myLOG(__FILE__."\n"."sql: ".$sql_stock);
-  $result = $conn->query($sql_stock);
+  $c_name = $obj->n;
+  $c_pwd = password_hash($obj->p,PASSWORD_DEFAULT);
+  $stmt = $conn->prepare("UPDATE `t_user` SET `c_pwd`=? WHERE `c_name`=?");
+  $stmt->bind_param("ss",$c_pwd,$c_name);
+  $result = $stmt->execute();
+  $stmt->close();
   $conn->close();
   echo json_encode($result);
 ?>

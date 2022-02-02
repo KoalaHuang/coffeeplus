@@ -51,6 +51,9 @@ $access = $_SESSION["access"];
         echo "<li><a class=\"dropdown-item\" href=\"admin_user.php\">User</a></li>";
         echo "</ul></div>";
       }
+      if (strstr($access,"O")) {
+        echo "<a href=\"myaccount.php\" class=\"btn btn-primary mb-3\" role=\"button\">My Account</a>";
+      }
     ?>
     </div>
   </div> <!-- container -->

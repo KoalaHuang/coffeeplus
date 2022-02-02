@@ -4,6 +4,10 @@ const objGlobal = {
   "a": "", //access
   "w": "", //workday
   "p": "", //p
+  "nn": "", //if it's new user. n will be 'addNewUser', nn is the name
+  "ni": "",
+  "na": "",
+  "nw": ""
 };
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -30,17 +34,20 @@ function f_userSelected () {
   var inputboxPwd = document.getElementById("iptPwd");
   if (objGlobal.n == 'Select User') {
     nameBox.value = inputboxID.value = "";
-    nameBox.disabled = inputboxID.disabled = inputboxPwd.disabled= true;
+    document.getElementById("btn_toConfirm").disabled = nameBox.disabled = inputboxID.disabled = inputboxPwd.disabled= true;
   }else{
     if (objGlobal.n == 'addNewUser') {
-      nameBox.placeholder = "name of new user";
+      nameBox.placeholder = "name and ID can't be changed after creation";
+      iptPwd.placeholder = "password required for new user";
+      nameBox.disabled = inputboxID.disabled = false; //only new user can set name and ID
       nameBox.value = inputboxID.value = inputboxPwd.value = "";
     }else{
+      nameBox.disabled = inputboxID.disabled = true; //only new user can set name and ID
       nameBox.value = objGlobal.n;
       inputboxID.value = objGlobal.i;
       inputboxPwd.value = "";
     }
-    nameBox.disabled = inputboxID.disabled = inputboxPwd.disabled= false;
+    document.getElementById("btn_toConfirm").disabled = inputboxPwd.disabled= false;
   }
   //workday
   elmBtnWorkday = document.getElementsByName("btn_workday");
@@ -63,33 +70,52 @@ function f_refresh() {
 
 //ok button
 function f_toConfirm() {
-  objGlobal.ni = document.getElementById("iptItem").value;
-  elmBtnStorage = document.getElementsByName("btn_storage");
-  for (idxStorage = 0, length = elmBtnStorage.length; idxStorage < length; idxStorage++) {
-    if (elmBtnStorage[idxStorage].checked) {
-      objGlobal.ns = elmBtnStorage[idxStorage].id;
+  objGlobal.nn = document.getElementById("iptName").value;
+  objGlobal.ni = document.getElementById("iptID").value;
+  objGlobal.p = document.getElementById("iptPwd").value;
+  elmBtn = document.getElementsByName("btn_access");
+  for (idx = 0, length = elmBtn.length; idx < length; idx++) {
+    if (elmBtn[idx].checked) {
+      objGlobal.na = objGlobal.na + elmBtn[idx].value;
     }//if
-  }//for_storage value
-  if ((objGlobal.ni == "") || (objGlobal.ns == "")) {
-    document.getElementById("lbl_modal").innerHTML = "Create new item";
-    document.getElementById("body_modal").innerHTML = "<p class=\"text-danger\">Item name and Storage can not be blank!</p>Press Cancel to return";
-    document.getElementById("btn_cancel").style.visibility = "visible";
-    document.getElementById("btn_ok").style.visibility = "hidden";
+  }//Access value
+  elmBtn = document.getElementsByName("btn_workday");
+  for (idx = 0, length = elmBtn.length; idx < length; idx++) {
+    if (elmBtn[idx].checked) {
+      objGlobal.nw = objGlobal.nw + elmBtn[idx].value;
+    }//if
+  }//workday value
+  var strBody = strTitle = "";
+  var needToCancel = true;
+  if ((objGlobal.ni == "") || (objGlobal.nn == "")) {
+    strTitle = "Create new item";
+    strBody= "<p class=\"text-danger\">Name and ID can not be blank!</p>Press Cancel to return";
+    needToCancel = true;
   }else{
-    var strToSubmit = "";
-    if (objGlobal.i == 'addNewItem') {
-      document.getElementById("lbl_modal").innerHTML = "Confirm to create new item?";
-      strToSubmit = "Item Category: " + objGlobal.c + "<br>" + "Item name: " + objGlobal.ni + "<br>" + "Item storage location: " + objGlobal.ns;
+    if (objGlobal.n == 'addNewUser') {
+      if (objGlobal.p == '') {
+        strTitle = "Create new item";
+        strBody = "<p class=\"text-danger\">Password can not be blank!</p>Press Cancel to return";
+        needToCancel = true;
+      }else{
+        strTitle = "Confirm to create new item?";
+        strBody = "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Password: " + objGlobal.p;
+        needToCancel = false;
+      }
     }else{
-      document.getElementById("lbl_modal").innerHTML = "Confirm to change current item?";
-      strToSubmit = "Item Category: " + objGlobal.c + "<br>" + "Item name: " + objGlobal.i + "<br>" + "Item storage location: " + objGlobal.s;
-      strToSubmit = strToSubmit + "<br><strong> change to </strong><br>"
-      strToSubmit = strToSubmit + "Item Category: " + objGlobal.c + "<br>" + "Item name: " + objGlobal.ni + "<br>" + "Item storage location: " + objGlobal.ns;
+      strTitle = "Confirm to update user?";
+      strBody = "Name: " + objGlobal.n + "<br>ID: " + objGlobal.i + "<br>Workday: " + objGlobal.w + "<br>Access: " + objGlobal.a;
+      strBody = strBody + "<br><strong> change to </strong><br>"
+      strBody = strBody + "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na;
+      if (objGlobal.p != '') {
+        strBody = strBody + "<br><span class=\"text-danger\">Password</span>: " + objGlobal.p;
+      }
+      needToCancel = false;
     }
-    document.getElementById("body_modal").innerHTML = strToSubmit;
-    document.getElementById("btn_cancel").style.visibility = "visible";
-    document.getElementById("btn_ok").style.visibility = "visible";
   }
+  document.getElementById("btn_ok").disabled = needToCancel;
+  document.getElementById("lbl_modal").innerHTML = strTitle;
+  document.getElementById("body_modal").innerHTML = strBody;
   modal_Popup.show();
 }
 
@@ -98,13 +124,14 @@ function f_submit() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     if (this.responseText == "true") {
-      document.getElementById("body_modal").innerHTML = "Submit successfully!<br>Press OK to return";
-      document.getElementById("btn_ok").style.visibility = "visible";
-      document.getElementById("btn_ok").onclick = f_refresh;
+      document.getElementById("body_modal").innerHTML  = "Submit successfully!<br>Press OK to return";
+      document.getElementById("btn_ok").setAttribute("onclick","f_refresh()");
+      document.getElementById("btn_ok").disabled = false;
+      document.getElementById("btn_cancel").disabled = true;
     }else{
-      document.getElementById("body_modal").innerHTML = "<p class=\"text-danger\">Update failed!</p>Return code: "+ this.responseText + "<br>Press Cancel to return";
-      document.getElementById("btn_cancel").style.visibility = "visible";
-      // modal_Popup.hide();
+      document.getElementById("body_modal").innerHTML  = "<p class=\"text-danger\">Update failed!</p>Return code: "+ this.responseText + "<br>Press Cancel to return";
+      document.getElementById("btn_ok").disabled = true;
+      document.getElementById("btn_cancel").disabled = false;
     }
   }
   const strJson = JSON.stringify(objGlobal);
@@ -114,6 +141,5 @@ function f_submit() {
   xhttp.send(strJson);
   document.getElementById("lbl_modal").innerHTML = "Request submitted";
   document.getElementById("body_modal").innerHTML = "Waiting server response...";
-  document.getElementById("btn_cancel").style.visibility = "hidden";
-  document.getElementById("btn_ok").style.visibility = "hidden";
+  document.getElementById("btn_cancel").disabled =  document.getElementById("btn_ok").disabled = true;
 }//f_submit
