@@ -9,6 +9,17 @@
 
   <body>
     <h1 class="text-center">TEST</h1>
+
+<?
+$n = 1;
+$s = "1234";
+if (strstr($s,(string)$n)) {
+  echo "OK";
+}else{
+  echo "not OK";
+}
+?>
+
     <div class="container-fluid">
       <select class="form-select" id="mySelect">
         <option selected>Open this select menu</option>
