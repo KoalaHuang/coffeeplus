@@ -1,5 +1,5 @@
 <?
-  function send_whatsapp($msg="Test"){
+  function send_mailNote($msg="Test"){
     $to = "hongjian.huang@gmail.com";
     $subject = "CoffeePlus Stocking - New Request";
 
@@ -22,7 +22,7 @@
     mail($to,$subject,$message,$headers);
   }
 
-  function send_whatsapp2($message="Test"){
+  function send_whatsapp($message="Test"){
       $phone="+6581186516";  // Enter your phone number here
       $apikey="638817";       // Enter your personal apikey received in step 3 above
 

@@ -14,7 +14,6 @@ function f_refresh() {
 
 //password f_pwdChanged
 function f_pwdChanged() {
-  console.log(document.getElementById("iptPwd").value );
   document.getElementById("btn_ok").disabled = (document.getElementById("iptPwd").value == "");
 }
 

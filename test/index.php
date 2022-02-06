@@ -8,34 +8,32 @@
   </head>
 
   <body>
-    <h1 class="text-center">TEST</h1>
+    <h1 class="text-center" id="title">TEST</h1>
+    <div class="row mb-1">
+      <div class="input-group mb-3">
+        <select class="form-select">
+          <option selected>yyyy</option>
+          <option value="1" disabled>One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+		</div> <!-- row -->
 
-<?
-$n = 1;
-$s = "1234";
-if (strstr($s,(string)$n)) {
-  echo "OK";
-}else{
-  echo "not OK";
-}
-?>
 
-    <div class="container-fluid">
-      <select class="form-select" id="mySelect">
-        <option selected>Open this select menu</option>
-        <option id="option1" value="1" >One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <input type="text" class="form-control" id="iptItem">
-
-    <button type="button" class="btn btn-primary" onclick="f_hide()">Primary</button>
-    <button id="btn_sec" type="button" class="btn btn-primary">Secondary</button>
-  </body>
 <script>
-function f_hide(){
-  document.getElementById("btn_sec").innerHTML = "changed";
-}
 </script>
+<?
+  include "../mylog.php";
+  $jd = date_create_from_format("Y/n/j","2022/42/32");
+  myLOG($jd);
+  if ($jd  == FALSE) {
+   echo "NULL";
+  }else
+  {
+      echo print_r($jd);
+  }
+
+?>
+<button type="button" class="btn btn-secondary" id="btn_cancel" onclick="f_test()">TEST</button>
 </html>

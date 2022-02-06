@@ -23,7 +23,7 @@ session_destroy();
 	<? include "navbar.php"; ?>
 
 	<h1 class="text-center mb-2">Logout</h1>
-	<div class="text-center mb-3 text-muted col-12 fst-italic fs-12">See you...</div>
+	<div class="text-center mb-3 text-muted col-12 fst-italic fs-12"><a href="login.php">See you...</a></div>
 
 	<div class="container">
  	</div> <!-- container -->

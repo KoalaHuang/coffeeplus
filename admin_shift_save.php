@@ -1,7 +1,5 @@
 <?
-  //receive request data and update t_user table
-  //receive data in JSON format
-  //return true if sucess otherwise return false
+  //save shift template to t_shittemp
 
   header("Content-Type: application/json; charset=UTF-8");
   include "mylog.php";
@@ -14,15 +12,21 @@
     echo "NULL JSON result from:".$str;
     die;
   }
-
   include "connect_db.php";
   $result = true;
+  $sql = "DELETE FROM `t_shifttemp` WHERE 1;";
+  $conn->query($sql);
 
-  $c_name = $obj->n;
-  $c_pwd = password_hash($obj->p,PASSWORD_DEFAULT);
-  $stmt = $conn->prepare("UPDATE `t_user` SET `c_pwd`=? WHERE `c_name`=?");
-  $stmt->bind_param("ss",$c_pwd,$c_name);
-  $result = $stmt->execute();
+  $stmt = $conn->prepare("INSERT INTO `t_shifttemp`(`c_weekday`, `c_id`, `c_store`) VALUES (?,?,?)");
+  $stmt->bind_param("iss",$c_weekday,$c_id,$c_store);
+  $length = count($obj);
+  for ($idx = 0; $idx < $length; $idx++) {
+    $c_weekday = $obj[$idx]->w;
+    $c_id = $obj[$idx]->p;
+    $c_store = $obj[$idx]->s;
+    $result = $stmt->execute();
+  }
+
   $stmt->close();
   $conn->close();
   echo json_encode($result);
