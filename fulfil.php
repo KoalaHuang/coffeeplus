@@ -94,7 +94,7 @@
 										}//if allocate range value
 										$rangeID = "r_".$rownum."_".$stockRowNum;
 										echo '<div class="row">';
-														echo '<label for="'.$rangeID.'" class="form-label col-3">'.$stk["c_storage"].'</label><span class="col-9"><span class="ms-2 text-muted">stock:'.'</span><span>'.$c_qty_stock.'</span><span class="ms-2 text-muted">&nbspallocate:</span><span class="ms-2 text-primary" id="'.$rangeID.'_val">'.$rangeVal.'</span></span>';
+														echo '<label for="'.$rangeID.'" class="form-label col-3">'.$stk["c_storage"].'</label><span class="col-9"><span class="ms-2 text-muted">stock:'.'</span><span>'.$c_qty_stock.'</span><span class="ms-2 text-muted">&nbspallocate:</span><span class="ms-2 text-danger" id="'.$rangeID.'_val">'.$rangeVal.'</span></span>';
 										echo '</div>';
 			      				echo '<input type="range" class="form-range" data-stocking-storage="'.$stk['c_storage'].'" min="0" max="'.$c_qty_stock.'" step="1" value="'.$rangeVal.'" id="'.$rangeID."\" onchange=\"f_rangeVal('".$rangeID."')\">";
 			            } //loop stock data

@@ -99,8 +99,17 @@
 			$objWeek1stDay = clone $objDay; //create new date to store starting day of current week row
 			echo "<div class=\"row row-cols-7 g-0 mb-1\">"; // row of days in the week
 			for ($idxWD = 1; $idxWD < 8; $idxWD++){
+				//check if it's holiday
+	      $sql = "SELECT `c_holiday` FROM `t_holiday` WHERE `c_date`='".date_format($objDay,'Y-m-d')."'";
+	      $holidayResult = $conn->query($sql);
+	      $holiday = $holidayResult->fetch_assoc();
+				if (is_null($holiday)) {
+					$strClassHol = $mday;
+				}else{
+					$strClassHol = "<span class=\"text-danger\">".$mday."</span>";
+				}
 				$mday = date('j',date_timestamp_get($objDay));
-				$strDiv3B = "<div class=\"col bg-light text-center border-top border-start border-bottom border-dark fs-8\">".$mday."<span class=\"text-muted\">";
+				$strDiv3B = "<div class=\"col bg-light text-center border-top border-start border-bottom border-dark fs-8\">".$strClassHol."<span class=\"text-muted\">";
 				$strDivEnd = "</span></div>";
 				switch ($idxWD) {
 					case 1:
@@ -122,7 +131,7 @@
 						echo $strDiv3B." S".$strDivEnd;
 						break;
 					case 7:
-						echo "<div class=\"col text-center border border-dark fs-8\">".$mday."<span class=\"text-muted\"> S".$strDivEnd;
+						echo "<div class=\"col bg-light text-center border border-dark fs-8\">".$strClassHol."<span class=\"text-muted\"> S".$strDivEnd;
 				}
 				date_add($objDay,date_interval_create_from_date_string("1 day"));
 			}
