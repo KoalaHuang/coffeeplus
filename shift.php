@@ -103,12 +103,12 @@
 	      $sql = "SELECT `c_holiday` FROM `t_holiday` WHERE `c_date`='".date_format($objDay,'Y-m-d')."'";
 	      $holidayResult = $conn->query($sql);
 	      $holiday = $holidayResult->fetch_assoc();
+				$mday = date('j',date_timestamp_get($objDay));
 				if (is_null($holiday)) {
 					$strClassHol = $mday;
 				}else{
 					$strClassHol = "<span class=\"text-danger\">".$mday."</span>";
 				}
-				$mday = date('j',date_timestamp_get($objDay));
 				$strDiv3B = "<div class=\"col bg-light text-center border-top border-start border-bottom border-dark fs-8\">".$strClassHol."<span class=\"text-muted\">";
 				$strDivEnd = "</span></div>";
 				switch ($idxWD) {

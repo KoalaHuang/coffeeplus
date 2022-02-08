@@ -39,7 +39,8 @@
           echo "<li><a class=\"dropdown-item\" href=\"admin_item.php\">Stock Item</a></li>";
           echo "<li><a class=\"dropdown-item\" href=\"admin_cat.php\">Stock Category</a></li>";
           echo "<li><a class=\"dropdown-item\" href=\"admin_user.php\">User</a></li>";
-          echo "<li><a class=\"dropdown-item\" href=\"admin_shift.php\">Shift</a></li>";
+          echo "<li><a class=\"dropdown-item\" href=\"admin_shift.php\">Shift Template</a></li>";
+          echo "<li><a class=\"dropdown-item\" href=\"admin_shift_report.php\">Shift Report</a></li>";
           echo "</ul>";
           echo "</li>";
           }

@@ -1,0 +1,493 @@
+<20220208224505> -- /volume1/Stocking/admin_shift_report.php
+NULL
+<20220208224523> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/5 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-05\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '2',
+    ),
+    'VP' => 
+    array (
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '2',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '1',
+    ),
+    'VP' => 
+    array (
+      'WW' => '3',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208232024> -- /volume1/Stocking/admin_shift_report.php
+NULL
+<20220208232029> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/5 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-05\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '4',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '1',
+    ),
+    'VP' => 
+    array (
+      'WW' => '3',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208232058> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '5',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+    'VP' => 
+    array (
+      'WW' => '3',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208232225> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '5',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+    'VP' => 
+    array (
+      'WW' => '3',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208232248> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '5',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+    'VP' => 
+    array (
+      'WW' => '3',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208232249> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '5',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+    'VP' => 
+    array (
+      'WW' => '3',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208232553> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '5',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '5',
+    ),
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208234357> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '5',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '5',
+    ),
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208235354> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '2',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '5',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '1',
+      'WW' => '5',
+    ),
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'WW' => '1',
+    ),
+  ),
+)
+<20220208235551> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/4/30 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-04-30\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '12',
+    ),
+    'VP' => 
+    array (
+      'HW' => '1',
+      'OW' => '12',
+      'WW' => '25',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '64',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'HW' => '1',
+      'OW' => '12',
+      'WW' => '28',
+    ),
+    'VP' => 
+    array (
+      'WW' => '37',
+    ),
+  ),
+  'YA' => 
+  array (
+    'VP' => 
+    array (
+      'OW' => '12',
+      'WW' => '13',
+    ),
+  ),
+)
