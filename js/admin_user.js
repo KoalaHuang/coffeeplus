@@ -3,11 +3,13 @@ const objGlobal = {
   "i": "", //id
   "a": "", //access
   "w": "", //workday
+  "s": "", //store
   "p": "", //p
   "nn": "", //if it's new user. n will be 'addNewUser', nn is the name
   "ni": "",
   "na": "",
-  "nw": ""
+  "nw": "",
+  "ns": ""
 };
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -24,9 +26,10 @@ function f_userSelected () {
       objGlobal.i = optionItems[idxOption].getAttribute("data-stocking-id");
       objGlobal.a = optionItems[idxOption].getAttribute("data-stocking-access");
       objGlobal.w = optionItems[idxOption].getAttribute("data-stocking-workday");
+      objGlobal.s = optionItems[idxOption].getAttribute("data-stocking-userstore");
       break;
     }
-  }//for
+  }//for loop to get user data
 
   //edit box
   var nameBox = document.getElementById("iptName");
@@ -50,16 +53,23 @@ function f_userSelected () {
     document.getElementById("btn_toConfirm").disabled = inputboxPwd.disabled= false;
   }
   //workday
-  elmBtnWorkday = document.getElementsByName("btn_workday");
-  for (idx = 0, length = elmBtnWorkday.length; idx < length; idx++) {
-    elmBtnWorkday[idx].disabled = (objGlobal.n == 'Select User');
-    elmBtnWorkday[idx].checked = (objGlobal.w.includes(elmBtnWorkday[idx].value));
+  elmBtn = document.getElementsByName("btn_workday");
+  for (idx = 0, length = elmBtn.length; idx < length; idx++) {
+    elmBtn[idx].disabled = (objGlobal.n == 'Select User');
+    elmBtn[idx].checked = (objGlobal.w.includes(elmBtn[idx].value));
   }
   //access
-  elmBtnAccess = document.getElementsByName("btn_access");
-  for (idx = 0, length = elmBtnAccess.length; idx < length; idx++) {
-    elmBtnAccess[idx].disabled = (objGlobal.n == 'Select User');
-    elmBtnAccess[idx].checked = (objGlobal.a.includes(elmBtnAccess[idx].value));
+  elmBtn = document.getElementsByName("btn_access");
+  for (idx = 0, length = elmBtn.length; idx < length; idx++) {
+    elmBtn[idx].disabled = (objGlobal.n == 'Select User');
+    elmBtn[idx].checked = (objGlobal.a.includes(elmBtn[idx].value));
+  }
+  //user store
+  elmBtn = document.getElementsByName("btn_store");
+  console.log(elmBtn);
+  for (idx = 0, length = elmBtn.length; idx < length; idx++) {
+    elmBtn[idx].disabled = (objGlobal.n == 'Select User');
+    elmBtn[idx].checked = (objGlobal.s == elmBtn[idx].value);
   }
 }
 
@@ -74,17 +84,25 @@ function f_toConfirm() {
   objGlobal.ni = document.getElementById("iptID").value;
   objGlobal.p = document.getElementById("iptPwd").value;
   elmBtn = document.getElementsByName("btn_access");
+  objGlobal.na = "";
   for (idx = 0, length = elmBtn.length; idx < length; idx++) {
     if (elmBtn[idx].checked) {
       objGlobal.na = objGlobal.na + elmBtn[idx].value;
     }//if
   }//Access value
+  objGlobal.nw = "";
   elmBtn = document.getElementsByName("btn_workday");
   for (idx = 0, length = elmBtn.length; idx < length; idx++) {
     if (elmBtn[idx].checked) {
       objGlobal.nw = objGlobal.nw + elmBtn[idx].value;
     }//if
   }//workday value
+  elmBtn = document.getElementsByName("btn_store");
+  for (idx = 0, length = elmBtn.length; idx < length; idx++) {
+    if (elmBtn[idx].checked) {
+      objGlobal.ns = elmBtn[idx].value;
+    }//if
+  }//store value
   var strBody = strTitle = "";
   var needToCancel = true;
   if ((objGlobal.ni == "") || (objGlobal.nn == "")) {
@@ -99,14 +117,14 @@ function f_toConfirm() {
         needToCancel = true;
       }else{
         strTitle = "Confirm to create new item?";
-        strBody = "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Password: " + objGlobal.p;
+        strBody = "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Store: " + objGlobal.ns + "<br>Password: " + objGlobal.p;
         needToCancel = false;
       }
     }else{
       strTitle = "Confirm to update user?";
-      strBody = "Name: " + objGlobal.n + "<br>ID: " + objGlobal.i + "<br>Workday: " + objGlobal.w + "<br>Access: " + objGlobal.a;
+      strBody = "Name: " + objGlobal.n + "<br>ID: " + objGlobal.i + "<br>Workday: " + objGlobal.w + "<br>Access: " + objGlobal.a + "<br>Store: " + objGlobal.s;
       strBody = strBody + "<br><strong> change to </strong><br>"
-      strBody = strBody + "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na;
+      strBody = strBody + "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Store: " + objGlobal.ns;
       if (objGlobal.p != '') {
         strBody = strBody + "<br><span class=\"text-danger\">Password</span>: " + objGlobal.p;
       }

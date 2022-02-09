@@ -53,7 +53,7 @@
 		</div> <!-- row -->
 
 		<!--Report type selection-->
-		<div class="row mb-2 <?if ($hideResult) echo "d-none"?>">
+		<div class="row mb-2 <?echo "d-none"?>">
 				<div class="text-muted">Report by </div>
 				<div class="btn-group" role="group">
 	        <input type="radio" class="btn-check" name="btn_reporttype" id="btn_people" onclick="f_whichType()">
