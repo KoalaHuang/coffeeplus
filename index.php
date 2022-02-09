@@ -28,22 +28,22 @@ $access = $_SESSION["access"];
     <div class="d-grid gap-2 col-6 mx-auto">
       <?
       if (strstr($access,"R")) {
-        echo "<a href=\"request.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Request</a>";
+        echo "<a href=\"request.php\" class=\"btn btn-primary mb-1\" role=\"button\">Stock - Request</a>";
       }
       if (strstr($access,"F")) {
-        echo "<a href=\"fulfil.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Fulfill</a>";
+        echo "<a href=\"fulfil.php\" class=\"btn btn-primary mb-1\" role=\"button\">Stock - Fulfill</a>";
       }
       if (strstr($access,"S")) {
-        echo "<a href=\"stock.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Stock</a>";
+        echo "<a href=\"stock.php\" class=\"btn btn-primary mb-1\" role=\"button\">Stock - Stock</a>";
       }
       if (strstr($access,"T")) {
-        echo "<a href=\"report.php\" class=\"btn btn-primary mb-3\" role=\"button\">Stock - Report</a>";
+        echo "<a href=\"report.php\" class=\"btn btn-primary mb-1\" role=\"button\">Stock - Report</a>";
       }
       if (strstr($access,"C")) {
-        echo "<a href=\"shift.php\" class=\"btn btn-primary mb-3\" role=\"button\">Shift</a>";
+        echo "<a href=\"shift.php\" class=\"btn btn-primary mb-1\" role=\"button\">Shift</a>";
       }
       if (strstr($access,"A")) {
-        echo "<div class=\"btn-group\" role=\"group\">";
+        echo "<div class=\"btn-group mb-1\" role=\"group\">";
         echo "<button type=\"button\" id=\"btnGroupDrop1\" class=\"btn btn-primary dropdown-toggle\" data-bs-toggle=\"dropdown\">Admin</button>";
         echo "<ul class=\"dropdown-menu\"  aria-labelledby=\"btnGroupDrop1\">";
         echo "<li><a class=\"dropdown-item\" href=\"admin_item.php\">Item</a></li>";

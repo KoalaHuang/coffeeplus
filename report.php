@@ -61,11 +61,11 @@
 						  <a class="btn btn-outline-dark col-12" data-bs-toggle="collapse" href="#<?echo "order".$rownum?>" role="button">
 						    <?
 								$date = date_create($row["c_date"]);
-								$strBtnText = date_format($date,"M.d")."&nbsp&nbsp&#9839&nbsp&nbsp";
+								$strBtnText = date_format($date,"M.d");
 								if ($orderType != 's') {
-									$strBtnText = $strBtnText.$row["c_store"]."&nbsp&nbsp&#9839&nbsp&nbsp"; //store name for fulfill and reqeust orders
+									$strBtnText = $strBtnText." ~ ".$row["c_store"]; //store name for fulfill and reqeust orders
 								}
-								$strBtnText = $strBtnText.$row["c_cat"];
+								$strBtnText = $strBtnText." ~ ".$row["c_cat"]." ~ ".$row["c_user"];
 								echo $strBtnText;
 								?>
 						  </a>

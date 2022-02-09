@@ -19,7 +19,7 @@
   $errDB = "";
   $result = true;
   $c_date = date('Y-m-d');
-  $c_user = 'default';
+  $c_user = $_SESSION["user"];
   $c_ordernum = "s".date_timestamp_get(date_create()).rand(0,9); //create ordernum with timestamp and 1 digit rand
   $c_cat = $obj->c;
   $stmt = $conn->prepare("UPDATE `t_stock` SET `c_qty`=`c_qty`+? WHERE `c_storage`=? AND `c_item`=?");

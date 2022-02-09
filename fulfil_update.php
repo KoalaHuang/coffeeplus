@@ -19,7 +19,7 @@
   $errDB = "";
   $result = true;
   $c_date = date('Y-m-d');
-  $c_user = 'default';
+  $c_user = $_SESSION["user"];
   $c_cat = $obj->c;
   $c_ordernum = "f".date_timestamp_get(date_create()).rand(0,9);
   $stmt_req = $conn->prepare("UPDATE `t_request` SET `c_qty`=`c_qty`-? WHERE `c_store`=? AND `c_item`=?");
