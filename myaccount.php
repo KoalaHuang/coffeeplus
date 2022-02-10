@@ -15,7 +15,7 @@
 	<? include "navbar.php" ?>
 
 	<div class="container">
-		<h1 id="section_home" class="text-center mb-2">My Account</h1>
+		<h1 id="section_home" class="text-center mb-2">Profile</h1>
 		<?
 		include "connect_db.php";
 		$sql = "SELECT * FROM `t_user` WHERE `c_name`='".$_SESSION["user"]."'";

@@ -124,7 +124,7 @@
     </div>
     <div class="row mx-auto mb-3">
       <span class="col text-primary">Shift</span>
-			<span class="col text-primary">MyAccount</span>
+			<span class="col text-primary">Profile</span>
       <span class="col text-primary">Admin</span>
 			<span class="col text-primary">&nbsp;</span>
     </div>

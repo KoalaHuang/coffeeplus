@@ -54,7 +54,7 @@ $access = $_SESSION["access"];
         echo "</ul></div>";
       }
       if (strstr($access,"O")) {
-        echo "<a href=\"myaccount.php\" class=\"btn btn-primary mb-3\" role=\"button\">My Account</a>";
+        echo "<a href=\"myaccount.php\" class=\"btn btn-primary mb-3\" role=\"button\">Profile</a>";
       }
     ?>
     </div>

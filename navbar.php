@@ -46,7 +46,7 @@
           }
           if (strstr($_SESSION["access"],"O")) {
           echo "<li class=\"nav-item\">";
-          echo "<a class=\"nav-link\" href=\"myaccount.php\">My Account</a>";
+          echo "<a class=\"nav-link\" href=\"myaccount.php\">Profile</a>";
           echo "</li>";
           }
           ?>
