@@ -10,53 +10,33 @@
   <body>
     <h1 class="" id="title">TEST</h1>
 
-    <div class="row mx-auto">
-      <div class="col">
-        <div class="form-check">
-				      <input type="checkbox" class="form-check form-check-input " name="btn_workday" id="wd1" value="1">
-        </div>
+    <div class="mb-1"><!--month switch-->
+  		<?
+      $arrayStore = ["Queens","VP"];
+  		$totalStore = count($arrayStore);
+  		for ($idxStore=0; $idxStore<$totalStore; $idxStore++){
+  		?>
+      <div class="form-check form-switch form-check-inline">
+    		<input checked class="form-check-input" type="checkbox" id="<? echo "btnST".$idxStore ?>" onclick="f_storeSelected(<?echo $idxStore?>)">
+    		<label class="form-check-label fw-bold" for="<? echo "btnST".$idxStore ?>"><? echo $arrayStore[$idxStore] ?></label>
       </div>
-      <div class="col">
-        <div class="form-check">
-				      <input type="checkbox" class="form-check form-check-input " name="btn_workday" id="wd1" value="1">
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-check">
-				      <input type="checkbox" class="form-check form-check-input " name="btn_workday" id="wd1" value="1">
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-check">
-				      <input type="checkbox" class="form-check form-check-input " name="btn_workday" id="wd1" value="1">
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-check">
-				      <input type="checkbox" class="form-check form-check-input " name="btn_workday" id="wd1" value="1">
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-check">
-				      <input type="checkbox" class="form-check form-check-input " name="btn_workday" id="wd1" value="1">
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-check">
-				      <input type="checkbox" class="form-check form-check-input " name="btn_workday" id="wd1" value="1">
-        </div>
-      </div>
+  		<?
+  		}
+  		?>
     </div>
-    <div class="row mx-auto">
-      <span class="col  text-primary">Mon</span>
-      <span class="col  text-primary">Tue</span>
-      <span class="col  text-primary">Wed</span>
-      <span class="col  text-primary">Thu</span>
-      <span class="col  text-primary">Fri</span>
-      <span class="col  text-primary">Sat</span>
-      <span class="col  text-primary">Sun</span>
+    <div> </div>
+    <div class="form-check form-switch form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+      <label class="form-check-label" for="inlineCheckbox1">1</label>
     </div>
-
+    <div class="form-check form-switch form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+      <label class="form-check-label" for="inlineCheckbox2">2</label>
+    </div>
+    <div class="form-check form-switch form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+      <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+    </div>
 
 <script>
 </script>
@@ -65,4 +45,5 @@
 
 ?>
 <button type="button" class="btn btn-secondary mt-5" id="btn_cancel" onclick="f_test()">TEST</button>
+</body>
 </html>

@@ -71,21 +71,19 @@
 	?>
 
 	<div class="container">
-		<div class="row mb-3"><!--store buttons-->
-			<div class="btn-group" role="group">
+		<div class="mb-2"><!--month switch-->
 				<?
 				$totalStore = count($arrayStore);
- 				for ($idxStore=0; $idxStore<$totalStore; $idxStore++){
+				for ($idxStore=0; $idxStore<$totalStore; $idxStore++){
 				?>
-				<div class="mx-auto">
-        <input checked type="checkbox" role="switch" class="form-check-input" name="btnStores" id="<? echo "btnST".$idxStore ?>" onkeypress="f_storeSelected(<?echo $idxStore?>)" onclick="f_storeSelected(<?echo $idxStore?>)">
-				<label class="form-check-label fw-bold" for="<? echo "btnST".$idxStore ?>"><? echo $arrayStore[$idxStore] ?></label>
+				<div class="form-check form-switch form-check-inline me-5">
+					<input checked type="checkbox" class="form-check-input" name="btnStores" id="<? echo "btnST".$idxStore ?>" onclick="f_storeSelected(<?echo $idxStore?>)">
+					<label class="form-check-label fw-bold" for="<? echo "btnST".$idxStore ?>"><? echo $arrayStore[$idxStore] ?></label>
 				</div>
 				<?
 				}
 				?>
-			</div> <!-- btn group -->
-		</div> <!-- row -->
+		</div>
 		<div class="row g-0 mb-1"><!--month switch-->
 			<div class="input-group mb-1">
 			  <button class="btn btn-primary" type="button" id="btnPre" onclick="f_lastMon()">&#8678;</button>

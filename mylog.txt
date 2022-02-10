@@ -118,3 +118,117 @@ array (
     ),
   ),
 )
+<20220210114522> -- /volume1/Stocking/admin_shift_report.php
+NULL
+<20220210114539> -- /volume1/Stocking/admin_shift_report.php
+'from: 2020/2/5 to: 2020/2/6 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2020-02-05\' AND `c_date`<=\'2020-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+)
+<20220210114904> -- /volume1/Stocking/admin_shift_report.php
+NULL
+<20220210114923> -- /volume1/Stocking/admin_shift_report.php
+'from: 2022/2/1 to: 2022/2/10 hide: false inputerror:false'
+'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-10\' GROUP BY `c_id`,`c_store`, `c_type`;'
+array (
+  0 => 
+  array (
+  ),
+  1 => 
+  array (
+  ),
+  2 => 
+  array (
+  ),
+  'AM' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '1',
+    ),
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '4',
+    ),
+  ),
+  'EU' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '7',
+    ),
+  ),
+  'XM' => 
+  array (
+    'Queens' => 
+    array (
+      'OW' => '2',
+      'WW' => '5',
+    ),
+    'VP' => 
+    array (
+      'WW' => '2',
+    ),
+  ),
+  'YA' => 
+  array (
+    'Queens' => 
+    array (
+      'WW' => '1',
+    ),
+    'VP' => 
+    array (
+      'OW' => '1',
+      'WW' => '1',
+    ),
+  ),
+)
+mysqli_stmt::__set_state(array(
+   'affected_rows' => NULL,
+   'insert_id' => NULL,
+   'num_rows' => NULL,
+   'param_count' => NULL,
+   'field_count' => NULL,
+   'errno' => NULL,
+   'error' => NULL,
+   'error_list' => NULL,
+   'sqlstate' => NULL,
+   'id' => NULL,
+))
+true
+mysqli_stmt::__set_state(array(
+   'affected_rows' => NULL,
+   'insert_id' => NULL,
+   'num_rows' => NULL,
+   'param_count' => NULL,
+   'field_count' => NULL,
+   'errno' => NULL,
+   'error' => NULL,
+   'error_list' => NULL,
+   'sqlstate' => NULL,
+   'id' => NULL,
+))
+true
+mysqli_stmt::__set_state(array(
+   'affected_rows' => NULL,
+   'insert_id' => NULL,
+   'num_rows' => NULL,
+   'param_count' => NULL,
+   'field_count' => NULL,
+   'errno' => NULL,
+   'error' => NULL,
+   'error_list' => NULL,
+   'sqlstate' => NULL,
+   'id' => NULL,
+))
+true
