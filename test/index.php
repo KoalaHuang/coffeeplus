@@ -12,7 +12,9 @@
 
     <div class="mb-1"><!--month switch-->
   		<?
-      $arrayStore = ["Queens","VP"];
+      $date = date_create_from_format("Y/n/j","2022/2/31");
+      $arrayStore[0] = date_format($date,"Y/n/j");
+      $arrayStore[1] = ["VP"];
   		$totalStore = count($arrayStore);
   		for ($idxStore=0; $idxStore<$totalStore; $idxStore++){
   		?>

@@ -5,6 +5,7 @@ const objGlobal = {
   store: "",
   pstore: "", //previous store
   pmday: 0, //previous day of month
+  pmon: 0,
   year: 0,
   mon: 0,
   mday: 0,
@@ -99,15 +100,18 @@ function f_storeSelected(idxStore) {
 }
 
 //highlight selected cell and update user selection
-function f_cellSelected(strStore, intWD, intmDay) {
+function f_cellSelected(strStore, intWD, intCellYear, intCellMon, intmDay) {
+  objGlobal.year = intCellYear;
+  objGlobal.pmon = objGlobal.mon;
+  objGlobal.mon = intCellMon;
   objGlobal.pmday = objGlobal.mday;
   objGlobal.mday = intmDay;
   objGlobal.pwd = objGlobal.wd;
   objGlobal.wd = intWD;
   objGlobal.pstore = objGlobal.store;
   objGlobal.store = strStore;
-  const cellName = objGlobal.store + objGlobal.mday;
-  const cellNamePre = objGlobal.pstore + objGlobal.pmday;
+  const cellName = objGlobal.store + objGlobal.mon + "_" + objGlobal.mday;
+  const cellNamePre = objGlobal.pstore + objGlobal.pmon + "_" + objGlobal.pmday;
   //highlight cell with border
   const strBorder = " border border-primary";
   var strClass = "";
@@ -119,12 +123,14 @@ function f_cellSelected(strStore, intWD, intmDay) {
   strClass = document.getElementById(cellName).getAttribute("class");
   strClass = strClass + strBorder;
   document.getElementById(cellName).setAttribute("class",strClass);
-
+  console.log("obj: "+objGlobal);
+  console.log("cellname: "+cellName);
 
   //post users in the cell to user selection
   if ((objGlobal.userstore == "ALL") || (objGlobal.userstore == objGlobal.store)) {
     for (idxPpl = 1; idxPpl < 4; idxPpl++) {
       assignedPpl = document.getElementById(cellName+"_"+idxPpl).innerHTML;
+      console.log("ppl: " + assignedPpl + " id: " + objGlobal.id);
       if (assignedPpl == objGlobal.id) {
         objGlobal.istoadd = false; //to remove from shift
         break;
@@ -153,7 +159,6 @@ function f_submit() {
       document.getElementById("btn_ok").setAttribute("onclick","f_refresh()");
       document.getElementById("btn_ok").disabled = false;
       document.getElementById("btn_cancel").disabled = true;
-      document.getElementById("btnSave").disabled = false; //turn off save button
     }else{
       document.getElementById("body_modal").innerHTML  = "<p class=\"text-danger\">Update failed!</p>Return code: "+ this.responseText + "<br>Press Cancel to return";
       document.getElementById("btn_ok").disabled = true;

@@ -1,234 +1,36 @@
-<20220209214113> -- /volume1/Stocking/admin_user_update.php
-(object) array(
-   'n' => 'Koala',
-   'i' => 'KO',
-   'a' => 'RFSTCA',
-   'w' => '1234567',
-   's' => 'NONE',
-   'p' => '',
-   'nn' => 'Koala',
-   'ni' => 'KO',
-   'na' => 'RFSTCOA',
-   'nw' => '1234567',
-   'ns' => 'NONE',
-)
-mysqli_stmt::__set_state(array(
-   'affected_rows' => NULL,
-   'insert_id' => NULL,
-   'num_rows' => NULL,
-   'param_count' => NULL,
-   'field_count' => NULL,
-   'errno' => NULL,
-   'error' => NULL,
-   'error_list' => NULL,
-   'sqlstate' => NULL,
-   'id' => NULL,
+'2022/3/6'
+DateTime::__set_state(array(
+   'date' => '2022-03-06 00:11:37.000000',
+   'timezone_type' => 3,
+   'timezone' => 'Asia/Taipei',
 ))
-mysqli_stmt::__set_state(array(
-   'affected_rows' => NULL,
-   'insert_id' => NULL,
-   'num_rows' => NULL,
-   'param_count' => NULL,
-   'field_count' => NULL,
-   'errno' => NULL,
-   'error' => NULL,
-   'error_list' => NULL,
-   'sqlstate' => NULL,
-   'id' => NULL,
+'2022/2/27'
+DateTime::__set_state(array(
+   'date' => '2022-02-27 00:11:52.000000',
+   'timezone_type' => 3,
+   'timezone' => 'Asia/Taipei',
 ))
-true
-mysqli_stmt::__set_state(array(
-   'affected_rows' => NULL,
-   'insert_id' => NULL,
-   'num_rows' => NULL,
-   'param_count' => NULL,
-   'field_count' => NULL,
-   'errno' => NULL,
-   'error' => NULL,
-   'error_list' => NULL,
-   'sqlstate' => NULL,
-   'id' => NULL,
+'2022/2/27'
+DateTime::__set_state(array(
+   'date' => '2022-02-27 00:11:58.000000',
+   'timezone_type' => 3,
+   'timezone' => 'Asia/Taipei',
 ))
-true
-mysqli_stmt::__set_state(array(
-   'affected_rows' => NULL,
-   'insert_id' => NULL,
-   'num_rows' => NULL,
-   'param_count' => NULL,
-   'field_count' => NULL,
-   'errno' => NULL,
-   'error' => NULL,
-   'error_list' => NULL,
-   'sqlstate' => NULL,
-   'id' => NULL,
+'2022/2/13'
+DateTime::__set_state(array(
+   'date' => '2022-02-13 00:12:16.000000',
+   'timezone_type' => 3,
+   'timezone' => 'Asia/Taipei',
 ))
-true
-<20220209222151> -- /volume1/Stocking/admin_shift_report.php
-NULL
-<20220209222202> -- /volume1/Stocking/admin_shift_report.php
-'from: 2022/2/1 to: 2022/4/1 hide: false inputerror:false'
-'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-04-01\' GROUP BY `c_id`,`c_store`, `c_type`;'
-array (
-  0 => 
-  array (
-  ),
-  1 => 
-  array (
-  ),
-  2 => 
-  array (
-  ),
-  'AM' => 
-  array (
-    'Queens' => 
-    array (
-      'WW' => '8',
-    ),
-    'VP' => 
-    array (
-      'OW' => '8',
-      'WW' => '18',
-    ),
-  ),
-  'EU' => 
-  array (
-    'Queens' => 
-    array (
-      'WW' => '43',
-    ),
-  ),
-  'XM' => 
-  array (
-    'Queens' => 
-    array (
-      'OW' => '9',
-      'WW' => '19',
-    ),
-    'VP' => 
-    array (
-      'WW' => '24',
-    ),
-  ),
-  'YA' => 
-  array (
-    'VP' => 
-    array (
-      'OW' => '8',
-      'WW' => '8',
-    ),
-  ),
-)
-<20220210114522> -- /volume1/Stocking/admin_shift_report.php
-NULL
-<20220210114539> -- /volume1/Stocking/admin_shift_report.php
-'from: 2020/2/5 to: 2020/2/6 hide: false inputerror:false'
-'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2020-02-05\' AND `c_date`<=\'2020-02-06\' GROUP BY `c_id`,`c_store`, `c_type`;'
-array (
-  0 => 
-  array (
-  ),
-  1 => 
-  array (
-  ),
-  2 => 
-  array (
-  ),
-)
-<20220210114904> -- /volume1/Stocking/admin_shift_report.php
-NULL
-<20220210114923> -- /volume1/Stocking/admin_shift_report.php
-'from: 2022/2/1 to: 2022/2/10 hide: false inputerror:false'
-'SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>=\'2022-02-01\' AND `c_date`<=\'2022-02-10\' GROUP BY `c_id`,`c_store`, `c_type`;'
-array (
-  0 => 
-  array (
-  ),
-  1 => 
-  array (
-  ),
-  2 => 
-  array (
-  ),
-  'AM' => 
-  array (
-    'Queens' => 
-    array (
-      'WW' => '1',
-    ),
-    'VP' => 
-    array (
-      'OW' => '1',
-      'WW' => '4',
-    ),
-  ),
-  'EU' => 
-  array (
-    'Queens' => 
-    array (
-      'WW' => '7',
-    ),
-  ),
-  'XM' => 
-  array (
-    'Queens' => 
-    array (
-      'OW' => '2',
-      'WW' => '5',
-    ),
-    'VP' => 
-    array (
-      'WW' => '2',
-    ),
-  ),
-  'YA' => 
-  array (
-    'Queens' => 
-    array (
-      'WW' => '1',
-    ),
-    'VP' => 
-    array (
-      'OW' => '1',
-      'WW' => '1',
-    ),
-  ),
-)
-mysqli_stmt::__set_state(array(
-   'affected_rows' => NULL,
-   'insert_id' => NULL,
-   'num_rows' => NULL,
-   'param_count' => NULL,
-   'field_count' => NULL,
-   'errno' => NULL,
-   'error' => NULL,
-   'error_list' => NULL,
-   'sqlstate' => NULL,
-   'id' => NULL,
+'2022/3/3'
+DateTime::__set_state(array(
+   'date' => '2022-03-03 00:12:23.000000',
+   'timezone_type' => 3,
+   'timezone' => 'Asia/Taipei',
 ))
-true
-mysqli_stmt::__set_state(array(
-   'affected_rows' => NULL,
-   'insert_id' => NULL,
-   'num_rows' => NULL,
-   'param_count' => NULL,
-   'field_count' => NULL,
-   'errno' => NULL,
-   'error' => NULL,
-   'error_list' => NULL,
-   'sqlstate' => NULL,
-   'id' => NULL,
+'2022/3/4'
+DateTime::__set_state(array(
+   'date' => '2022-03-04 00:12:40.000000',
+   'timezone_type' => 3,
+   'timezone' => 'Asia/Taipei',
 ))
-true
-mysqli_stmt::__set_state(array(
-   'affected_rows' => NULL,
-   'insert_id' => NULL,
-   'num_rows' => NULL,
-   'param_count' => NULL,
-   'field_count' => NULL,
-   'errno' => NULL,
-   'error' => NULL,
-   'error_list' => NULL,
-   'sqlstate' => NULL,
-   'id' => NULL,
-))
-true

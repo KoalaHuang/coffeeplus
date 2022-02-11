@@ -12,10 +12,13 @@
     die;
   }
   include "connect_db.php";
+  $strPostedDate = $obj->year."/".$obj->mon."/".$obj->mday;
+  $currentDate = date_create_from_format("Y/n/j",$strPostedDate);
 
-  $currentDate = date_create_from_format("Y/n/j",$obj->year."/".$obj->mon."/".$obj->mday);
+  myLOG($strPostedDate);
+  myLOG($currentDate);
 
-  if ($currentDate) {
+  if (($currentDate) && (date_format($currentDate,"Y/n/j") == $strPostedDate)) {
     if ($obj->istoadd) {
       //get user workday
       $sql = "SELECT `c_workday` FROM `t_user` WHERE (`c_id`='".$obj->id."')";

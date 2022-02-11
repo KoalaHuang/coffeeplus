@@ -87,7 +87,7 @@
 		<div class="row g-0 mb-1"><!--month switch-->
 			<div class="input-group mb-1">
 			  <button class="btn btn-primary" type="button" id="btnPre" onclick="f_lastMon()">&#8678;</button>
-			  <input type="text" id="iptDate" data-stocking-year="<?echo $theYear?>" data-stocking-mon="<?echo $theMonth?>" class="form-control text-center fw-bold" value="<?echo $theMonthName." - ".$theYear ?>" disabled>
+			  <input type="text" id="iptDate" data-stocking-year="<?echo $theYear?>" data-stocking-mon="<?echo $theMonth?>" class="form-control text-center fw-bold" value="<?echo $theMonthName." - ".$theYear ?>" disabled> <!--holds year and month of title. Note individual day may have diff year/mon value-->
 				<button class="btn btn-primary" type="button" id="btnNext" onclick="f_nextMon()">&#8680;</button>
 			</div>
 		</div>
@@ -102,12 +102,17 @@
 	      $holidayResult = $conn->query($sql);
 	      $holiday = $holidayResult->fetch_assoc();
 				$mday = date('j',date_timestamp_get($objDay));
-				if (is_null($holiday)) {
+				if ((date_diff($objDay,date_create()))->format("%R%a") == "+0") {
+					$bgToday = "bg-warning";
+				}else{
+					$bgToday = "bg-light";
+				}
+			if (is_null($holiday)) {
 					$strClassHol = $mday;
 				}else{
 					$strClassHol = "<span class=\"text-danger\">".$mday."</span>";
 				}
-				$strDiv3B = "<div class=\"col bg-light text-center border-top border-start border-bottom border-dark fs-8\">".$strClassHol."<span class=\"text-muted\">";
+				$strDiv3B = "<div class=\"col ".$bgToday." text-center border-top border-start border-bottom border-dark fs-8\">".$strClassHol."<span class=\"text-muted\">";
 				$strDivEnd = "</span></div>";
 				switch ($idxWD) {
 					case 1:
@@ -143,8 +148,15 @@
 				$objDay = clone $objWeek1stDay; //counting day for store/ppl rows
 				for ($idxWD = 1; $idxWD < 8; $idxWD++) {
 					$mday = date('j',date_timestamp_get($objDay));
-					echo "<div class=\"col\" onclick=\"f_cellSelected('".$rowStore."',".$idxWD.",".$mday.")\" id=\"".$rowStore.$mday."\">";
-					$sql = "SELECT `c_id` FROM `t_calendar` WHERE `c_store`='".$rowStore."' AND `c_date`='".$theYear."-".$theMonth."-".$mday."'";
+					$cellYear = date("Y",date_timestamp_get($objDay));
+					$cellMon = date("n",date_timestamp_get($objDay));
+					$cellID = $rowStore.$cellMon."_".$mday;
+					if ((date_diff($objDay,date_create()))->format("%R") == "-") { //future dates
+						echo "<div class=\"col\" onclick=\"f_cellSelected('".$rowStore."',".$idxWD.",".$cellYear.",".$cellMon.",".$mday.")\" id=\"".$cellID."\">";
+					}else{
+						echo "<div class=\"col\" id=\"".$cellID."\">"; //no clicable if date is not greater than today
+					}
+					$sql = "SELECT `c_id` FROM `t_calendar` WHERE `c_store`='".$rowStore."' AND `c_date`='".$cellYear."-".$cellMon."-".$mday."'";
 					$result = $conn->query($sql);
 					$sqlMinPpl = "SELECT `c_ppl` FROM `t_minppl` WHERE `c_store`='".$rowStore."' AND `c_weekday`=".$idxWD;
 					$resultMinPpl = $conn->query($sqlMinPpl);
@@ -152,7 +164,7 @@
 					for ($idxPpl = 1; $idxPpl < 4; $idxPpl++) { //MAX ppl/store set at 3.  PHASE 2 FEATURE
 						$row = $result->fetch_assoc();
 						$strDivClass = "<div class=\"text-center fs-6";
-						$strDivData = "\" data-stocking-minppl=\"".$MinPpl['c_ppl']."\" id=\"".$rowStore.$mday."_".$idxPpl."\">";
+						$strDivData = "\" data-stocking-minppl=\"".$MinPpl['c_ppl']."\" id=\"".$cellID."_".$idxPpl."\">";
 						if ($row){
 							if (strstr($arrayUserWorkday[$row['c_id']],(string)$idxWD)) {
 								echo $strDivClass.$strDivData.$row['c_id']."</div>";
