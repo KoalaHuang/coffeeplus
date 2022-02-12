@@ -19,17 +19,11 @@ window.addEventListener("DOMContentLoaded", function() {
   const elmIptDate = document.getElementById("iptDate");
   objGlobal.year = Number(elmIptDate.getAttribute("data-stocking-year"));
   objGlobal.mon = Number(elmIptDate.getAttribute("data-stocking-mon"));
-  objGlobal.name = document.getElementById("txtUserName").innerText;
-
-  elmSltItem =  document.getElementById('sltUser');
-  var optionItems = elmSltItem.options;
-  for (idxOption = 0, lenOption = optionItems.length; idxOption < lenOption; idxOption++) {
-    if (optionItems[idxOption].innerHTML == objGlobal.name) {
-      objGlobal.id = optionItems[idxOption].value;
-      objGlobal.userstore = optionItems[idxOption].getAttribute("data-stocking-userstore");
-      break;
-    }
-  }
+  
+  elmUser =  document.getElementById('txtUserName');
+  objGlobal.name = elmUser.innerText;
+  objGlobal.id = elmUser.getAttribute("data-stocking-userid");
+  objGlobal.userstore = elmUser.getAttribute("data-stocking-userstore");
 
 }, false);
 

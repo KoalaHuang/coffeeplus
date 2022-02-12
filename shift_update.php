@@ -15,9 +15,6 @@
   $strPostedDate = $obj->year."/".$obj->mon."/".$obj->mday;
   $currentDate = date_create_from_format("Y/n/j",$strPostedDate);
 
-  myLOG($strPostedDate);
-  myLOG($currentDate);
-
   if (($currentDate) && (date_format($currentDate,"Y/n/j") == $strPostedDate)) {
     if ($obj->istoadd) {
       //get user workday

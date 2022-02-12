@@ -17,33 +17,40 @@
 	?>
 
 	<h1 id="section_home" class="text-center mb-3">Shift</h1>
-	<div id="txtUserName" class="text-center mb-2 text-muted col-12 fs-6"><?echo $_SESSION["user"]?></div>
 
 	<?
-	$arrayUserName = array();
-	$arrayUserID = array();
-	$arrayUserWorkday = array();
+	$UserName = $_SESSION["user"];
+	$UserID = "";
+	$UserWorkday = "";
+	$UserStore = "";
+	$UserIsAdmin = false;
 	$arrayStore = array();
-	$arrayUserStore = array();
-
+	
 	include "connect_db.php";
-	$sql = "SELECT `c_name`,`c_id`,`c_workday`,`c_store` FROM `t_user` WHERE (NOT `c_store`='NONE')";
+	$sql = "SELECT `c_name`,`c_id`,`c_workday`,`c_store`, `c_access` FROM `t_user` WHERE `c_name`='".$UserName."'";
 	$result = $conn->query($sql);
-	$idx = 0;
-	while($row = $result->fetch_assoc()) {
-		$arrayUserID[$idx] = $row["c_id"];
-		$arrayUserName[$arrayUserID[$idx]] = $row["c_name"];
-		$arrayUserWorkday[$arrayUserID[$idx]] = $row["c_workday"];
-		$arrayUserStore[$arrayUserID[$idx]] = $row["c_store"];
+	if ($row = $result->fetch_assoc()) {
+		$UserID = $row["c_id"];
+		$UserName = $row["c_name"];
+		$UserWorkday = $row["c_workday"];
+		$UserStore = $row["c_store"];
+		$UserIsAdmin = strstr($row["c_access"],"A");
 		$idx++;
+	}else{
+		echo "User data error!";
+		die;
 	}
 	$sql = "SELECT `c_name` FROM `t_store`";
 	$result = $conn->query($sql);
 	$idx = 0;
 	while($row = $result->fetch_assoc()) {
-		$arrayStore[$idx] = $row["c_name"];
-		$idx++;
+		$rowStore = $row['c_name'];
+		if (($UserStore == "ALL") || ($rowStore == $UserStore) || ($UserIsAdmin)) {
+			$arrayStore[$idx] = $rowStore;
+			$idx++;
+		} //skip not working store. for admin, display all
 	}
+	myLOG($arrayStore);
 	//get starting date for calendar
 	function f_getStartDay($theYear, $theMonth) {
 		$objStartDay = date_create_from_format("Y/n/j",$theYear."/".$theMonth."/1");
@@ -69,6 +76,8 @@
 	$arrStartDay = getdate(date_timestamp_get($objStartDay)); //starting day in date array
 	$intStartDay = date_timestamp_get($objStartDay); //starting day in time stamp
 	?>
+
+	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>"><?echo $UserName?></div>
 
 	<div class="container">
 		<div class="mb-2"><!--month switch-->
@@ -98,19 +107,19 @@
 			echo "<div class=\"row row-cols-7 g-0 mb-1\">"; // row of days in the week
 			for ($idxWD = 1; $idxWD < 8; $idxWD++){
 				//check if it's holiday
-	      $sql = "SELECT `c_holiday` FROM `t_holiday` WHERE `c_date`='".date_format($objDay,'Y-m-d')."'";
-	      $holidayResult = $conn->query($sql);
-	      $holiday = $holidayResult->fetch_assoc();
+				$sql = "SELECT `c_holiday` FROM `t_holiday` WHERE `c_date`='".date_format($objDay,'Y-m-d')."'";
+				$holidayResult = $conn->query($sql);
+				$holiday = $holidayResult->fetch_assoc();
 				$mday = date('j',date_timestamp_get($objDay));
 				if ((date_diff($objDay,date_create()))->format("%R%a") == "+0") {
 					$bgToday = "bg-warning";
 				}else{
 					$bgToday = "bg-light";
 				}
-			if (is_null($holiday)) {
-					$strClassHol = $mday;
-				}else{
-					$strClassHol = "<span class=\"text-danger\">".$mday."</span>";
+				if (is_null($holiday)) {
+						$strClassHol = $mday;
+					}else{
+						$strClassHol = "<span class=\"text-danger\">".$mday."</span>";
 				}
 				$strDiv3B = "<div class=\"col ".$bgToday." text-center border-top border-start border-bottom border-dark fs-8\">".$strClassHol."<span class=\"text-muted\">";
 				$strDivEnd = "</span></div>";
@@ -156,21 +165,29 @@
 					}else{
 						echo "<div class=\"col\" id=\"".$cellID."\">"; //no clicable if date is not greater than today
 					}
-					$sql = "SELECT `c_id` FROM `t_calendar` WHERE `c_store`='".$rowStore."' AND `c_date`='".$cellYear."-".$cellMon."-".$mday."'";
+					$sql = "SELECT `c_id`, `c_type` FROM `t_calendar` WHERE `c_store`='".$rowStore."' AND `c_date`='".$cellYear."-".$cellMon."-".$mday."'";
 					$result = $conn->query($sql);
 					$sqlMinPpl = "SELECT `c_ppl` FROM `t_minppl` WHERE `c_store`='".$rowStore."' AND `c_weekday`=".$idxWD;
 					$resultMinPpl = $conn->query($sqlMinPpl);
 					$MinPpl = $resultMinPpl->fetch_assoc(); //min ppl required in this weekday for this store
 					for ($idxPpl = 1; $idxPpl < 4; $idxPpl++) { //MAX ppl/store set at 3.  PHASE 2 FEATURE
 						$row = $result->fetch_assoc();
+						$c_type = $row['c_type'];
 						$strDivClass = "<div class=\"text-center fs-6";
 						$strDivData = "\" data-stocking-minppl=\"".$MinPpl['c_ppl']."\" id=\"".$cellID."_".$idxPpl."\">";
+						myLOG("idxPpl: ".$idxPpl."id: ".$row['c_id']." type: ".$row['c_type']." cellid: ".$cellID." row: ".$row);
 						if ($row){
-							if (strstr($arrayUserWorkday[$row['c_id']],(string)$idxWD)) {
-								echo $strDivClass.$strDivData.$row['c_id']."</div>";
-							}else{
-								echo $strDivClass." text-warning".$strDivData.$row['c_id']."</div>";
-							}//if is off day working
+							switch ($c_type) {
+								case "WW":
+									echo $strDivClass.$strDivData.$row['c_id']."</div>";
+									break;
+								case "OW":
+									echo $strDivClass." text-warning".$strDivData.$row['c_id']."</div>";
+									break;
+								case "HW":
+									echo $strDivClass." text-danger".$strDivData.$row['c_id']."</div>";
+									break;
+							}
 						}else{
 							if ($idxPpl <= $MinPpl['c_ppl']) {
 								echo $strDivClass." text-danger".$strDivData."*</div>";
@@ -187,15 +204,6 @@
 		}//for loop Weeks
 		?>
 </div> <!-- container -->
-
-<select class="form-select d-none" id="sltUser" onchange="f_sltUserChanged()" multiple>
-	<?
-	for ($idxUser = 0; $idxUser < count($arrayUserID); $idxUser++) {
-		$userID = $arrayUserID[$idxUser];
-		echo "<option value=\"".$userID."\" data-stocking-workday=\"".$arrayUserWorkday[$userID]."\" data-stocking-userstore=\"".$arrayUserStore[$userID]."\">".$arrayUserName[$userID]."</option>";
-	}
-	?>
-</select>
 
 	<!-- Modal Submit-->
 	<div class="modal fade" id="modal_box" tabindex="-1">
