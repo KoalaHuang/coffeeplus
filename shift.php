@@ -50,7 +50,6 @@
 			$idx++;
 		} //skip not working store. for admin, display all
 	}
-	myLOG($arrayStore);
 	//get starting date for calendar
 	function f_getStartDay($theYear, $theMonth) {
 		$objStartDay = date_create_from_format("Y/n/j",$theYear."/".$theMonth."/1");
@@ -111,6 +110,8 @@
 				$holidayResult = $conn->query($sql);
 				$holiday = $holidayResult->fetch_assoc();
 				$mday = date('j',date_timestamp_get($objDay));
+				myLOG($objDay);
+				myLOG(date_diff($objDay,date_create())->format("%R%a"));
 				if ((date_diff($objDay,date_create()))->format("%R%a") == "+0") {
 					$bgToday = "bg-warning";
 				}else{
@@ -143,7 +144,7 @@
 						echo $strDiv3B." S".$strDivEnd;
 						break;
 					case 7:
-						echo "<div class=\"col bg-light text-center border border-dark fs-8\">".$strClassHol."<span class=\"text-muted\"> S".$strDivEnd;
+						echo "<div class=\"col ".$bgToday." text-center border border-dark fs-8\">".$strClassHol."<span class=\"text-muted\"> S".$strDivEnd;
 				}
 				date_add($objDay,date_interval_create_from_date_string("1 day"));
 			}
@@ -175,7 +176,6 @@
 						$c_type = $row['c_type'];
 						$strDivClass = "<div class=\"text-center fs-6";
 						$strDivData = "\" data-stocking-minppl=\"".$MinPpl['c_ppl']."\" id=\"".$cellID."_".$idxPpl."\">";
-						myLOG("idxPpl: ".$idxPpl."id: ".$row['c_id']." type: ".$row['c_type']." cellid: ".$cellID." row: ".$row);
 						if ($row){
 							switch ($c_type) {
 								case "WW":

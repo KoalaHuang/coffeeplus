@@ -15,7 +15,6 @@
 	<?
 	include "navbar.php";
 	include "mylog.php";
-	myLOG(__FILE__);
 
 	$hideResult = true;
 	$inputError = false;
@@ -27,7 +26,6 @@
 		}else{
 			$hideResult = false;
 		}
-		myLOG("from: ".date_format($fromDate,"Y/n/j")." to: ".date_format($toDate,"Y/n/j")." hide: ".var_export($hideResult,true)." inputerror:".var_export($inputError,true));
 	}
 	?>
 
@@ -90,7 +88,6 @@
 			}
 
 			$sql = "SELECT count(`c_date`),`c_id`,`c_store`,`c_type` FROM `t_calendar` WHERE `c_date`>='".date_format($fromDate,"Y-m-d")."' AND `c_date`<='".date_format($toDate,"Y-m-d")."' GROUP BY `c_id`,`c_store`, `c_type`;";
-			myLOG($sql);
 			$result = $conn->query($sql);
 			$idx = 0;
 			while($row = $result->fetch_assoc()) {
@@ -104,7 +101,6 @@
 			}
 			$conn->close();
 		}
-		myLOG($arrayPeople);
 		?>
 
 		<!--Result Row-->

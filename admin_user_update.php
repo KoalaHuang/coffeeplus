@@ -43,8 +43,6 @@
     }
   }
   $result = $stmt->execute();
-  myLOG($stmt);
-  myLOG($result);
   $stmt->close();
   $conn->close();
   echo json_encode($result);

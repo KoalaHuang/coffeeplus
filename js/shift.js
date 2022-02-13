@@ -60,7 +60,7 @@ function f_nextMon() {
     newYear = objGlobal.year;
     newMon = objGlobal.mon + 1;
   }
-  strURL = "/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();;
+  strURL = "?year=" + newYear.toString() + "&mon=" + newMon.toString();
   window.open(strURL,"_self");
 }
 
@@ -72,7 +72,8 @@ function f_lastMon() {
     newYear = objGlobal.year;
     newMon = objGlobal.mon - 1;
   }
-  strURL = "/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();;
+  console.log(document.location.hostname);
+  strURL = "?year=" + newYear.toString() + "&mon=" + newMon.toString();
   window.open(strURL,"_self");
 }
 
