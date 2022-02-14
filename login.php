@@ -1,4 +1,3 @@
-
 <?php
 // Start the session
 session_start();
@@ -56,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
   		<div class="row mt-3">
   			<span>
-  				<select class="form-select mb-3" id="sltUser" name="user" onchange="f_UsrSelected()">
+  				<select class="form-select mb-3" id="sltUser" name="user">
   				  <option selected>Who are you...</option>
   					<?
   					include "connect_db.php";

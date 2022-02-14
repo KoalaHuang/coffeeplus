@@ -1,4 +1,13 @@
-<? include_once "sessioncheck.php"?>
+<?
+/*
+Store to raise Request
+*/ 
+include_once "sessioncheck.php";
+if (f_shouldDie("R")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +24,7 @@
 
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-2">Request</h1>
+		<div class="text-center mb-2 text-secondary col-12 fw-bold fs-6"><?echo $_SESSION["user"]?></div>
 
 		<div id="reminding" class="text-center mb-2 text-muted col-12 fst-italic fs-6">Select store and category</div>
 

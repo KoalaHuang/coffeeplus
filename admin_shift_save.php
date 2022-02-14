@@ -6,7 +6,6 @@
 
   $str = file_get_contents('php://input');
   $obj = json_decode($str, false);
-  // myLOG(__FILE__."\n"."str: ".print_r($str,true)." obj: ".print_r($obj,true)."  input: ".file_get_contents('php://input')." $_POST:".print_r($_POST,true));
 
   if ($obj == null){
     echo "NULL JSON result from:".$str;

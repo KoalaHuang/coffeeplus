@@ -1,7 +1,8 @@
 <?
-  //receive request data and update t_request table
+  //receive update data into t_stock
   //receive data in JSON format
   //return true if sucess otherwise return false
+  session_start();
 
   header("Content-Type: application/json; charset=UTF-8");
   include "mylog.php";

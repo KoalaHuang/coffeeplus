@@ -1,4 +1,13 @@
-<? include_once "sessioncheck.php"?>
+<?
+/*
+Stock data maintainance
+*/ 
+include_once "sessioncheck.php";
+if (f_shouldDie("S")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>

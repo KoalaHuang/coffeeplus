@@ -1,4 +1,13 @@
-<? include_once "sessioncheck.php"?>
+<?
+/*
+Fulfill store request
+*/ 
+include_once "sessioncheck.php";
+if (f_shouldDie("F")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>

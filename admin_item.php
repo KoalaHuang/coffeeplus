@@ -1,4 +1,13 @@
-<? include_once "sessioncheck.php"?>
+<?
+/*
+Item Admin page.  Add/change item name, storage location
+*/ 
+include_once "sessioncheck.php";
+if (f_shouldDie("A")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>

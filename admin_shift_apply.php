@@ -1,5 +1,6 @@
 <?
   //apply shift template to date range in t_calendar
+  session_start();
 
   header("Content-Type: application/json; charset=UTF-8");
   include "mylog.php";

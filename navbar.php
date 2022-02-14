@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php"><img class="img-fluid align-top" src="img/CoffeePlus_wordlogo.jpeg"><span>&nbspBackOffice</span></a>
+    <a class="navbar-brand" href="index.php"><img class="img-fluid align-top" src="img/CoffeePlus_wordlogo.jpeg"><span>&nbspBack Office</span></a>
     <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" id="btn-nav">
       <span class="navbar-toggler-icon"></span>
     </button>

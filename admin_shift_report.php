@@ -1,4 +1,13 @@
-<? include_once "sessioncheck.php"?>
+<?
+/*
+Shift repot by date range.  Part of Admin menu.
+*/ 
+include_once "sessioncheck.php";
+if (f_shouldDie("A")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,12 +28,17 @@
 	$hideResult = true;
 	$inputError = false;
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$fromDate = date_create_from_format("Y/n/j",$_POST["iptFromDate"]);
-	  $toDate = date_create_from_format("Y/n/j",$_POST["iptToDate"]);
-	  if ((is_null($fromDate)) || is_null($toDate)) {
+		$fromDate = date_create_from_format("Y/n/j",$_POST["iptFromYear"]."/".$_POST["iptFromMon"]."/".$_POST["iptFromDay"]);
+		$toDate = date_create_from_format("Y/n/j",$_POST["iptToYear"]."/".$_POST["iptToMon"]."/".$_POST["iptToDay"]);
+		if ((is_null($fromDate)) || is_null($toDate)) {
 			$inputError = true;
 		}else{
-			$hideResult = false;
+			$dateCompare = date_diff($fromDate,$toDate)->format("%R");
+			if (($dateCompare == NULL) || ($dateCompare != "+")) {
+				$inputError = true;
+			}else{
+				$hideResult = false;
+			}
 		}
 	}
 	?>
@@ -32,29 +46,44 @@
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-3">Shift Report</h1>
 		<!--date form-->
-		<div class="row mb-3">
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			<form class="row g-0 mb-4" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<?
 				if ($inputError) {
-					echo "<div class=\"text-danger fst-italic fs-6 mb-1\">Date error! Use yyyy/m/d ie 2022/2/4 :</div>";
+					echo "<div class=\"text-danger fst-italic fs-6 mb-1\">Date value error!</div>";
 				}else{
-					echo "<div class=\"text-muted fst-italic fs-6 mb-1\">Report date range (yyyy/m/d ie 2022/2/4):</div>";
+					echo "<div class=\"text-muted fst-italic fs-6 mb-1\">Report date range:</div>";
 				}
 				?>
-				<div class="input-group mb-1">
-				  <input type="text" class="form-control" name="iptFromDate" placeholder="From date" value="<?if (!($hideResult)) echo date_format($fromDate,"Y/n/j")?>">
-				  <span class="input-group-text">&rarr;</span>
-				  <input type="text" class="form-control" name="iptToDate" placeholder="To date" value="<?if (!($hideResult)) echo date_format($toDate,"Y/n/j")?>">
+				<div class="col">
+					<input type="text" class="form-control mb-3" name="iptFromYear" placeholder="YYYY" value="<?if (!($hideResult)) echo date_format($fromDate,"Y")?>" requied>
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
+				<div class="col">
+						<input type="text" class="form-control" name="iptFromMon" placeholder="m" value="<?if (!($hideResult)) echo date_format($fromDate,"n")?>" requied>
+				</div>
+				<div class="col">
+						<input type="text" class="form-control" name="iptFromDay" placeholder="d" value="<?if (!($hideResult)) echo date_format($fromDate,"j")?>"requied>
+				</div>
+				<div class="col-1">
+						<span class="input-group-text">&rarr;</span>
+				</div>
+				<div class="col">
+						<input type="text" class="form-control mb-3" name="iptToYear" placeholder="YYYY" value="<?if (!($hideResult)) echo date_format($toDate,"Y")?>" requied>
+						<button type="reset" class="btn btn-secondary">Reset</button>
+				</div>
+				<div class="col">
+						<input type="text" class="form-control" name="iptToMon" placeholder="m" value="<?if (!($hideResult)) echo date_format($toDate,"n")?>" requied>
+				</div>
+				<div class="col">
+						<input type="text" class="form-control" name="iptToDay" placeholder="d" value="<?if (!($hideResult)) echo date_format($toDate,"j")?>" requied>
+				</div>
 			</form>
-		</div> <!-- row -->
 
 		<!--Report type selection-->
 		<div class="row mb-2 <?echo "d-none"?>">
 				<div class="text-muted">Report by </div>
 				<div class="btn-group" role="group">
-	        <input type="radio" class="btn-check" name="btn_reporttype" id="btn_people" onclick="f_whichType()">
+	        <input type="radio" class="btn-check" name="btn_reporttype" name="btn_people" onclick="f_whichType()">
 					<label class="btn btn-outline-primary" for="btn_people">People</label>
 					<input type="radio" class="btn-check" name="btn_reporttype" id="btn_store" onclick="f_whichType()">
 					<label class="btn btn-outline-primary" for="btn_store">Store</label>

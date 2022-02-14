@@ -97,7 +97,6 @@ function f_sltUserChanged(){
     const strWarning = " text-warning";
     const strDanger = " text-danger";
     idxPpl = 1;
-    var pplIdentified = false;
     for (idxOption = 0, lenOption = optionItems.length; idxOption < lenOption; idxOption++) {
       if (optionItems[idxOption].selected) {
         if (idxPpl < 4) { //LIMIT to 3 person per store maximum!!
@@ -197,22 +196,25 @@ function f_submit() {
 //confirm to apply shift template to dater range
 function f_applyShift() {
   if (document.getElementById("btnSave").disabled) {
-    objDateRange.from = document.getElementById("iptFromDate").value;
-    objDateRange.to = document.getElementById("iptToDate").value;
-    dateFrom = new Date(objDateRange.from);
-    dateTo = new Date(objDateRange.to);
-    if ((objDateRange.from == "") || (objDateRange.to == "")) {
-      alert ("Please input Date range to apply.")
+    const fromYear = document.getElementById("iptFromYear").value;
+    const fromMon = document.getElementById("iptFromMon").value;
+    const fromDay = document.getElementById("iptFromDay").value;
+    const toYear = document.getElementById("iptToYear").value;
+    const toMon = document.getElementById("iptToMon").value;
+    const toDay = document.getElementById("iptToDay").value;
+    dateFrom = new Date(fromYear, Number(fromMon)-1, fromDay);
+    dateTo = new Date(toYear, Number(toMon)-1, toDay); 
+    const today = new Date();
+    if ((dateFrom > dateTo) || (dateFrom <= today) || (dateFrom == "Invalid Date") || (dateTo == "Invalid Date")) {
+      alert ("Date range error! Date must be valid and later than today.");
     }else{
-      if ((dateFrom == "Invalid Date") || (dateTo == "Invalid Date")) {
-        alert ("Please input dates in yyyy/mm/dd format.");
-      }else{
-        document.getElementById("lbl_modal").innerHTML = "Apply Shift Tempalte";
-        document.getElementById("body_modal").innerHTML = "Update shift from " + objDateRange.from + " to " + objDateRange.to + " ?"
-        document.getElementById("btn_ok").setAttribute("onclick","f_submitShift()");
-        document.getElementById("btn_cancel").disabled =  document.getElementById("btn_ok").disabled = false;
-        modal_Popup.show();
-      }
+      objDateRange.from = fromYear.toString() + "/" + fromMon + "/" + fromDay;
+      objDateRange.to = toYear.toString() + "/" + toMon + "/" + toDay;
+      document.getElementById("lbl_modal").innerHTML = "Apply Shift Tempalte";
+      document.getElementById("body_modal").innerHTML = "Update shift from " + objDateRange.from + " to " + objDateRange.to + " ?"
+      document.getElementById("btn_ok").setAttribute("onclick","f_submitShift()");
+      document.getElementById("btn_cancel").disabled =  document.getElementById("btn_ok").disabled = false;
+      modal_Popup.show();
     }
   }else{
     alert ("Shift template change is not saved. Save first.")

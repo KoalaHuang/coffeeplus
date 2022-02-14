@@ -2,6 +2,7 @@
   //receive request data and update t_user table
   //receive data in JSON format
   //return true if sucess otherwise return false
+  session_start();
 
   header("Content-Type: application/json; charset=UTF-8");
   include "mylog.php";

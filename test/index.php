@@ -41,6 +41,18 @@
     </div>
 
 <script>
+  function f_test() {
+    d  = new Date(2022,0,1);
+    e = new Date(2022,1,15);
+    
+    if (d >= e) {
+      s = "wrong";
+    }else{
+      s = "correct";
+    }
+
+    document.getElementById('title').innerHTML = s;
+  }
 </script>
 <?
   include "../mylog.php";

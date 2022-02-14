@@ -1,4 +1,15 @@
-<? include_once "sessioncheck.php"?>
+<? 
+/*
+Shift Calendar
+* normal user can add/remove his/her assignmet
+* admin can change all assignment
+*/
+include_once "sessioncheck.php";
+if (f_shouldDie("C")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>BackOffice</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+  	<link rel="stylesheet" href="css/styles.css">
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/nav.js"></script>
 	<script src="js/shift.js"></script>
@@ -72,11 +83,9 @@
 		$theMonthName = $arrDefaultDay['month'];
 	}
 	$objStartDay = f_getStartDay($theYear,$theMonth);
-	$arrStartDay = getdate(date_timestamp_get($objStartDay)); //starting day in date array
-	$intStartDay = date_timestamp_get($objStartDay); //starting day in time stamp
 	?>
 
-	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>"><?echo $UserName?></div>
+	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>" data-stocking-change="<?echo $UserIsAdmin?>"><?echo $UserName?></div>
 
 	<div class="container">
 		<div class="mb-2"><!--month switch-->
@@ -110,8 +119,6 @@
 				$holidayResult = $conn->query($sql);
 				$holiday = $holidayResult->fetch_assoc();
 				$mday = date('j',date_timestamp_get($objDay));
-				myLOG($objDay);
-				myLOG(date_diff($objDay,date_create())->format("%R%a"));
 				if ((date_diff($objDay,date_create()))->format("%R%a") == "+0") {
 					$bgToday = "bg-warning";
 				}else{

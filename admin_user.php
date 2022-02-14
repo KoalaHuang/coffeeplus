@@ -1,4 +1,13 @@
-<? include_once "sessioncheck.php"?>
+<?
+/*
+User setup undre Admin menu
+*/ 
+include_once "sessioncheck.php";
+if (f_shouldDie("A")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>

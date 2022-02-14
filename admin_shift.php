@@ -111,12 +111,18 @@
 		</div>
 
 		<div class="row mb-3">
-			<div class="text-muted fst-italic fs-6 mb-1">Apply Shift to dates(yyyy/m/d ie 2022/2/4):</div>
-			<div class="input-group mb-1">
-			  <input type="text" class="form-control" id="iptFromDate" placeholder="From date">
-			  <span class="input-group-text">&rarr;</span>
-			  <input type="text" class="form-control" id="iptToDate" placeholder="To date">
-				<button type="button" class="btn btn-primary" onclick="f_applyShift()">Apply</button>
+			<div class="text-muted fst-italic fs-6 mb-1">Apply Shift to date range:</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" id="iptFromYear" placeholder="YYYY" requied>
+			  	<input type="text" class="form-control" id="iptFromMon" placeholder="m" requied>
+			  	<input type="text" class="form-control" id="iptFromDay" placeholder="d" requied>
+			  	<span class="input-group-text">&rarr;</span>
+			  	<input type="text" class="form-control" id="iptToYear" placeholder="YYYY" requied>
+			  	<input type="text" class="form-control" id="iptToMon" placeholder="m" requied>
+			  	<input type="text" class="form-control" id="iptToDay" placeholder="d" requied>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary col-3" onclick="f_applyShift()">Apply</button>
 			</div>
 		</div> <!-- row -->
 </div> <!-- container -->

@@ -1,4 +1,13 @@
-<? include_once "sessioncheck.php"?>
+<?
+/*
+User Profile view and update. Can change password
+*/ 
+include_once "sessioncheck.php";
+if (f_shouldDie("O")) {
+	header("Location:login.php");
+	exit();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>

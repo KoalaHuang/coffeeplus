@@ -3,13 +3,12 @@
   //receive data in JSON format
   //return true if sucess otherwise return false
 
+  session_start();
   header("Content-Type: application/json; charset=UTF-8");
-  include "mylog.php";
   include "whatsapp.php";
 
   $str = file_get_contents('php://input');
   $obj = json_decode($str, false);
-  // myLOG(__FILE__."\n"."str: ".print_r($str,true)." obj: ".print_r($obj,true)."  input: ".file_get_contents('php://input')." $_POST:".print_r($_POST,true));
 
   if ($obj == null){
     echo "NULL JSON result from:".$str;
@@ -28,7 +27,6 @@
   $stmt_report = $conn->prepare("INSERT INTO `t_report`(`c_date`, `c_ordernum`, `c_item`, `c_cat`, `c_store`, `c_qty`, `c_user`) VALUES (?,?,?,?,?,?,?)");
   $stmt_report->bind_param("sssssis",$c_date,$c_ordernum,$c_item,$c_cat,$c_store,$c_qty,$c_user);
   $numRow = (int)($obj->r);
-  // myLOG("obj: ".print_r($obj,TRUE)." numRow: ".$numRow);
   if (!$numRow) {
     $errDB = "JSON Para error".$obj->r;
     die;
@@ -39,7 +37,6 @@
       $nameQty = "q".$i;
       $c_item = $obj->$nameItem;
       $c_qty = $obj->$nameQty;
-      // myLOG("store: ".$c_store." item: ".$c_item." qty: ".$c_qty);
       $result = ($result && $stmt->execute());
       $result = ($result && $stmt_report->execute());
       // myLOG("stmt after ".print_r($stmt,TRUE));

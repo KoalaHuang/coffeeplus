@@ -60,7 +60,7 @@ function f_nextMon() {
     newYear = objGlobal.year;
     newMon = objGlobal.mon + 1;
   }
-  strURL = "?year=" + newYear.toString() + "&mon=" + newMon.toString();
+  strURL = "http://" + window.location.host + "/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();
   window.open(strURL,"_self");
 }
 
@@ -72,8 +72,7 @@ function f_lastMon() {
     newYear = objGlobal.year;
     newMon = objGlobal.mon - 1;
   }
-  console.log(document.location.hostname);
-  strURL = "?year=" + newYear.toString() + "&mon=" + newMon.toString();
+  strURL = "http://" + window.location.host + "/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();
   window.open(strURL,"_self");
 }
 
@@ -141,7 +140,14 @@ function f_cellSelected(strStore, intWD, intCellYear, intCellMon, intmDay) {
     document.getElementById("btn_ok").disabled = false;
     modal_Popup.show();
   }else{
-    alert ("You are not working in " + objGlobal.store + ".");
+    elmUser =  document.getElementById('txtUserName');
+    $canChange = elmUser.getAttribute("data-stocking-change");
+    if ($canChange == "A") {
+      strURL = "http://" + window.location.host+"/shift_admin.php?year=" + objGlobal.year.toString() + "&mon=" + objGlobal.mon.toString() + "&day=" + objGlobal.mday + "&store=" + objGlobal.store + "&cmon=" + document.getElementById("iptDate").getAttribute("data-stocking-mon");
+      window.open(strURL,"_self");
+    }else{
+      alert ("You are not working in " + objGlobal.store + ".");
+    }
   }
 }
 
