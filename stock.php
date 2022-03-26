@@ -88,7 +88,7 @@ if (f_shouldDie("S")) {
 								<span><? echo $c_qty ?></span>
 								<span class="fw-bold" id="<? echo "lblResult".$strIndex ?>"></span>
 							</span>
-						  <input type="text" class="form-control text-center col-2" data-stocking-stock="<? echo $c_qty ?>" value="0" onchange="<? echo "f_boxChanged('".$strIndex."')"; ?>" id="<? echo "box".$strIndex ?>">
+						  <input type="text" class="form-control text-center col-2 text-primary" data-stocking-stock="<? echo $c_qty ?>" value="0" onchange="<? echo "f_boxChanged('".$strIndex."')"; ?>" id="<? echo "box".$strIndex ?>">
 						  <button class="btn btn-outline-secondary col-2" type="button" onclick="<? echo "f_adjust('".$strIndex."',true)"; ?>">+</button>
 						  <button class="btn btn-outline-secondary col-2" type="button" onclick="<? echo "f_adjust('".$strIndex."',false)"; ?>">-</button>
 						</div>

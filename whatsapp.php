@@ -10,7 +10,7 @@
     </head>
     <body>
     <h3>$msg</h3>
-    <p>Go to <a href=\"http://coffeeplus.ml/stocking/report.php\">CoffeePlus Stocking</a> for detail.</p>
+    <p>Go to <a href=\"http://coffeeplus.sg/bo">CoffeePlus BackOffice</a> for detail.</p>
     </body>
     </html>
     ";

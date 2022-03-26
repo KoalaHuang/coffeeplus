@@ -60,7 +60,7 @@ function f_nextMon() {
     newYear = objGlobal.year;
     newMon = objGlobal.mon + 1;
   }
-  strURL = "http://" + window.location.host + "/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();
+  strURL = "http://" + window.location.host + "/bo/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();
   window.open(strURL,"_self");
 }
 
@@ -72,7 +72,7 @@ function f_lastMon() {
     newYear = objGlobal.year;
     newMon = objGlobal.mon - 1;
   }
-  strURL = "http://" + window.location.host + "/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();
+  strURL = "http://" + window.location.host + "/bo/shift.php?year=" + newYear.toString() + "&mon=" + newMon.toString();
   window.open(strURL,"_self");
 }
 
@@ -117,8 +117,6 @@ function f_cellSelected(strStore, intWD, intCellYear, intCellMon, intmDay) {
   strClass = document.getElementById(cellName).getAttribute("class");
   strClass = strClass + strBorder;
   document.getElementById(cellName).setAttribute("class",strClass);
-  console.log("obj: "+objGlobal);
-  console.log("cellname: "+cellName);
 
   //post users in the cell to user selection
   if ((objGlobal.userstore == "ALL") || (objGlobal.userstore == objGlobal.store)) {
@@ -143,7 +141,7 @@ function f_cellSelected(strStore, intWD, intCellYear, intCellMon, intmDay) {
     elmUser =  document.getElementById('txtUserName');
     $canChange = elmUser.getAttribute("data-stocking-change");
     if ($canChange == "A") {
-      strURL = "http://" + window.location.host+"/shift_admin.php?year=" + objGlobal.year.toString() + "&mon=" + objGlobal.mon.toString() + "&day=" + objGlobal.mday + "&store=" + objGlobal.store + "&cmon=" + document.getElementById("iptDate").getAttribute("data-stocking-mon");
+      strURL = "http://" + window.location.host+"/bo/shift_admin.php?year=" + objGlobal.year.toString() + "&mon=" + objGlobal.mon.toString() + "&day=" + objGlobal.mday + "&store=" + objGlobal.store + "&cmon=" + document.getElementById("iptDate").getAttribute("data-stocking-mon");
       window.open(strURL,"_self");
     }else{
       alert ("You are not working in " + objGlobal.store + ".");
