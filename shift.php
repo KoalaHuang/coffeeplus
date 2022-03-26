@@ -83,6 +83,8 @@ if (f_shouldDie("C")) {
 		$theMonthName = $arrDefaultDay['month'];
 	}
 	$objStartDay = f_getStartDay($theYear,$theMonth);
+	$objStartDay->setTime(0,0,0);
+	$today = new DateTime("today");
 	?>
 
 	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>" data-stocking-change="<?echo $UserIsAdmin?>"><?echo $UserName?></div>
@@ -119,7 +121,10 @@ if (f_shouldDie("C")) {
 				$holidayResult = $conn->query($sql);
 				$holiday = $holidayResult->fetch_assoc();
 				$mday = date('j',date_timestamp_get($objDay));
-				if ((date_diff($objDay,date_create()))->format("%R%a") == "+0") {
+				myLOG("today".date_format($today,"y/m/j H:i:u"));
+				myLOG("objDay".date_format($objDay,"y/m/j H:i:u"));
+				myLOG("diff: ".(integer)($today->diff($objDay)->format("%R%a")));
+				if (((integer)($today->diff($objDay)->format("%R%a"))) == 0) {
 					$bgToday = "bg-warning";
 				}else{
 					$bgToday = "bg-light";
@@ -168,7 +173,7 @@ if (f_shouldDie("C")) {
 					$cellYear = date("Y",date_timestamp_get($objDay));
 					$cellMon = date("n",date_timestamp_get($objDay));
 					$cellID = $rowStore.$cellMon."_".$mday;
-					if ((date_diff($objDay,date_create()))->format("%R") == "-") { //future dates
+					if ((((integer)($today->diff($objDay)->format("%R%a"))) > 0) || ($UserIsAdmin)) { //future dates or user is admin (admin can edit past days)
 						echo "<div class=\"col\" onclick=\"f_cellSelected('".$rowStore."',".$idxWD.",".$cellYear.",".$cellMon.",".$mday.")\" id=\"".$cellID."\">";
 					}else{
 						echo "<div class=\"col\" id=\"".$cellID."\">"; //no clicable if date is not greater than today
