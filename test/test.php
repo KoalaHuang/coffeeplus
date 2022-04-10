@@ -9,9 +9,14 @@
   </head>
 
   <body>
+  
+    <select class="form-select" aria-label="Default select example">
+    <option selected>Open this select menu</option><button type="button" class="btn btn-primary">X</button>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+    </select>
 
-<?
-  include "../connect_db.php";
+  </body>
 
-</body>
-</html>
+<html>

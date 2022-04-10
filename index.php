@@ -47,10 +47,10 @@ $access = $_SESSION["access"];
         echo "<button type=\"button\" id=\"btnGroupDrop1\" class=\"btn btn-primary dropdown-toggle\" data-bs-toggle=\"dropdown\">Admin</button>";
         echo "<ul class=\"dropdown-menu\"  aria-labelledby=\"btnGroupDrop1\">";
         echo "<li><a class=\"dropdown-item\" href=\"admin_item.php\">Item</a></li>";
-        echo "<li><a class=\"dropdown-item\" href=\"admin_cat.php\">Category</a></li>";
         echo "<li><a class=\"dropdown-item\" href=\"admin_user.php\">User</a></li>";
         echo "<li><a class=\"dropdown-item\" href=\"admin_shift.php\">Shift Template</a></li>";
         echo "<li><a class=\"dropdown-item\" href=\"admin_shift_report.php\">Shift Report</a></li>";
+        echo "<li><a class=\"dropdown-item\" href=\"admin_config.php\">System Configuration</a></li>";
         echo "</ul></div>";
       }
       if (strstr($access,"O")) {

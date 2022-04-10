@@ -1,55 +1,36 @@
-var myModal;
-
-window.addEventListener("DOMContentLoaded", function() {
-   myModal = new bootstrap.Modal(document.getElementById("RequestModal"));
-
-   const $navbarNav = document.querySelector("#navbarToggler");
-   if ($navbarNav) {
-     console.log($navbarNav);
-     const navbarNavCollapse = (event) => {
-       if ($navbarNav != event.target) {
-         $navbarNav.setAttribute("class","collapse navbar-collapse");
-         document.removeEventListener("mouseup", navbarNavCollapse);
-       }
-     }
-
-     $navbarNav.addEventListener("shown.bs.collapse", () => {
-       document.addEventListener("mouseup", navbarNavCollapse);
-     });
-   }
-
-}, false);
-
-var jsonObj = {
-      "s":"VP",
-      "c":"Ice Cream",
-      "r":1,
-      "i1":"C&C",
-      "q1":50
-};
-
-function f_test () {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {
-      document.getElementById("srv_msg").innerHTML = this.responseText;
-      myModal.hide();
+function f_add_notice_wa() {
+  iptBox_wa = document.getElementById("input_notice_wa");
+  input_wa = iptBox_wa.value;
+  const pattern = /\x2b65\d{8}\x2e\d{6}$/; //start with +65 with 8 mobile number, and '.' followed by 6 digits pin code
+  if (pattern.test(input_wa)) {
+    wa_list = document.getElementById("ul_wa");
+    newIdx = (wa_list.childElementCount + 1).toString();
+    newListItem = document.createElement("li");
+    newListItem.setAttribute('class','list-group-item list-group-item-secondary me-1 mb-1 col-10');
+    newListItem.setAttribute('id','li_wa_'+newIdx);
+    newListItem.innerText = input_wa;
+    newButton = document.createElement("button");
+    newButton.setAttribute('class','mb-1 btn btn-danger col-1');
+    newButton.setAttribute('id','btn_wa_'+newIdx);
+    newButton.setAttribute('type','button');
+    newButton.setAttribute('onclick','f_remove_notice_wa('+newIdx+')');
+    newButton.innerText = "X";
+    newRow = document.createElement("div");
+    newRow.setAttribute('class','row');
+    newRow.setAttribute('id','wa_row_'+newIdx);
+    newRow.appendChild(newListItem);
+    newRow.appendChild(newButton);
+    document.getElementById("ul_wa").appendChild(newRow);
+    iptBox_wa.value = "";
+  }else{
+    alert("WhatsApp notice number format: +65<8 digits phone num>.<6 digits code>");
   }
-  const strJson = JSON.stringify(jsonObj);
-  console.log(strJson);
-  xhttp.open("POST", "test.php");
-  xhttp.setRequestHeader("Accept", "application/json");
-  xhttp.setRequestHeader("Content-Type", "application/json");
-  xhttp.send(strJson);
-  document.getElementById("msg").innerHTML = strJson;
 }
 
-// function f_test2() {
-  // window.location.href = "http://irc.pythonabc.org/mylog.php";
-// }
-
-function f_test2(strElemenID) {
-  console.log("elm: " + strElemenID);
-  var int_range = document.getElementById(strElemenID).value;
-  console.log("value:" + int_range);
-  document.getElementById("msg").innerHTML = strElemenID + " value changed:" + int_range;
+function f_remove_notice_wa(idx) {
+  list_wa = document.getElementById("ul_wa");
+  //listItemToRemove = document.getElementById("li_wa_"+idx.toString());
+  //buttonToRemove = document.getElementById("btn_wa_"+idx.toString());
+  rowToRemove = document.getElementById("wa_row_"+idx.toString());
+  list_wa.removeChild(rowToRemove);
 }

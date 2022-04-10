@@ -32,18 +32,17 @@
     die;
   }else{
     $c_store = $obj->s;
+    $noticeMsg = $c_cat." request from store ".$c_store.".\n";
     for ($i = 1; $i <= $numRow; $i++) {
       $nameItem = "i".$i;
       $nameQty = "q".$i;
       $c_item = $obj->$nameItem;
       $c_qty = $obj->$nameQty;
+      $noticeMsg = $noticeMsg."<".$c_item.">  ".$c_qty." \n";
       $result = ($result && $stmt->execute());
       $result = ($result && $stmt_report->execute());
-      // myLOG("stmt after ".print_r($stmt,TRUE));
     } // for
-    // myLOG("result: ".print_r($result,TRUE));
-    // $whatsapp_rtn = send_whatsapp($c_cat." request received from store ".$c_store."!");
-    // myLOG(__FILE__."WhatsApp return: ".print_r($whatsapp_rtn));
+    send_notice("R",$noticeMsg); //send email and whatsapp notice
     echo json_encode($result);
   } //if $numRow correct
   $stmt->close();

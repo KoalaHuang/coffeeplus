@@ -95,7 +95,7 @@ function f_submit() {
       document.getElementById("btn_ok").style.visibility = "visible";
       document.getElementById("btn_ok").onclick = f_refresh;
     }else{
-      document.getElementById("body_modal").innerHTML = "Update failed!<br>Return code: "+ this.responseText + "<br>Press Cancel to return";
+      document.getElementById("body_modal").innerHTML = "<p class=\"text-danger\">Update failed!</p>Return code: "+ this.responseText + "<br>Press Cancel to return";
       document.getElementById("btn_cancel").style.visibility = "visible";
       // modal_Popup.hide();
     }

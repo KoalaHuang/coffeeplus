@@ -46,7 +46,7 @@ if (f_shouldDie("A")) {
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-3">Shift Report</h1>
 		<!--date form-->
-			<form class="row g-0 mb-4" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			<form class="row g-0 mb-4" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
 				<?
 				if ($inputError) {
 					echo "<div class=\"text-danger fst-italic fs-6 mb-1\">Date value error!</div>";
@@ -135,7 +135,12 @@ if (f_shouldDie("A")) {
 		<!--Result Row-->
 		<div class="row px-3 col mb-2 <?if ($hideResult) echo "d-none"?>">
 		<?
-		for ($idxPpl = 0; $idxPpl<count($arrayUserID); $idxPpl++) {
+		if (is_iterable($arrayUserID)) {
+		    $countUserID = count($arrayUserID,1);
+		}else{
+		    die;
+		}
+		for ($idxPpl = 0; $idxPpl<$countUserID; $idxPpl++) {
 			$c_id = $arrayUserID[$idxPpl];
 			$c_name = $arrayUserName[$c_id];
 

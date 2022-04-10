@@ -37,10 +37,10 @@
           echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"admindropdown\" role=\"button\" data-bs-toggle=\"dropdown\">Admin</a>";
           echo "<ul class=\"dropdown-menu\" aria-labelledby=\"admindropdown\">";
           echo "<li><a class=\"dropdown-item\" href=\"admin_item.php\">Stock Item</a></li>";
-          echo "<li><a class=\"dropdown-item\" href=\"admin_cat.php\">Stock Category</a></li>";
           echo "<li><a class=\"dropdown-item\" href=\"admin_user.php\">User</a></li>";
           echo "<li><a class=\"dropdown-item\" href=\"admin_shift.php\">Shift Template</a></li>";
           echo "<li><a class=\"dropdown-item\" href=\"admin_shift_report.php\">Shift Report</a></li>";
+          echo "<li><a class=\"dropdown-item\" href=\"admin_config.php\">System Configuration</a></li>";
           echo "</ul>";
           echo "</li>";
           }
