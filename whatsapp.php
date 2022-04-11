@@ -11,16 +11,10 @@
     $html=file_get_contents($url);
   }
 
-  //send notice via maill or whatsapp. 
-  //$type = "R", send notice for stock request
+  //send notice via maill or whatsapp
+  //$type: "R", send notice for stock request
+  //$msg: array of string. each element is one line
   function send_notice($type,$msg){
-    /*
-    $servername = "localhost:3307";
-    $username = "coffeedb";
-    $password = "koala5@FR11";
-    $dbname = "coffeedb";
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    */
     include "connect_db.php";
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
@@ -42,9 +36,11 @@
         <head>
         <title>CoffeePlus Stocking - New Request</title>
         </head>
-        <body>
-        <h3>$msg</h3>
-        <p>Go to <a href=\"http://coffeeplus.sg/bo\">CoffeePlus BackOffice</a> for detail.</p>
+        <body>";
+        for ($idx=0; $idx < count($msg); $idx++){
+          $message = $message."<p>".$msg[$idx]."</p>";          
+        }
+        $message = $message."<p>Go to <a href=\"http://coffeeplus.sg/bo\">CoffeePlus BackOffice</a> for detail.</p>
         </body>
         </html>
         ";
@@ -59,7 +55,11 @@
           $phone = $token;
           $token = strtok(".");
           $apikey = $token;
-          $message = $msg."\nGo to http://coffeeplus.sg/bo for detail.";
+          $message = "";
+          for ($idx=0; $idx < count($msg); $idx++){
+            $message = $message.$msg[$idx]."\n";          
+          }
+            $message = $message."Go to http://coffeeplus.sg/bo for detail.";
           send_whatsapp($phone,$apikey,$message);
         }
       }

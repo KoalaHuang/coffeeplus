@@ -23,9 +23,9 @@
   $c_user = $_SESSION["user"];
   $c_cat = $obj->c;
   $c_ordernum = "f".date_timestamp_get(date_create()).rand(0,9);
-  $stmt_req = $conn->prepare("UPDATE `t_request` SET `c_qty`=`c_qty`-? WHERE `c_store`=? AND `c_item`=?");
+  $stmt_req = $conn->prepare("UPDATE `t_request` SET `c_qty`=IF(`c_qty`>?,`c_qty`-?,0) WHERE `c_store`=? AND `c_item`=?");
   $stmt_stk = $conn->prepare("UPDATE `t_stock` SET `c_qty`=`c_qty`-? WHERE `c_storage`=? AND `c_item`=?");
-  $stmt_req->bind_param("iss", $c_qty,$c_store,$c_item);
+  $stmt_req->bind_param("iiss", $c_qty,$c_qty,$c_store,$c_item);
   $stmt_stk->bind_param("iss", $c_qty,$c_storage,$c_item);
   $stmt_report = $conn->prepare("INSERT INTO `t_report`(`c_date`, `c_ordernum`, `c_item`, `c_cat`, `c_store`, `c_storage`,`c_qty`,`c_user`) VALUES (?,?,?,?,?,?,?,?)");
   $stmt_report->bind_param("ssssssis",$c_date,$c_ordernum,$c_item,$c_cat,$c_store,$c_storage,$c_qty,$c_user);

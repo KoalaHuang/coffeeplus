@@ -32,13 +32,14 @@
     die;
   }else{
     $c_store = $obj->s;
-    $noticeMsg = $c_cat." request from store ".$c_store.".\n";
+    $noticeMsg = array("");
+    array_push($noticeMsg,$c_cat." request from store ".$c_store);
     for ($i = 1; $i <= $numRow; $i++) {
       $nameItem = "i".$i;
       $nameQty = "q".$i;
       $c_item = $obj->$nameItem;
       $c_qty = $obj->$nameQty;
-      $noticeMsg = $noticeMsg."<".$c_item.">  ".$c_qty." \n";
+      array_push($noticeMsg,"( ".$c_item." )  ".$c_qty);
       $result = ($result && $stmt->execute());
       $result = ($result && $stmt_report->execute());
     } // for
