@@ -6,6 +6,7 @@
 
   header("Content-Type: application/json; charset=UTF-8");
   include "mylog.php";
+  include "whatsapp.php";
 
   $str = file_get_contents('php://input');
   $obj = json_decode($str, false);
@@ -33,6 +34,8 @@
     $errDB = "JSON Para error".$obj->r;
     die;
   }else{
+    $noticeMsg = array("Stock Updated");
+    array_push($noticeMsg,$c_cat." stock updated.");
     for ($i = 1; $i <= $numRow; $i++) {
       $nameItem = "i".$i;
       $nameQty = "q".$i;
@@ -41,11 +44,13 @@
       $c_qty = $obj->$nameQty;
       $c_storage = $obj->$nameStorage;
       // myLOG("store: ".$c_store." item: ".$c_item." qty: ".$c_qty);
+      array_push($noticeMsg,"( ".$c_item." )  ".sprintf("%+d",$c_qty)." @ ".$c_storage);
       $result = ($result && $stmt->execute());
       $result = ($result && $stmt_report->execute());
       // myLOG("stmt after ".print_r($stmt,TRUE));
     } // for
     // myLOG("result: ".print_r($result,TRUE));
+    send_notice("S",$noticeMsg); //send email and whatsapp notice
     echo json_encode($result);
   } //if $numRow correct
   $stmt->close();

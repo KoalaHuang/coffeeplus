@@ -52,7 +52,7 @@ if (f_shouldDie("A")) {
         </div>
 
         <div class="card mb-3">
-            <h5 class="card-header">Notice when request is raised</h5>
+            <h5 class="card-header">Notice when stocking data changed</h5>
             <div class="card-body">
                 <div class="card-title">WhatsApp Notice</div>
                 <div class="input-group mb-1">
@@ -62,7 +62,7 @@ if (f_shouldDie("A")) {
                 <ul class="list-group" id="ul_wa">
             <?
                 include "connect_db.php";
-                $sql = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_request' AND `c_subsetup`='WA'";
+                $sql = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_stocking' AND `c_subsetup`='WA'";
     			$result = $conn->query($sql);
                 $idx = 0;
     			if ($result->num_rows > 0) {
@@ -87,7 +87,7 @@ if (f_shouldDie("A")) {
                 <ul class="list-group" id="ul_mail">
             <?
                 include "connect_db.php";
-                $sql = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_request' AND `c_subsetup`='mail'";
+                $sql = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_stocking' AND `c_subsetup`='mail'";
     			$result = $conn->query($sql);
                 $idx = 0;
     			if ($result->num_rows > 0) {

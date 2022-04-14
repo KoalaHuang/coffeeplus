@@ -83,7 +83,7 @@ function f_toConfirm() {
     }
 
     listGroup = document.getElementById("ul_wa");
-    c_setup = "notice_request";
+    c_setup = "notice_stocking";
     c_subsetup = "WA";
     listChild = listGroup.firstElementChild; //must be ElementChild. FirstChild may be text, not list item
     while (listChild != null) {

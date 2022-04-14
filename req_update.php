@@ -43,7 +43,7 @@
       $result = ($result && $stmt->execute());
       $result = ($result && $stmt_report->execute());
     } // for
-    send_notice("R",$noticeMsg); //send email and whatsapp notice
+    send_notice("S",$noticeMsg); //send email and whatsapp notice
     echo json_encode($result);
   } //if $numRow correct
   $stmt->close();

@@ -12,7 +12,7 @@
   }
 
   //send notice via maill or whatsapp
-  //$type: "R", send notice for stock request
+  //$type: "S", send notice for stocking data change
   //$msg: array of string. each element is one line
   function send_notice($type,$msg){
     include "connect_db.php";
@@ -20,9 +20,10 @@
       die("Connection failed: " . $conn->connect_error);
     }     
     switch ($type) {
-    case "R":
+    case "S":
+      myLOG($msg);
       //send mail notice
-      $sqlNotice = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_request' AND `c_subsetup`='mail'";
+      $sqlNotice = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_stocking' AND `c_subsetup`='mail'";
       $result = $conn->query($sqlNotice);
       if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -30,14 +31,14 @@
         while($row = $result->fetch_assoc()) {
           $to = ",".$row["c_value"];
         }
-        $subject = "CoffeePlus Stocking - New Request";
+        $subject = $msg[0];
         $message = "
         <html>
         <head>
-        <title>CoffeePlus Stocking - New Request</title>
+        <title>".$subject."</title>
         </head>
         <body>";
-        for ($idx=0; $idx < count($msg); $idx++){
+        for ($idx=1; $idx < count($msg); $idx++){
           $message = $message."<p>".$msg[$idx]."</p>";          
         }
         $message = $message."<p>Go to <a href=\"http://coffeeplus.sg/bo\">CoffeePlus BackOffice</a> for detail.</p>
@@ -47,8 +48,9 @@
         send_mailNote($to,$subject,$message);
       }
       //send WhatsApp notice
-      $sqlNotice = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_request' AND `c_subsetup`='WA'";
+      $sqlNotice = "SELECT `c_value` FROM `t_config` WHERE `c_setup`='notice_stocking' AND `c_subsetup`='WA'";
       $result = $conn->query($sqlNotice);
+      myLOG($result);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           $token = strtok($row["c_value"],".");
