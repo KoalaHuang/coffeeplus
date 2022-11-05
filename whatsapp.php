@@ -29,7 +29,7 @@
         $row = $result->fetch_assoc();
         $to = $row["c_value"];
         while($row = $result->fetch_assoc()) {
-          $to = ",".$row["c_value"];
+          $to = $to.", ".$row["c_value"];
         }
         $subject = $msg[0];
         $message = "
@@ -45,6 +45,7 @@
         </body>
         </html>
         ";
+        myLOG($to);
         send_mailNote($to,$subject,$message);
       }
       //send WhatsApp notice

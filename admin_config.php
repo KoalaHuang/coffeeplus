@@ -11,19 +11,11 @@ if (f_shouldDie("A")) {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <? include "header.php"; ?>
 	<title>Stocking</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/nav.js"></script>
 	<script src="js/admin_config.js"></script>
 </head>
 <body>
-	<? include "navbar.php" ?>
-    <? include "mylog.php" ?>
-
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-3">Admin - Configuration</h1>
         <div class="card mb-3">

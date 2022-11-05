@@ -11,18 +11,11 @@ if (f_shouldDie("S")) {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<? include "header.php"; ?>
 	<title>Stocking</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/nav.js"></script>
 	<script src="js/stock.js"></script>
 </head>
 <body>
-	<? include "navbar.php" ?>
-
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-2">Stock</h1>
 		<div id="reminding" class="text-center mb-2 text-muted col-12 fst-italic fs-6">Select item category</div>

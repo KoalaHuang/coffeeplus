@@ -12,20 +12,11 @@ if (f_shouldDie("A")) {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<? include "header.php"; ?>
 	<title>BackOffice</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/nav.js"></script>
 	<script src="js/shift_admin.js"></script>
 </head>
 <body>
-	<? include "navbar.php";
-		 include "mylog.php";
-	?>
-
 	<h1 id="section_home" class="text-center mb-4">Shift</h1>
 	<?
 	$arrayUserName = array();
@@ -33,10 +24,11 @@ if (f_shouldDie("A")) {
 	$arrayUserWorkday = array();
 	$arrayStore = array();
 	$arrayUserStore = array();
+	$arrayUserEmployee = array();
     $arrayAssigned = array();
 
 	include "connect_db.php";
-	$sql = "SELECT `c_name`,`c_id`,`c_workday`,`c_store` FROM `t_user` WHERE (NOT `c_store`='NONE')";
+	$sql = "SELECT `c_name`,`c_id`,`c_workday`,`c_store`, `c_employee` FROM `t_user` WHERE (NOT (`c_store`='NONE' OR `c_employee`='D'))"; //filter HP, Jerry and me, and deactivated user
 	$result = $conn->query($sql);
 	$idx = 0;
 	while($row = $result->fetch_assoc()) {
@@ -44,6 +36,7 @@ if (f_shouldDie("A")) {
 		$arrayUserName[$arrayUserID[$idx]] = $row["c_name"];
 		$arrayUserWorkday[$arrayUserID[$idx]] = $row["c_workday"];
 		$arrayUserStore[$arrayUserID[$idx]] = $row["c_store"];
+		$arrayUserEmployee[$arrayUserID[$idx]] = $row["c_employee"];
 		$idx++;
 	}
 	$sql = "SELECT `c_name` FROM `t_store`";

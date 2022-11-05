@@ -38,32 +38,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<? include "header.php"; ?>
 	<title>BackOffice</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<? include "navbar.php"; ?>
-
 	<h1 class="text-center mb-2">Login</h1>
 	<div id="reminding" class="text-center mb-3 text-danger col-12 fst-italic fs-6"><?echo $subject;?></div>
 
 	<div class="container">
-		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		<form method="POST" action="<? echo $_SERVER["PHP_SELF"];?>">
   		<div class="row mt-3">
   			<span>
   				<select class="form-select mb-3" id="sltUser" name="user">
   				  <option selected>Who are you...</option>
   					<?
   					include "connect_db.php";
-  					$sql = "SELECT `c_name` FROM `t_user`";
+  					$sql = "SELECT `c_name`, `c_access` FROM `t_user` WHERE `c_employee` <> 'D'";
       			$result = $conn->query($sql);
       			if ($result->num_rows > 0) {
               while($row = $result->fetch_assoc()) {
   							$c_name = $row["c_name"];
+  							$c_access = $row["c_access"];
   					?>
   				  <option value="<?echo $c_name?>"><?echo $c_name?></option>
   					<?

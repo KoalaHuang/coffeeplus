@@ -11,17 +11,10 @@ $access = $_SESSION["access"];
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <? include "header.php"; ?>
 	<title>BackOffice</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/nav.js"></script>
 </head>
 <body>
-	<? include "navbar.php" ?>
-
 	<div class="container">
 		<h1 class="text-center text-secondary mb-2">Welcome</h1>
     <h1 class="text-center mb-3 fs-10"><?echo $user;?></h1>

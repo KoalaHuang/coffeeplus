@@ -5,7 +5,6 @@
   session_start();
 
   header("Content-Type: application/json; charset=UTF-8");
-  include "mylog.php";
 
   $str = file_get_contents('php://input');
   $obj = json_decode($str, false);

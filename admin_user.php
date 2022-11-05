@@ -11,18 +11,11 @@ if (f_shouldDie("A")) {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<? include "header.php"; ?>
 	<title>BackOffice</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/nav.js"></script>
 	<script src="js/admin_user.js"></script>
 </head>
 <body>
-	<? include "navbar.php" ?>
-
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-2">Admin - User</h1>
 
@@ -34,7 +27,7 @@ if (f_shouldDie("A")) {
 					<option value="addNewUser" data-stocking-access="O" data-stocking-id="" data-stocking-workday="" data-stocking-userstore="NONE">&#9830;&nbsp;Add New User&nbsp;&#9830;</option>
 					<?
 					include "connect_db.php";
-					$sql = "SELECT `c_name`,`c_id`,`c_access`,`c_workday`,`c_store` FROM `t_user`";
+					$sql = "SELECT `c_name`,`c_id`,`c_access`,`c_workday`,`c_store`, `c_employee` FROM `t_user`";
     			$result = $conn->query($sql);
     			if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -43,8 +36,9 @@ if (f_shouldDie("A")) {
 							$c_id = $row["c_id"];
 							$c_workday = $row["c_workday"];
 							$c_store = $row["c_store"];
+							$c_employee = $row["c_employee"];
 					?>
-				  <option value="<?echo $c_name?>" data-stocking-access="<?echo $c_access?>" data-stocking-id="<?echo $c_id?>" data-stocking-workday="<?echo $c_workday?>" data-stocking-name="<?echo $c_name?>" data-stocking-userstore="<?echo $c_store?>"><?echo $c_name?></option>
+				  <option value="<?echo $c_name?>" data-stocking-access="<?echo $c_access?>" data-stocking-id="<?echo $c_id?>" data-stocking-workday="<?echo $c_workday?>" data-stocking-name="<?echo $c_name?>" data-stocking-userstore="<?echo $c_store?>" data-stocking-employee="<?echo $c_employee?>"><?echo $c_name?></option>
 					<?
 						}
 					}
@@ -58,12 +52,23 @@ if (f_shouldDie("A")) {
 		</div> <!--name-->
 		<div class="input-group mb-3">
 			<span class="input-group-text">ID</span>
-		  <input type="text" class="form-control" placeholder="2 characters ID used in calendar" id="iptID" disabled>
+			<input type="text" class="form-control" placeholder="2 characters ID used in calendar" id="iptID" disabled>
 		</div> <!--initial-->
 		<div class="input-group mb-3">
 			<span class="input-group-text">password</span>
 		  <input type="password" placeholder="leave blank if no change" class="form-control" id="iptPwd" disabled>
 		</div> <!--pwd-->
+		<div class="row mt-3">
+			<span>
+				<select class="form-select mb-3" id="sltEmployee" onchange="" disabled>
+				  <option value="" selected>Empolyee type</option>
+				  <option value="F">Full time</option>
+				  <option value="P">Part time</option>
+				  <option value="S">Part time without break</option>
+				  <option value="D">Deactivated</option>
+				</select>
+			</span>
+		</div> <!-- employee type-->
 		<div class="col-12 bg-light text-center mb-1"><strong>Working Day</strong></div>
 		<div class="row mx-auto">
       <div class="col"><div class="form-check">

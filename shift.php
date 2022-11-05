@@ -13,22 +13,12 @@ if (f_shouldDie("C")) {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<? include "header.php"; ?>
 	<title>BackOffice</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-  	<link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/nav.js"></script>
 	<script src="js/shift.js"></script>
 </head>
 <body>
-	<? include "navbar.php";
-		 include "mylog.php";
-	?>
-
 	<h1 id="section_home" class="text-center mb-3">Shift</h1>
-
 	<?
 	$UserName = $_SESSION["user"];
 	$UserID = "";
@@ -38,15 +28,15 @@ if (f_shouldDie("C")) {
 	$arrayStore = array();
 	
 	include "connect_db.php";
-	$sql = "SELECT `c_name`,`c_id`,`c_workday`,`c_store`, `c_access` FROM `t_user` WHERE `c_name`='".$UserName."'";
+	$sql = "SELECT `c_name`,`c_id`,`c_workday`,`c_store`, `c_access`, `c_employee` FROM `t_user` WHERE `c_name`='".$UserName."'";
 	$result = $conn->query($sql);
 	if ($row = $result->fetch_assoc()) {
 		$UserID = $row["c_id"];
 		$UserName = $row["c_name"];
 		$UserWorkday = $row["c_workday"];
 		$UserStore = $row["c_store"];
-		$UserIsAdmin = strstr($row["c_access"],"A");
-		$idx++;
+		$UserStatus = $row["c_employee"];
+		$UserIsAdmin = strpos($row["c_access"],"A");
 	}else{
 		echo "User data error!";
 		die;
@@ -59,9 +49,9 @@ if (f_shouldDie("C")) {
 		if (($UserStore == "ALL") || ($rowStore == $UserStore) || ($UserIsAdmin)) {
 			$arrayStore[$idx] = $rowStore;
 			$idx++;
-		} //skip not working store. for admin, display all
+		} //For employee, display only working store. for admin, display all
 	}
-	//get starting date for calendar
+	//get starting date for calendar: date of Monday of the week of first day of the month
 	function f_getStartDay($theYear, $theMonth) {
 		$objStartDay = date_create_from_format("Y/n/j",$theYear."/".$theMonth."/1");
 		$theWeekDay = date('w', date_timestamp_get($objStartDay));
@@ -87,7 +77,7 @@ if (f_shouldDie("C")) {
 	$today = new DateTime("today");
 	?>
 
-	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>" data-stocking-change="<?echo $UserIsAdmin?>"><?echo $UserName?></div>
+	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>" data-stocking-employee="<?echo $UserStatus?>" data-stocking-change="<?if ($UserIsAdmin) {echo 1;}else{echo 0;}?>"><?echo $UserName?></div>
 
 	<div class="container">
 		<div class="mb-2"><!--month switch-->
@@ -121,9 +111,6 @@ if (f_shouldDie("C")) {
 				$holidayResult = $conn->query($sql);
 				$holiday = $holidayResult->fetch_assoc();
 				$mday = date('j',date_timestamp_get($objDay));
-				myLOG("today".date_format($today,"y/m/j H:i:u"));
-				myLOG("objDay".date_format($objDay,"y/m/j H:i:u"));
-				myLOG("diff: ".(integer)($today->diff($objDay)->format("%R%a")));
 				if (((integer)($today->diff($objDay)->format("%R%a"))) == 0) {
 					$bgToday = "bg-warning";
 				}else{
@@ -165,30 +152,47 @@ if (f_shouldDie("C")) {
 			$rowStore = "";
 			for ($idxStore = 0; $idxStore < $totalStore; $idxStore++) {
 				$rowStore = $arrayStore[$idxStore];
-				echo "<div class=\"row mb-1\"><span class=\"bg-light text-muted text-center\" name=\"divStore".$idxStore."\">".$rowStore."</span></div>";
-				echo "<div class=\"row row-cols-7 mb-1\" name=\"divStore".$idxStore."\">";
+				//Use divStore# to name both store title and store lines to control hide/show of individual store
+				echo "<div class=\"row mb-1\"><span class=\"bg-light text-center\" name=\"divStore".$idxStore."\"><strong>".$rowStore."</strong></span></div>";
+				echo "<div class=\"row row-cols-7 g-0 mb-1\" name=\"divStore".$idxStore."\">";
 				$objDay = clone $objWeek1stDay; //counting day for store/ppl rows
 				for ($idxWD = 1; $idxWD < 8; $idxWD++) {
 					$mday = date('j',date_timestamp_get($objDay));
 					$cellYear = date("Y",date_timestamp_get($objDay));
 					$cellMon = date("n",date_timestamp_get($objDay));
 					$cellID = $rowStore.$cellMon."_".$mday;
-					if ((((integer)($today->diff($objDay)->format("%R%a"))) > 0) || ($UserIsAdmin)) { //future dates or user is admin (admin can edit past days)
-						echo "<div class=\"col\" onclick=\"f_cellSelected('".$rowStore."',".$idxWD.",".$cellYear.",".$cellMon.",".$mday.")\" id=\"".$cellID."\">";
+					if ($idxWD == 7) {
+						$strBorder = "border";
 					}else{
-						echo "<div class=\"col\" id=\"".$cellID."\">"; //no clicable if date is not greater than today
+						$strBorder = "border-top border-start border-bottom";
 					}
-					$sql = "SELECT `c_id`, `c_type` FROM `t_calendar` WHERE `c_store`='".$rowStore."' AND `c_date`='".$cellYear."-".$cellMon."-".$mday."'";
+					$sqlStorePpl = "SELECT `c_minppl`,`c_maxppl` FROM `t_storeppl` WHERE `c_store`='".$rowStore."' AND `c_weekday`=".$idxWD;
+					$resultPpl = $conn->query($sqlStorePpl);
+					if ($rowPpl = $resultPpl->fetch_assoc()) {
+						$MinPpl = $rowPpl["c_minppl"]; //min ppl required in this weekday for this store
+						$MaxPpl = $rowPpl["c_maxppl"]; //max ppl required in this weekday for this store
+					}else{ //in case store ppl value is not set
+						$MinPpl = 2;
+						$MaxPpl = 3;
+					}
+					$data_ppl = " data-stocking-minppl=".$MinPpl." data-stocking-maxppl=".$MaxPpl;
+					if ((((integer)($today->diff($objDay)->format("%R%a"))) > 0) || ($UserIsAdmin)) { //future dates or user is admin (admin can edit past days)
+						echo "<div class=\"col border-secondary ".$strBorder."\" onclick=\"f_cellSelected('".$rowStore."',".$idxWD.",".$cellYear.",".$cellMon.",".$mday.")\" id=\"".$cellID."\"".$data_ppl.">";
+					}else{
+						echo "<div class=\"col border-secondary ".$strBorder."\" id=\"".$cellID."\">"; //no clickable if date is not greater than today
+					}
+					$sql = "SELECT `c_id`, `c_type`, `c_timestart`, `c_timeend`, `c_fullday`, `c_totalmins` FROM `t_calendar` WHERE `c_store`='".$rowStore."' AND `c_date`='".$cellYear."-".$cellMon."-".$mday."'";
 					$result = $conn->query($sql);
-					$sqlMinPpl = "SELECT `c_ppl` FROM `t_minppl` WHERE `c_store`='".$rowStore."' AND `c_weekday`=".$idxWD;
-					$resultMinPpl = $conn->query($sqlMinPpl);
-					$MinPpl = $resultMinPpl->fetch_assoc(); //min ppl required in this weekday for this store
-					for ($idxPpl = 1; $idxPpl < 4; $idxPpl++) { //MAX ppl/store set at 3.  PHASE 2 FEATURE
-						$row = $result->fetch_assoc();
-						$c_type = $row['c_type'];
+					for ($idxPpl = 1; $idxPpl <= $MaxPpl; $idxPpl++) {
 						$strDivClass = "<div class=\"text-center fs-6";
-						$strDivData = "\" data-stocking-minppl=\"".$MinPpl['c_ppl']."\" id=\"".$cellID."_".$idxPpl."\">";
+						$row = $result->fetch_assoc();
 						if ($row){
+							$c_type = $row['c_type'];
+							$data_fullday = $row['c_fullday'];
+							$data_timestart =  $row['c_timestart'];
+							$data_timeend = $row['c_timeend'];
+							$data_totalmins = $row['c_totalmins'];
+							$strDivData = "\" data-stocking-fullday=".$data_fullday." data-stocking-timestart=\"".$data_timestart."\" data-stocking-timeend=\"".$data_timeend."\" data-stocking-totalmins=".$data_totalmins." id=\"".$cellID."_".$idxPpl."\">";
 							switch ($c_type) {
 								case "WW":
 									echo $strDivClass.$strDivData.$row['c_id']."</div>";
@@ -201,7 +205,8 @@ if (f_shouldDie("C")) {
 									break;
 							}
 						}else{
-							if ($idxPpl <= $MinPpl['c_ppl']) {
+							$strDivData = "\" data-stocking-fullday=\"\" data-stocking-timestart=\"\"  data-stocking-timeend=\"\" data-stocking-totalmins=\"\" id=\"".$cellID."_".$idxPpl."\">";
+							if ($idxPpl <= $MinPpl) {
 								echo $strDivClass." text-danger".$strDivData."*</div>";
 							}else{
 								echo $strDivClass.$strDivData."&nbsp;</div>";
@@ -225,6 +230,34 @@ if (f_shouldDie("C")) {
 					<h5 class="modal-title" id="lbl_modal"></h5>
 				</div>
 				<div class="modal-body fs-6" id="body_modal">
+					<h6 class="mt-2 ms-2" id="lbl_msg"></h5>
+					<div class="form-check form-switch form-check-inline ms-2">
+						<input class="form-check-input" type="checkbox" role="switch" id="checkWorking" onchange="f_ShiftChanged(0)">
+						<label class="form-check-label" id="lbl_Working" for="checkFullDay"></label>
+					</div><hr>
+					<div class="input-group mb-3">
+						<select class="form-select" id="sltTimeStart" onchange="f_ShiftChanged(1)">
+							<?
+								for ($idxTime = 0; $idxTime < 24; $idxTime++) {
+									echo "<option value=\"".$idxTime.":00\">".$idxTime.":00"."</option>";
+									echo "<option value=\"".$idxTime.":30\">".$idxTime.":30"."</option>";
+								}
+							?>
+						</select>
+						<span class="input-group-text">&rarr;</span>
+						<select class="form-select" id="sltTimeEnd" onchange="f_ShiftChanged(1)">
+							<?
+								for ($idxTime = 0; $idxTime < 24; $idxTime++) {
+									echo "<option value=\"".$idxTime.":00\">".$idxTime.":00"."</option>";
+									echo "<option value=\"".$idxTime.":30\">".$idxTime.":30"."</option>";
+								}
+							?>
+						</select>
+						<div class="form-check form-switch form-check-inline ms-2 align-self-center">
+							<input class="form-check-input" type="checkbox" role="switch" id="checkFullDay" onchange="f_ShiftChanged(1)">
+							<label class="form-check-label" for="checkFullDay<?echo $idxTab?>">Full day</label>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>

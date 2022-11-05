@@ -5,11 +5,13 @@ const objGlobal = {
   "w": "", //workday
   "s": "", //store
   "p": "", //p
+  "e": "", //employee type
   "nn": "", //if it's new user. n will be 'addNewUser', nn is the name
   "ni": "",
   "na": "",
   "nw": "",
-  "ns": ""
+  "ns": "",
+  "ne": ""
 };
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -27,6 +29,7 @@ function f_userSelected () {
       objGlobal.a = optionItems[idxOption].getAttribute("data-stocking-access");
       objGlobal.w = optionItems[idxOption].getAttribute("data-stocking-workday");
       objGlobal.s = optionItems[idxOption].getAttribute("data-stocking-userstore");
+      objGlobal.e = optionItems[idxOption].getAttribute("data-stocking-employee");
       break;
     }
   }//for loop to get user data
@@ -35,41 +38,62 @@ function f_userSelected () {
   var nameBox = document.getElementById("iptName");
   var inputboxID = document.getElementById("iptID");
   var inputboxPwd = document.getElementById("iptPwd");
-  if (objGlobal.n == 'Select User') {
-    nameBox.value = inputboxID.value = "";
-    document.getElementById("btn_toConfirm").disabled = nameBox.disabled = inputboxID.disabled = inputboxPwd.disabled= true;
+  var sltEmployee = document.getElementById("sltEmployee");
+  var IsSelectUser = (objGlobal.n == 'Select User');
+
+  if (IsSelectUser) {
+    nameBox.value = inputboxID.value = sltEmployee.value = "";
+    document.getElementById("btn_toConfirm").disabled = nameBox.disabled = inputboxID.disabled = inputboxPwd.disabled = sltEmployee.disabled = true;
   }else{
     if (objGlobal.n == 'addNewUser') {
       nameBox.placeholder = "name and ID can't be changed after creation";
       iptPwd.placeholder = "password required for new user";
-      nameBox.disabled = inputboxID.disabled = false; //only new user can set name and ID
+      nameBox.disabled = inputboxID.disabled = inputboxPwd.disabled = false; //only new user can set name and ID
       nameBox.value = inputboxID.value = inputboxPwd.value = "";
+      sltEmployee.value = "F"; // default as full time
+      sltEmployee.disabled = false;
     }else{
       nameBox.disabled = inputboxID.disabled = true; //only new user can set name and ID
       nameBox.value = objGlobal.n;
       inputboxID.value = objGlobal.i;
       inputboxPwd.value = "";
+      inputboxPwd.disabled = false;
+      inputboxPwd.placeholder = "leave blank if no change";
+      sltEmployee.value = objGlobal.e; 
+      sltEmployee.disabled = false;
     }
     document.getElementById("btn_toConfirm").disabled = inputboxPwd.disabled= false;
   }
+
   //workday
   elmBtn = document.getElementsByName("btn_workday");
   for (idx = 0, length = elmBtn.length; idx < length; idx++) {
-    elmBtn[idx].disabled = (objGlobal.n == 'Select User');
-    elmBtn[idx].checked = (objGlobal.w.includes(elmBtn[idx].value));
+    elmBtn[idx].disabled = IsSelectUser;
+    if (IsSelectUser){
+      elmBtn[idx].checked = false;
+    }else{
+      elmBtn[idx].checked = (objGlobal.w.includes(elmBtn[idx].value));
+    }
   }
   //access
   elmBtn = document.getElementsByName("btn_access");
   for (idx = 0, length = elmBtn.length; idx < length; idx++) {
-    elmBtn[idx].disabled = (objGlobal.n == 'Select User');
-    elmBtn[idx].checked = (objGlobal.a.includes(elmBtn[idx].value));
+    elmBtn[idx].disabled = IsSelectUser;
+    if (IsSelectUser){
+      elmBtn[idx].checked = false;
+    }else{
+      elmBtn[idx].checked = (objGlobal.a.includes(elmBtn[idx].value));
+    }
   }
   //user store
   elmBtn = document.getElementsByName("btn_store");
-  console.log(elmBtn);
   for (idx = 0, length = elmBtn.length; idx < length; idx++) {
-    elmBtn[idx].disabled = (objGlobal.n == 'Select User');
-    elmBtn[idx].checked = (objGlobal.s == elmBtn[idx].value);
+    elmBtn[idx].disabled = IsSelectUser;
+    if (IsSelectUser){
+      elmBtn[idx].checked = false;
+    }else{
+      elmBtn[idx].checked = (objGlobal.s.includes(elmBtn[idx].value));
+    }
   }
 }
 
@@ -83,6 +107,7 @@ function f_toConfirm() {
   objGlobal.nn = document.getElementById("iptName").value;
   objGlobal.ni = document.getElementById("iptID").value;
   objGlobal.p = document.getElementById("iptPwd").value;
+  objGlobal.ne = document.getElementById("sltEmployee").value;
   elmBtn = document.getElementsByName("btn_access");
   objGlobal.na = "";
   for (idx = 0, length = elmBtn.length; idx < length; idx++) {
@@ -105,9 +130,9 @@ function f_toConfirm() {
   }//store value
   var strBody = strTitle = "";
   var needToCancel = true;
-  if ((objGlobal.ni == "") || (objGlobal.nn == "")) {
+  if ((objGlobal.ni == "") || (objGlobal.nn == "") || (objGlobal.ne == "")) {
     strTitle = "Create new item";
-    strBody= "<p class=\"text-danger\">Name and ID can not be blank!</p>Press Cancel to return";
+    strBody= "<p class=\"text-danger\">Name, ID and employee type can not be blank!</p>Press Cancel to return";
     needToCancel = true;
   }else{
     if (objGlobal.n == 'addNewUser') {
@@ -117,14 +142,14 @@ function f_toConfirm() {
         needToCancel = true;
       }else{
         strTitle = "Confirm to create new item?";
-        strBody = "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Store: " + objGlobal.ns + "<br>Password: " + objGlobal.p;
+        strBody = "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Store: " + objGlobal.ns + "<br>Password: " + objGlobal.p + "<br>Type: " + objGlobal.ne;
         needToCancel = false;
       }
     }else{
       strTitle = "Confirm to update user?";
-      strBody = "Name: " + objGlobal.n + "<br>ID: " + objGlobal.i + "<br>Workday: " + objGlobal.w + "<br>Access: " + objGlobal.a + "<br>Store: " + objGlobal.s;
+      strBody = "Name: " + objGlobal.n + "<br>ID: " + objGlobal.i + "<br>Type: " + objGlobal.e + "<br>Workday: " + objGlobal.w + "<br>Access: " + objGlobal.a + "<br>Store: " + objGlobal.s;
       strBody = strBody + "<br><strong> change to </strong><br>"
-      strBody = strBody + "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Store: " + objGlobal.ns;
+      strBody = strBody + "Name: " + objGlobal.nn + "<br>ID: " + objGlobal.ni + "<br>Type: " + objGlobal.ne + "<br>Workday: " + objGlobal.nw + "<br>Access: " + objGlobal.na + "<br>Store: " + objGlobal.ns;
       if (objGlobal.p != '') {
         strBody = strBody + "<br><span class=\"text-danger\">Password</span>: " + objGlobal.p;
       }

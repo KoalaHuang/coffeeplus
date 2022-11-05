@@ -32,7 +32,7 @@
     die;
   }else{
     $c_store = $obj->s;
-    $noticeMsg = array("");
+    $noticeMsg = array("New Request");
     array_push($noticeMsg,$c_cat." request from store ".$c_store);
     for ($i = 1; $i <= $numRow; $i++) {
       $nameItem = "i".$i;

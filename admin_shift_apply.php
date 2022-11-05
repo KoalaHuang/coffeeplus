@@ -3,7 +3,6 @@
   session_start();
 
   header("Content-Type: application/json; charset=UTF-8");
-  include "mylog.php";
 
   $str = file_get_contents('php://input');
   $obj = json_decode($str, false);
@@ -36,8 +35,8 @@
   		$idx++;
   	}
     //prepare t_calendar INSERT
-    $stmt = $conn->prepare("INSERT INTO `t_calendar`(`c_date`, `c_id`, `c_store`, `c_type`) VALUES (?,?,?,?)");
-    $stmt->bind_param("ssss",$c_date,$c_id,$c_store,$c_type);
+    $stmt = $conn->prepare("INSERT INTO `t_calendar`(`c_date`, `c_id`, `c_store`, `c_type`, `c_timestart`, `c_timeend`, `c_fullday`, `c_totalmins`) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("ssssssii",$c_date,$c_id,$c_store,$c_type,$c_timestart,$c_timeend,$c_fullday,$c_totalmins);
     $result = true;
     //update t_calendar day by day
     while ($currentDate <= $endDate) {
@@ -49,13 +48,17 @@
       $holiday = $holidayResult->fetch_assoc();
       $isHoliday = (!(is_null($holiday)));
       //read shift template
-      $sql = "SELECT `c_id`,`c_store` FROM `t_shifttemp` WHERE (`c_weekday`=".$currentWD.")";
+      $sql = "SELECT `c_id`,`c_store`,`c_timestart`, `c_timeend`, `c_fullday`, `c_totalmins` FROM `t_shifttemp` WHERE (`c_weekday`=".$currentWD.")";
       //myLOG($sql);
     	$shiftTempResult = $conn->query($sql);
       while ($shiftTemp = $shiftTempResult->fetch_assoc()){
         $c_date = date_format($currentDate,'Y-m-d');
         $c_id = $shiftTemp['c_id'];
         $c_store = $shiftTemp['c_store'];
+        $c_timestart = $shiftTemp['c_timestart'];
+        $c_timeend = $shiftTemp['c_timeend'];
+        $c_fullday = $shiftTemp['c_fullday'];
+        $c_totalmins = $shiftTemp['c_totalmins'];
         if ($isHoliday) {
           $c_type = "HW";
         }else{

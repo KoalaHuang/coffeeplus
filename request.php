@@ -11,17 +11,11 @@ if (f_shouldDie("R")) {
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<? include "header.php"; ?>
 	<title>Stocking</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-	<script src="js/bootstrap.min.js"></script>
 	<script src="js/request.js"></script>
 </head>
 <body>
-	<? include "navbar.php" ?>
-
 	<div class="container">
 		<h1 id="section_home" class="text-center mb-2">Request</h1>
 		<div class="text-center mb-2 text-secondary col-12 fw-bold fs-6"><?echo $_SESSION["user"]?></div>
