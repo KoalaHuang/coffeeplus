@@ -8,9 +8,25 @@
   $obj = json_decode($str, false);
 
   if ($obj == null){
-    echo "NULL JSON result from:".$str;
+    echo json_encode("NULL JSON result from:".$str);
     die;
   }
+
+  switch ($obj->status) {
+    case 0:
+      echo json_encode ("remove:".$obj->status);
+      break;
+    case 1:
+      echo json_encode ("add:".$obj->status);
+      break;
+    case 2:
+        echo json_encode ("update:".$obj->status);
+        break;
+    default:
+      echo json_encode("Error status".$obj->status);
+  }
+
+  /*
   include "connect_db.php";
   $strPostedDate = $obj->year."/".$obj->mon."/".$obj->mday;
   $currentDate = date_create_from_format("Y/n/j",$strPostedDate);
@@ -57,4 +73,5 @@
   }else{
     echo json_encode("Dates Error!");
   }
+  */
 ?>

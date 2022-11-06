@@ -150,6 +150,10 @@ include_once "sessioncheck.php"
 							<span class="input-group-text">Total mins:</span><input type="text" class="form-control text-" id="ipTotalMins<?echo $idxTab?>" disabled>
 						</div>
 						<div class="input-group mb-3">
+							<div class="form-check form-switch form-check-inline me-2 align-self-center">
+								<input class="form-check-input" type="checkbox" role="switch" id="checkFullDay<?echo $idxTab?>" onchange="f_ShiftChanged(<?echo $idxTab?>,1)">
+								<label class="form-check-label" for="checkFullDay<?echo $idxTab?>">Full day</label>
+							</div>
 							<select class="form-select" id="sltTimeStart<?echo $idxTab?>" onchange="f_ShiftChanged(<?echo $idxTab?>,1)">
 								<?
 									for ($idxTime = 0; $idxTime < 24; $idxTime++) {
@@ -167,10 +171,6 @@ include_once "sessioncheck.php"
 									}
 								?>
 							</select>
-							<div class="form-check form-switch form-check-inline ms-2 align-self-center">
-								<input class="form-check-input" type="checkbox" role="switch" id="checkFullDay<?echo $idxTab?>" onchange="f_ShiftChanged(<?echo $idxTab?>,1)">
-								<label class="form-check-label" for="checkFullDay<?echo $idxTab?>">Full day</label>
-							</div>
 						</div>
 					</div>
 				<?} //tab loop?>

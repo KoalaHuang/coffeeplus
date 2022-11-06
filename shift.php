@@ -230,12 +230,16 @@ if (f_shouldDie("C")) {
 					<h5 class="modal-title" id="lbl_modal"></h5>
 				</div>
 				<div class="modal-body fs-6" id="body_modal">
-					<h6 class="mt-2 ms-2" id="lbl_msg"></h5>
-					<div class="form-check form-switch form-check-inline ms-2">
+					<h6 class="mt-2 ms-1" id="lbl_msg"></h5>
+					<div class="form-check form-switch form-check-inline ms-1 mb-3">
 						<input class="form-check-input" type="checkbox" role="switch" id="checkWorking" onchange="f_ShiftChanged(0)">
 						<label class="form-check-label" id="lbl_Working" for="checkFullDay"></label>
-					</div><hr>
-					<div class="input-group mb-3">
+					</div>
+					<div class="input-group ms-1">
+						<div class="form-check form-switch form-check-inline align-self-center me-2">
+							<input class="form-check-input" type="checkbox" role="switch" id="checkFullDay" onchange="f_ShiftChanged(1)">
+							<label class="form-check-label" for="checkFullDay<?echo $idxTab?>">Full day</label>
+						</div>
 						<select class="form-select" id="sltTimeStart" onchange="f_ShiftChanged(1)">
 							<?
 								for ($idxTime = 0; $idxTime < 24; $idxTime++) {
@@ -253,23 +257,20 @@ if (f_shouldDie("C")) {
 								}
 							?>
 						</select>
-						<div class="form-check form-switch form-check-inline ms-2 align-self-center">
-							<input class="form-check-input" type="checkbox" role="switch" id="checkFullDay" onchange="f_ShiftChanged(1)">
-							<label class="form-check-label" for="checkFullDay<?echo $idxTab?>">Full day</label>
-						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary" id="btn_ok" onclick="f_submit()">OK</button>
+				</div><hr>
+				<div class="row mb-3 ms-2">
+					<div class="col-6 text-start" id="lbl_status"></div>
+					<button type="button" class="col-2 btn btn-secondary me-2" id="btn_cancel" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="col-2 btn btn-primary" id="btn_ok" onclick="f_submit()">OK</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<?
-	$conn->close();
-	include "footer.php"
-	?>
+</div>
+<?
+$conn->close();
+include "footer.php"
+?>
 </body>
 </html>

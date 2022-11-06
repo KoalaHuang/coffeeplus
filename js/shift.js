@@ -148,6 +148,7 @@ function f_cellSelected(strStore, intWD, intCellYear, intCellMon, intmDay) {
     }
  
     document.getElementById("btn_ok").disabled = false;
+    document.getElementById("lbl_status").innerHTML = "";
     modal_Popup.show();
   }else{
     elmUser =  document.getElementById('txtUserName');
@@ -220,22 +221,59 @@ function f_submit() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     if (this.responseText == "true") {
+      document.getElementById("lbl_status").innerHTML = "<span class=\"text-primary\">Chang submitted......</span>";
       document.getElementById("body_modal").innerHTML  = "Submit successfully!<br>Press OK to return";
       document.getElementById("btn_ok").setAttribute("onclick","f_refresh()");
       document.getElementById("btn_ok").disabled = false;
       document.getElementById("btn_cancel").disabled = true;
     }else{
-      document.getElementById("body_modal").innerHTML  = "<p class=\"text-danger\">Update failed!</p>Return code: "+ this.responseText + "<br>Press Cancel to return";
+      document.getElementById("lbl_status").innerHTML  = "<span class=\"text-danger\">Update failed! " + this.responseText + "</span>";
       document.getElementById("btn_ok").disabled = true;
       document.getElementById("btn_cancel").disabled = false;
     }
   }
-  const strJson = JSON.stringify(objGlobal);
-  xhttp.open("POST", "shift_update.php");
-  xhttp.setRequestHeader("Accept", "application/json");
-  xhttp.setRequestHeader("Content-Type", "application/json");
-  xhttp.send(strJson);
-  document.getElementById("lbl_modal").innerHTML = "Request submitted";
-  document.getElementById("body_modal").innerHTML = "Waiting server response...";
-  document.getElementById("btn_cancel").disabled =  document.getElementById("btn_ok").disabled = true;
+
+  //check data
+  var isGoodToSubmit = true;
+  const sltTimeStart = document.getElementById('sltTimeStart');
+  const sltTimeEnd = document.getElementById('sltTimeEnd');
+  const startTime = sltTimeStart.value.split(":");
+  const endTime = sltTimeEnd.value.split(":");
+  objGlobal.totalmins = (endTime[0] - startTime[0]) * 60 + (endTime[1] - startTime[1]);
+  if (objGlobal.totalmins < 0){
+    alert("Please choose right time slot.");
+    objGlobal.timestart = objGlobal.timeend = sltTimeStart.value = sltTimeEnd.value = "0:00";
+    objGlobal.totalmins = 0;
+    isGoodToSubmit = false;        
+  }else{
+    objGlobal.timestart = sltTimeStart.value;
+    objGlobal.timeend = sltTimeEnd.value;
+  }
+  console.log("old status:" + objGlobal.status + " checked:" + document.getElementById("checkWorking").checked);
+  if (document.getElementById("checkWorking").checked){
+    if (objGlobal.status == 1){ 
+      objGlobal.status = 2; //before and after status 1->1, update time
+    }else{
+      objGlobal.status = 1; //before and after status 0->1, insert
+    }
+  }else{
+    if (objGlobal.status == 1){ 
+      objGlobal.status = 0; //before and after status 1->0, remove
+    }else{
+      objGlobal.status = 0; //before and after status 0->0, no change
+      isGoodToSubmit = false;
+      alert("No change.");
+    }
+  }
+  console.log("new status:" + objGlobal.status);
+
+  if (isGoodToSubmit){
+    const strJson = JSON.stringify(objGlobal);
+    xhttp.open("POST", "shift_update.php");
+    xhttp.setRequestHeader("Accept", "application/json");
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(strJson);
+    document.getElementById("lbl_status").innerHTML = "<span class=\"text-primary\">Chang submitted......</span>";
+    document.getElementById("btn_cancel").disabled =  document.getElementById("btn_ok").disabled = true;
+  }
 }//f_submit
