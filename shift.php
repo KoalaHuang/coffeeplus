@@ -77,7 +77,7 @@ if (f_shouldDie("C")) {
 	$today = new DateTime("today");
 	?>
 
-	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>" data-stocking-employee="<?echo $UserStatus?>" data-stocking-change="<?if ($UserIsAdmin) {echo 1;}else{echo 0;}?>"><?echo $UserName?></div>
+	<div id="txtUserName" class="text-center mb-2 text-secondary col-12 fw-bold fs-6" data-stocking-userid="<?echo $UserID?>" data-stocking-userstore="<?echo $UserStore?>" data-stocking-userworkday="<?echo $UserWorkday?>" data-stocking-employee="<?echo $UserStatus?>"><?echo $UserName?></div>
 
 	<div class="container">
 		<div class="mb-2"><!--month switch-->
@@ -121,7 +121,7 @@ if (f_shouldDie("C")) {
 					}else{
 						$strClassHol = "<span class=\"text-danger\">".$mday."</span>";
 				}
-				$strDiv3B = "<div class=\"col ".$bgToday." text-center border-top border-start border-bottom border-dark fs-8\">".$strClassHol."<span class=\"text-muted\">";
+				$strDiv3B = "<div class=\"col ".$bgToday." text-center border-top border-start border-bottom border-dark border-2 fs-8\">".$strClassHol."<span class=\"text-muted\">";
 				$strDivEnd = "</span></div>";
 				switch ($idxWD) {
 					case 1:
@@ -143,7 +143,7 @@ if (f_shouldDie("C")) {
 						echo $strDiv3B." S".$strDivEnd;
 						break;
 					case 7:
-						echo "<div class=\"col ".$bgToday." text-center border border-dark fs-8\">".$strClassHol."<span class=\"text-muted\"> S".$strDivEnd;
+						echo "<div class=\"col ".$bgToday." text-center border border-dark border-2 fs-8\">".$strClassHol."<span class=\"text-muted\"> S".$strDivEnd;
 				}
 				date_add($objDay,date_interval_create_from_date_string("1 day"));
 			}
@@ -176,10 +176,14 @@ if (f_shouldDie("C")) {
 						$MaxPpl = 3;
 					}
 					$data_ppl = " data-stocking-minppl=".$MinPpl." data-stocking-maxppl=".$MaxPpl;
-					if ((((integer)($today->diff($objDay)->format("%R%a"))) > 0) || ($UserIsAdmin)) { //future dates or user is admin (admin can edit past days)
-						echo "<div class=\"col border-secondary ".$strBorder."\" onclick=\"f_cellSelected('".$rowStore."',".$idxWD.",".$cellYear.",".$cellMon.",".$mday.")\" id=\"".$cellID."\"".$data_ppl.">";
-					}else{
-						echo "<div class=\"col border-secondary ".$strBorder."\" id=\"".$cellID."\">"; //no clickable if date is not greater than today
+					if ($UserIsAdmin){//admin can edit all users and dates
+						echo "<div class=\"col border-secondary ".$strBorder."\" onclick=\"f_editForAll('".$rowStore."',".$idxWD.",".$cellYear.",".$cellMon.",".$mday.")\" id=\"".$cellID."\"".$data_ppl.">";
+					}else{//normal user edit future dates
+						if (((integer)($today->diff($objDay)->format("%R%a"))) > 0){
+							echo "<div class=\"col border-secondary ".$strBorder."\" onclick=\"f_cellSelected('".$rowStore."',".$idxWD.",".$cellYear.",".$cellMon.",".$mday.")\" id=\"".$cellID."\"".$data_ppl.">";
+						}else{//past dates can't be edited by normal user
+							echo "<div class=\"col border-secondary ".$strBorder."\" id=\"".$cellID."\">"; //no clickable if date is not greater than today
+						}
 					}
 					$sql = "SELECT `c_id`, `c_type`, `c_timestart`, `c_timeend`, `c_fullday`, `c_totalmins` FROM `t_calendar` WHERE `c_store`='".$rowStore."' AND `c_date`='".$cellYear."-".$cellMon."-".$mday."'";
 					$result = $conn->query($sql);

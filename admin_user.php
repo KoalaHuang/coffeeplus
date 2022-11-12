@@ -69,7 +69,7 @@ if (f_shouldDie("A")) {
 				</select>
 			</span>
 		</div> <!-- employee type-->
-		<div class="col-12 bg-light text-center mb-1"><strong>Working Day</strong></div>
+		<div class="col-12 bg-info text-center mb-1"><strong>Working Day</strong></div>
 		<div class="row mx-auto">
       <div class="col"><div class="form-check">
 				      <input disabled type="checkbox" class="form-check-input" name="btn_workday" id="wd1" value="1">
@@ -102,48 +102,84 @@ if (f_shouldDie("A")) {
       <span class="col  text-primary">Sat</span>
       <span class="col  text-primary">Sun</span>
     </div>
-		<div class="col-12 bg-light text-center mb-1"><strong>Access</strong></div>
-		<div class="row mx-auto mb-1">
-      <div class="col"><div class="form-check">
-				      <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as1" value="R">
-      </div></div>
-      <div class="col"><div class="form-check">
-				      <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as2" value="F">
-      </div></div>
-      <div class="col"><div class="form-check">
-				      <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as3" value="S">
-        </div></div>
-      <div class="col"><div class="form-check">
-				      <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as4" value="T">
-      </div></div>
+	<div class="col-12 bg-info text-center mb-1"><strong>Access</strong></div>
+	<div class="row mx-auto mb-1">
+		<div class="col-12 bg-light text-center mb-1">Stock</div>
+    	<div class="col">
+			<div class="form-check">
+				<input disabled type="checkbox" class="form-check-input" name="btn_access" id="as1" value="R">
+      		</div>
 		</div>
-		<div class="row mx-auto mb-1">
+      	<div class="col">
+			<div class="form-check">
+			    <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as2" value="F">
+      		</div>
+		</div>
+      	<div class="col">
+			<div class="form-check">
+			    <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as3" value="S">
+        	</div>
+		</div>
+      	<div class="col">
+			<div class="form-check">
+			    <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as4" value="T">
+      		</div>
+		</div>
+	</div>
+	<div class="row mx-auto mb-1">
       <span class="col text-primary">Request</span>
       <span class="col text-primary">Fufill</span>
       <span class="col text-primary">Stock</span>
       <span class="col text-primary">Report</span>
-		</div>
-		<div class="row mx-auto mb-1">
-      <div class="col"><div class="form-check">
-				      <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as5" value="C">
-      </div></div>
-      <div class="col"><div class="form-check">
-				      <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as6" value="O">
-      </div></div>
-			<div class="col"><div class="form-check">
-				      <input disabled type="checkbox" class="form-check-input" name="btn_access" id="as7" value="A">
-      </div></div>
-			<div class="col">
+	</div>
+	<div class="col-12 bg-light text-center mb-1">Shift</div>
+	<div class="row mx-auto mb-1">
+		<div class="col">
+			<div class="form-check">
+				<input disabled type="checkbox" class="form-check-input" name="btn_access" id="as5" value="C">
 			</div>
+		</div>
+		<div class="col">
+			<div class="form-check">
+			<input disabled type="checkbox" class="form-check-input" name="btn_access" id="as6" value="E">
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-check">
+			<input disabled type="checkbox" class="form-check-input" name="btn_access" id="as7" value="M">
+			</div>
+		</div>
+		<div class="col"></div>
+	</div>
+    <div class="row mx-auto mb-3">
+    	<span class="col text-primary">Shift</span>
+		<span class="col text-primary">Report</span>
+      	<span class="col text-primary">Template</span>
+		<span class="col text-primary">&nbsp;</span>
+    </div>
+	<div class="col-12 bg-light text-center mb-1">Profile/Admin</div>
+	<div class="row mx-auto mb-1">
+		<div class="col">
+			<div class="form-check">
+				<input disabled type="checkbox" class="form-check-input" name="btn_access" id="as8" value="O">
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-check">
+				<input disabled type="checkbox" class="form-check-input" name="btn_access" id="as9" value="A">
+			</div>
+		</div>
+		<div class="col"></div>
+		<div class="col"></div>
     </div>
     <div class="row mx-auto mb-3">
-      <span class="col text-primary">Shift</span>
-			<span class="col text-primary">Profile</span>
-      <span class="col text-primary">Admin</span>
-			<span class="col text-primary">&nbsp;</span>
+		<span class="col text-primary">Profile</span>
+      	<span class="col text-primary">Admin</span>
+		<span class="col text-primary">&nbsp;</span>
+		<span class="col text-primary">&nbsp;</span>
     </div>
-		<div class="col-12 bg-light text-center mb-1"><strong>Store</strong></div>
-		<div class="row mx-auto">
+	<div class="col-12 bg-info text-center mb-1"><strong>Store</strong></div>
+	<div class="row mx-auto">
 		<?
 		$sql = "SELECT `c_name` FROM `t_store`";
 		$result = $conn->query($sql);
@@ -153,7 +189,8 @@ if (f_shouldDie("A")) {
 		?>
 		<div class="col"><div class="form-check">
 						<input type="radio" class="form-check-input" name="btn_store" id="st<?echo $idx?>" value="<?echo $arrayStore[$idx]?>" disabled>
-		</div></div>
+		</div>
+	</div>
 		<?
 		$idx++;
 		}
@@ -166,7 +203,7 @@ if (f_shouldDie("A")) {
 							<input type="radio" class="form-check-input" name="btn_store" id="as<?echo $idx?>" value="NONE" disabled>
 			</div></div>
 		</div>
-		<div class="row mx-auto mb-3">
+	<div class="row mx-auto mb-3">
 		<?
 		for ($idx=0;$idx<count($arrayStore);$idx++) {
 				echo "<span class=\"col text-primary\">".$arrayStore[$idx]."</span>";
@@ -174,12 +211,12 @@ if (f_shouldDie("A")) {
 		?>
 			<span class="col text-primary">ALL</span>
 			<span class="col text-primary">NONE</span>
-		</div>
-		<div class="row">
+	</div>
+	<div class="row">
 			<span><button type="button" id="btn_toConfirm" class="btn btn-primary col-3 me-5" onclick="f_toConfirm()" disabled>OK</button>
 			<button type="button" class="btn btn-secondary col-3" onclick="f_refresh()">Cancel</button></span>
-		</div>
- 	</div> <!-- container -->
+	</div>
+</div> <!-- container -->
 
 	<!-- Modal Submit-->
 	<div class="modal fade" id="modal_box" tabindex="-1">

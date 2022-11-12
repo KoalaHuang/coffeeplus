@@ -139,10 +139,10 @@ function f_cellSelected(strStore, intWD) {
   var maxPpl = (Number)(elmSelectedCell.getAttribute("data-stocking-maxppl")); 
 
   //post shift assignments in tabs
-  for (idxPpl = 1, idxTab = 1; idxPpl <= maxPpl; idxPpl++, idxTab++) {
+  for (idxTab = 1; idxTab <= maxPpl; idxTab++) {
     const elmSltUser =  document.getElementById('sltUser'+idxTab);
     const optionItems = elmSltUser.options;
-    const pplLine = document.getElementById(cellName+idxPpl);
+    const pplLine = document.getElementById(cellName+idxTab);
     var assignedPpl = pplLine.innerHTML;
     const sltTimeStart = document.getElementById('sltTimeStart'+idxTab);
     const sltTimeEnd = document.getElementById('sltTimeEnd'+idxTab);
@@ -294,7 +294,7 @@ function f_toConfirmSaveTemplate() {
     }
   }
   idxArray = 0;
-  strStore = "";
+  var strStore = "";
   elmStores = document.getElementsByName("divStores");
   for (idxStore = 0; idxStore<elmStores.length; idxStore++){
     strStore = elmStores[idxStore].innerText;
@@ -304,7 +304,6 @@ function f_toConfirmSaveTemplate() {
       for (idxPpl = 1; idxPpl <= maxPpl; idxPpl++) {
         const elmPpl = document.getElementById(strStore+idxWD+idxPpl);
         strPpl = elmPpl.innerHTML;
-        console.log(strStore + ", " + idxWD + ", " + strPpl);
         if ((strPpl != '*') && (strPpl != '&nbsp;')) {
           arrayToSubmit[idxArray] = new ClassToSubmit(strStore,idxWD,strPpl, elmPpl.getAttribute("data-stocking-timestart"), elmPpl.getAttribute("data-stocking-timeend"), (Number)(elmPpl.getAttribute("data-stocking-fullday")), (Number)(elmPpl.getAttribute("data-stocking-totalmins")));
           idxArray++;
@@ -324,7 +323,7 @@ function f_saveTemplate() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     if (this.responseText == "true") {
-      document.getElementById("body_modal").innerHTML  = "Submit successfully!<br>Press OK to return";
+      document.getElementById("body_modal").innerHTML  = "Submit successfully! Press OK to return";
       document.getElementById("btn_ok").setAttribute("onclick","f_refresh()");
       document.getElementById("btn_ok").disabled = false;
       document.getElementById("btn_cancel").disabled = true;
@@ -336,7 +335,7 @@ function f_saveTemplate() {
     }
   }
   const strJson = JSON.stringify(arrayToSubmit);
-  xhttp.open("POST", "admin_shift_save.php");
+  xhttp.open("POST", "shift_template_save.php");
   xhttp.setRequestHeader("Accept", "application/json");
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(strJson);
@@ -390,7 +389,7 @@ function f_submitShift() {
   }
 
   const strJson = JSON.stringify(objDateRange);
-  xhttp.open("POST", "admin_shift_apply.php");
+  xhttp.open("POST", "shift_template_apply.php");
   xhttp.setRequestHeader("Accept", "application/json");
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(strJson);

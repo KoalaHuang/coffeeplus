@@ -2,17 +2,21 @@
 /*
 	Shift template edit by admin
 */
-include_once "sessioncheck.php"
+include_once "sessioncheck.php";
+if (f_shouldDie("M")) {
+	header("Location:login.php");
+	exit();
+  }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<? include "header.php"; ?>
 	<title>BackOffice</title>
-	<script src="js/admin_shift.js"></script>
+	<script src="js/shift_template.js"></script>
 </head>
 <body>
-	<h1 id="section_home" class="text-center mb-4">Admin - Shift</h1>
+	<h1 id="section_home" class="text-center mb-4">Shift Template</h1>
 	<?
 	$arrayUserName = array();
 	$arrayUserID = array();
@@ -44,13 +48,13 @@ include_once "sessioncheck.php"
 
 	<div class="container">
 		<div class="row row-cols-7 g-0 mb-1">
-			<div class="col text-center bg-light border-top border-start border-bottom">M</div>
-			<div class="col text-center bg-light border-top border-start border-bottom">T</div>
-			<div class="col text-center bg-light border-top border-start border-bottom">W</div>
-			<div class="col text-center bg-light border-top border-start border-bottom">T</div>
-			<div class="col text-center bg-light border-top border-start border-bottom">F</div>
-			<div class="col text-center bg-light border-top border-start border-bottom">S</div>
-			<div class="col text-center border bg-light">S</div>
+			<div class="col text-center bg-light border-top border-start border-bottom border-2 border-dark">M</div>
+			<div class="col text-center bg-light border-top border-start border-bottom border-2 border-dark">T</div>
+			<div class="col text-center bg-light border-top border-start border-bottom border-2 border-dark">W</div>
+			<div class="col text-center bg-light border-top border-start border-bottom border-2 border-dark">T</div>
+			<div class="col text-center bg-light border-top border-start border-bottom border-2 border-dark">F</div>
+			<div class="col text-center bg-light border-top border-start border-bottom border-2 border-dark">S</div>
+			<div class="col text-center border bg-light border-2 border-dark">S</div>
 		</div> <!-- row -->
 		<?
 		$rowStore = "";
@@ -177,7 +181,7 @@ include_once "sessioncheck.php"
 			</div> <!-- tab content -->
 
 			<div class="row mb-3"><span>
-				<button type="button" class="btn btn-primary col me-3" onclick="f_updateSelectedWD()" id="btnUpdateShift" disabled>Change arrangment</button>
+				<button type="button" class="btn btn-primary col me-3" onclick="f_updateSelectedWD()" id="btnUpdateShift" disabled>Post Shift</button>
 				<button type="button" class="btn btn-primary col" onclick="f_toConfirmSaveTemplate()" id="btnSave" disabled>Save Template</button>
 			</span></div>
 		</div>
